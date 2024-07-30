@@ -9,8 +9,8 @@ defaults:
 paginate: 10
 paginate_path: "/blog/page:num/"
 
-title: Christian Ezeani
-subtitle: Full-Stack Developer
+title: Chris Grigsby
+subtitle: Generalist. Cryptic. No hookups. 
 
 # left_side:
 #   background_image: "./assets/images/left-background.jpg"
@@ -46,20 +46,23 @@ menu:
 # Socialmedia Icons
 social_icons:
   - name: linkedin
-    link: https://www.linkedin.com/christianezeani
+    link: https://www.linkedin.com/chris-a-grigsby
     icon: fab fa-linkedin
 
   - name: github
-    link: https://github.com/christianezeani
+    link: https://github.com/cagrigsby
     icon: fab fa-github-square
 
-  - name: facebook
-    link: https://www.facebook.com/christian.ezeani.cyb
-    icon: fab fa-facebook-square
+  - name: mastodon
+    link: https://techhub.social/@poppop
+    icon: fab fa-mastodon
 
-  - name: twitter
-    link: https://www.twitter.com/christianezeani
-    icon: fab fa-twitter
-
+  - name: tryhackme
+    link: https://tryhackme.com/p/grica421
+    icon: /assets/icons/tryhackme.png
+    
+  - name: onlyfans
+    link: https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExd2F6MnFydXFkdnhmNDMwMG9sc3FnazhxN2p3dXo0ZXR2ZnN2OGY3NiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xT5LMx6fVvC41alw6Q/giphy.gif
+    icon: /assets/icons/onlyfans.png
 
     
