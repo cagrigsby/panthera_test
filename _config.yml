@@ -23,23 +23,23 @@ footer:
 
 # Side Menu Links
 menu:
-  - text: Portfolio
+  - text: About Me
     link: /
     icon: ""
 
-  - text: Skills & Offers
-    link: /skills-and-offers
-    icon: ""
-
-  - text: Contact Me
-    link: /contact
-    icon: ""
-
-  - text: My Resume
+    text: My Resume
     link: /assets/files/Resume.pdf
     icon: ""
 
-  - text: Blog Posts
+  - text: Pentest Lab Writeups
+    link: /skills-and-offers
+    icon: ""
+
+  - text: OSCP Notes
+    link: /contact
+    icon: ""
+
+  - text: Blog
     link: /blog
     icon: ""
 
