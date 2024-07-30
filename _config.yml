@@ -32,7 +32,7 @@ menu:
     icon: ""
 
   - text: Pentest Lab Writeups
-    link: /skills-and-offers
+    link: /writeups
     icon: ""
 
   - text: OSCP Notes
