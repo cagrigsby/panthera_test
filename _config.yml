@@ -59,7 +59,7 @@ social_icons:
 
   - name: twitter
     link: https://www.twitter.com/christianezeani
-    icon: fab fa-twitter
+    icon: /assets/icons/imdb.png
 
 
     
