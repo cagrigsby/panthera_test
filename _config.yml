@@ -57,9 +57,9 @@ social_icons:
     link: https://techhub.social/@poppop
     icon: fab fa-mastodon
 
-  - name: twitter
-    link: https://www.twitter.com/christianezeani
-    icon: /assets/icons/imdb.png
+  - name: tryhackme
+    link: https://tryhackme.com/p/grica421
+    icon: /assets/icons/tryhackme.png
 
 
     
