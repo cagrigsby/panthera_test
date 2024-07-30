@@ -46,8 +46,12 @@ menu:
 # Socialmedia Icons
 social_icons:
   - name: linkedin
-    link: https://www.linkedin.com/chris-a-grigsby
+    link: https://www.linkedin.com/chris-a-grigsby  
     icon: fab fa-linkedin
+
+    name: gmail
+    link: mailto:cagrigsby@gmail.com
+    icon: fab fa-google
 
   - name: github
     link: https://github.com/cagrigsby
