@@ -36,7 +36,7 @@ menu:
     icon: ""
 
   - text: My Resume
-    link: /resume
+    link: /assets/files/Resume.pdf
     icon: ""
 
   - text: Blog Posts
@@ -50,7 +50,7 @@ social_icons:
     icon: fab fa-linkedin
 
     #name: gmail
-    #link: mailto:cagrigsby@gmail.com
+    #link: https://mailto:cagrigsby@gmail.com
     #icon: fab fa-google
 
   - name: github
