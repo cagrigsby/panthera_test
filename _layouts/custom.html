@@ -10,15 +10,7 @@
 <body>
   <div id="container">
     <aside id="sidebar">
-      <ul>
-        {% for heading in page.content | split: '\n' %}
-          {% if heading contains '## ' %}
-            <li><a href="#{{ heading | remove: '## ' | slugify }}">{{ heading | remove: '## ' }}</a></li>
-          {% elsif heading contains '# ' %}
-            <li><a href="#{{ heading | remove: '# ' | slugify }}">{{ heading | remove: '# ' }}</a></li>
-          {% endif %}
-        {% endfor %}
-      </ul>
+      <!-- Sidebar will be populated by JavaScript -->
     </aside>
     <main id="content">
       {{ content }}
