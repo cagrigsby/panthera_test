@@ -3,7 +3,17 @@ document.addEventListener('DOMContentLoaded', function () {
     const content = document.querySelector('#content');
     const sidebar = document.querySelector('#sidebar');
   
+    if (!content || !sidebar) {
+      console.error('Content or sidebar element not found');
+      return;
+    }
+  
     const headings = content.querySelectorAll('h1, h2, h3, h4, h5, h6');
+    if (headings.length === 0) {
+      console.log('No headings found in content');
+      return;
+    }
+  
     const list = document.createElement('ul');
   
     headings.forEach(heading => {
