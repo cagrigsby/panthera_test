@@ -20,6 +20,7 @@ group :jekyll_plugins do
   gem "jekyll-sitemap"
   gem "jekyll-feed"
   gem "jemoji"
+  gem "rouge"
 end
 
 group :development, :test do
