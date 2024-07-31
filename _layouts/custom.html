@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ page.title }}</title>
+  <link rel="stylesheet" href="/assets/css/custom.css">
+  <script src="/assets/js/custom.js" defer></script>
+</head>
+<body>
+  <div id="container">
+    <aside id="sidebar">
+      <ul>
+        {% for heading in page.content | split: '\n' %}
+          {% if heading contains '## ' %}
+            <li><a href="#{{ heading | remove: '## ' | slugify }}">{{ heading | remove: '## ' }}</a></li>
+          {% elsif heading contains '# ' %}
+            <li><a href="#{{ heading | remove: '# ' | slugify }}">{{ heading | remove: '# ' }}</a></li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </aside>
+    <main id="content">
+      {{ content }}
+    </main>
+  </div>
+</body>
+</html>
