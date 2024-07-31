@@ -3,4 +3,4 @@
 
 # Writeups 
 
-{% include posts/index.html %}
+{% include writeups/index.html %}
