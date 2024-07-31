@@ -1,4 +1,10 @@
-#container {
+/* General body styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  #container {
     display: flex;
   }
   
@@ -10,6 +16,20 @@
     background: #f4f4f4;
     height: 100vh;
     overflow-y: auto;
+    padding: 20px;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  #home-link {
+    display: block;
+    margin-bottom: 20px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #007bff;
+  }
+  
+  #home-link:hover {
+    text-decoration: underline;
   }
   
   #sidebar ul {
@@ -18,7 +38,7 @@
   }
   
   #sidebar li {
-    padding: 10px;
+    padding: 10px 0;
   }
   
   #sidebar a {
@@ -27,7 +47,7 @@
   }
   
   #content {
-    margin-right: 260px;
+    margin-right: 270px; /* Adjust margin to account for sidebar width */
     padding: 20px;
   }
   
