@@ -36,7 +36,7 @@ menu:
     icon: ""
 
   - text: OSCP Notes
-    link: /contact
+    link: /oscp_notes
     icon: ""
 
   - text: Blog
@@ -66,7 +66,7 @@ social_icons:
     icon: /assets/icons/tryhackme.png
     
   - name: onlyfans
-    link: https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExd2F6MnFydXFkdnhmNDMwMG9sc3FnazhxN2p3dXo0ZXR2ZnN2OGY3NiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xT5LMx6fVvC41alw6Q/giphy.gif
+    link: https://www.bulksupplements.com/products/melatonin-powder
     icon: /assets/icons/onlyfans.png
 
 # trying to add a collection for Writeups
