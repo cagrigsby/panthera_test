@@ -32,7 +32,7 @@ menu:
     icon: ""
 
   - text: Pentest Lab Writeups
-    link: /skills-and-offers
+    link: /writeups
     icon: ""
 
   - text: OSCP Notes
@@ -69,4 +69,8 @@ social_icons:
     link: https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExd2F6MnFydXFkdnhmNDMwMG9sc3FnazhxN2p3dXo0ZXR2ZnN2OGY3NiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xT5LMx6fVvC41alw6Q/giphy.gif
     icon: /assets/icons/onlyfans.png
 
-    
+# trying to add a section for writeups
+collections:
+  writeups:
+    output: true
+    permalink: /writeups/:path/
