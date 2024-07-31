@@ -4,7 +4,56 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Test Page</title>
-  <link rel="stylesheet" href="/assets/css/test.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    #container {
+      display: grid;
+      grid-template-columns: 250px 1fr; /* Sidebar is 250px wide, content takes remaining space */
+      height: 100vh;
+    }
+
+    #sidebar {
+      background: #f4f4f4;
+      padding: 20px;
+      overflow-y: auto;
+      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    #home-link {
+      display: block;
+      margin-bottom: 20px;
+      font-weight: bold;
+      text-decoration: none;
+      color: #007bff;
+    }
+
+    #home-link:hover {
+      text-decoration: underline;
+    }
+
+    #sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    #sidebar li {
+      padding: 10px 0;
+    }
+
+    #sidebar a {
+      text-decoration: none;
+      color: #333;
+    }
+
+    #content {
+      padding: 20px;
+      background: #fff;
+    }
+  </style>
 </head>
 <body>
   <div id="container">
