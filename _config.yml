@@ -36,7 +36,7 @@ menu:
     icon: ""
 
   - text: OSCP Notes
-    link: /contact
+    link: /oscp_notes
     icon: ""
 
   - text: Blog
