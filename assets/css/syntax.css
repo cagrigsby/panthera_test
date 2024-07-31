@@ -2,60 +2,16 @@
 ---
 
 @import "panthera-jekyll";
-.rouge-github .highlight {
-    background: #f8f8f8;
-    border: 1px solid #cccccc;
-    padding: 5px;
-    overflow: auto;
-  }
-  
-  .rouge-github .highlight .gu {
-    color: #bbbbbb;
-  }
-  
-  .rouge-github .highlight .gt {
-    color: #a71d5d;
-  }
-  
-  .rouge-github .highlight .gi {
-    color: #0086b3;
-  }
-  
-  .rouge-github .highlight .gd {
-    color: #d73a49;
-  }
-  
-  .rouge-github .highlight pre {
-    margin: 0;
-  }
-  
-  .rouge-github .highlight pre code {
-    white-space: pre;
-  }
-  
-  .rouge-github .highlight table {
-    width: 100%;
-    border-spacing: 0;
-    border-collapse: collapse;
-  }
-  
-  .rouge-github .highlight td {
-    padding: 0;
-  }
-  
-  .rouge-github .highlight .g0 {
-    color: #333333;
-  }
-  
-  .rouge-github .highlight .g1 {
-    color: #333333;
-  }
-  
-  .rouge-github .highlight .g2 {
-    color: #333333;
-  }
-  
-  .rouge-github .highlight .g3 {
-    color: #333333;
-  }
-  
+.highlight {
+  background: #f8f8f8;
+  padding: 10px;
+  overflow: auto;
+  border: 1px solid #ddd;
+}
+.highlight pre, .highlight code {
+  color: #333;
+  font-size: 14px;
+}
+.highlight .keyword { color: #a71d5d; }
+.highlight .comment { color: #969896; }
+.highlight .constant { color: #0086b3; }
