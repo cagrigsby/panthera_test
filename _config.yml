@@ -74,7 +74,3 @@ collections:
   writeups:
     output: true
     permalink: /writeups/:path/
-
-#adding rouge
-markdown: kramdown
-highlighter: rouge
