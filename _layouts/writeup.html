@@ -1,0 +1,30 @@
+---
+layout: default
+---
+
+<section class="writeup-view">
+  {% if page.image %}
+  <div class="writeup-view__image">
+    <img src="{{ page.image | relative_url }}" alt="{{ page.title }}">
+  </div>
+  {% endif %}
+
+  <div class="writeup-view__header">
+    <h1>{{ page.title }}</h1>
+    <div class="writeup-view__info">
+      <span><strong>Date:</strong> {{ page.date | date: '%Y, %b %d' }}</span>
+    </div>
+  </div>
+
+  {% include addons/share.html %}
+  
+  <div class="writeup-view__body">
+    {{ content }}
+  </div>
+
+  {% include addons/share.html %}
+
+  {% include writeups/related.html %}
+
+  {% include addons/comments.html %}
+</section>

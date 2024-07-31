@@ -23,31 +23,35 @@ footer:
 
 # Side Menu Links
 menu:
-  - text: Portfolio
+  - text: About Me
     link: /
     icon: ""
 
-  - text: Skills & Offers
-    link: /skills-and-offers
+    text: My Resume
+    link: /assets/files/Resume.pdf
     icon: ""
 
-  - text: Contact Me
+  - text: Pentest Lab Writeups
+    link: /writeups
+    icon: ""
+
+  - text: OSCP Notes
     link: /contact
     icon: ""
 
-  - text: My Resume
-    link: /resume
-    icon: ""
-
-  - text: Blog Posts
+  - text: Blog
     link: /blog
     icon: ""
 
 # Socialmedia Icons
 social_icons:
   - name: linkedin
-    link: https://www.linkedin.com/chris-a-grigsby
+    link: https://www.linkedin.com/chris-a-grigsby  
     icon: fab fa-linkedin
+
+    #name: gmail
+    #link: https://mailto:cagrigsby@gmail.com
+    #icon: fab fa-google
 
   - name: github
     link: https://github.com/cagrigsby
@@ -65,4 +69,8 @@ social_icons:
     link: https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExd2F6MnFydXFkdnhmNDMwMG9sc3FnazhxN2p3dXo0ZXR2ZnN2OGY3NiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xT5LMx6fVvC41alw6Q/giphy.gif
     icon: /assets/icons/onlyfans.png
 
-    
+# trying to add a collection for Writeups
+collections:
+  writeups:
+    output: true
+    permalink: /writeups/:path/

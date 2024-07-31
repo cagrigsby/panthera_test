@@ -1,0 +1,38 @@
+{% if paginator.writeups.size %}
+  {% assign all_writeups = paginator.writeups %}
+{% else %}
+  {% assign all_writeups = site.writeups %}
+{% endif %}
+
+<section class="pan-writeup-list">
+  {% for writeup in all_writeups %}
+  <div class="pan-writeup-list__item">
+    <div class="pan-writeup-list--left">
+      <div class="pan-writeup-list--image">
+        {% if writeup.image %}
+        <a href="{{ writeup.url | relative_url }}" style="background-image: url({{ writeup.image | relative_url }});"></a>
+        {% else %}
+        <a href="{{ writeup.url | relative_url }}"></a>
+        {% endif %}
+      </div>
+    </div>
+    <div class="pan-writeup-list--right">
+      <div class="pan-writeup-list--content">
+        <div class="pan-writeup-list--body">
+          <h2><a href="{{ writeup.url | relative_url }}">{{ writeup.title }}</a></h2>
+          <p class="info">
+            <span>{{ writeup.date | date: '%Y, %b %d' }}</span>
+            &nbsp;&nbsp; - &nbsp;&nbsp;
+            <span>{% capture words %}{{ writeup.content | number_of_words }}{% endcapture %}{% unless words contains "-" %}{{ words | plus: 250 | divided_by: 250 | append: " minute read" }}{% endunless %}</span>
+          </p>
+          <p class="desc">{{ writeup.content | strip_html | truncatewords: 20 }}</p>
+        </div>
+        </div>
+    </div>
+  </div>
+  {% endfor %}
+</section>
+
+{% if paginator.writeups.size %}
+  {% include writeups/pagination.html %}
+{% endif %}

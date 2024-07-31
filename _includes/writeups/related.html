@@ -1,0 +1,68 @@
+<div class="pan-related-writeups">
+  <h3 class="pan-related-writeups__header">Related Writeups</h3>
+
+  {% if site.data.writeup.related.max %}
+    {% assign maxRelated = site.data.writeup.related.max %}
+  {% else %}
+    {% assign maxRelated = 12 %}
+  {% endif %}
+
+  {% assign minCommonTags =  1 %}
+  {% assign maxRelatedCounter = 0 %}
+  {% assign allRelatedWriteups = '' | split: ',' %}
+
+  {% capture noRelatedWriteups %}
+  <div class="pan-related-writeups__none">
+    <span>No related writeup found</span>
+  </div>
+  {% endcapture %}
+
+  {% if site.writeups.size < 1 %}
+    {{ noRelatedWriteups }}
+  {% else %}
+    {% for writeup in site.writeups %}
+      {% assign sameTagCount = 0 %}
+      {% assign commonTags = '' %}
+
+      {% for tag in writeup.tags %}
+        {% if writeup.url != page.url %}
+          {% if page.tags contains tag %}
+            {% assign sameTagCount = sameTagCount | plus: 1 %}
+            {% capture tagmarkup %} <span class="label label-default">{{ tag }}</span> {% endcapture %}
+            {% assign commonTags = commonTags | append: tagmarkup %}
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+
+      {% if sameTagCount >= minCommonTags %}
+        {% assign allRelatedWriteups = allRelatedWriteups | push: writeup %}
+        {% assign maxRelatedCounter = maxRelatedCounter | plus: 1 %}
+        {% if maxRelatedCounter >= maxRelated %}
+          {% break %}
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+
+    {% if allRelatedWriteups.size < 1 %}
+      {{ noRelatedWriteups }}
+    {% else %}
+      <div class="pan-related-writeups__container">
+        {% for writeup in allRelatedWriteups %}
+          <div class="pan-related-writeups__item">
+            <div class="pan-related-writeups__body">
+              {% if writeup.image %}
+                <div class="pan-related-writeups--image" style="background-image: url({{ writeup.image | relative_url }});"></div>
+              {% else %}
+                <div class="pan-related-writeups--image"></div>
+              {% endif %}
+              <h4>
+                <a href="{{ writeup.url | relative_url }}">{{ writeup.title | truncate: 50, '...' }}</a>
+              </h4>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endif %}
+
+</div>
