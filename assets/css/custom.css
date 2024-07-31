@@ -48,7 +48,8 @@ body {
   }
   
   #content {
-    margin-left: 250px; /* Adjust margin to account for sidebar width */
+    margin-left: 250px; /* Ensure this matches the sidebar width */
     padding: 20px;
+    flex: 1; /* Ensure content area grows and adjusts properly */
   }
   

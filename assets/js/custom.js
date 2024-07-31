@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     var sidebar = document.getElementById('sidebar');
-    var headers = document.querySelectorAll('#content h1, #content h2, #content h3');
+    var headers = document.querySelectorAll('#content h1, #content h2, #content h3, #content h4, #content h5');
     var ul = document.createElement('ul');
   
     headers.forEach(function(header) {
