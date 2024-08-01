@@ -2,37 +2,4 @@
 ---
 
 @import "panthera-jekyll";
-/* Basic styles for syntax highlighting blocks */
-.highlight {
-  background: #f8f8f8; /* Light grey background for code blocks */
-  padding: 10px; /* Padding around the code */
-  border: 1px solid #ddd; /* Light grey border around the code block */
-  border-radius: 4px; /* Rounded corners for the border */
-  overflow: auto; /* Ensure scrollbars if code overflows */
-  margin-bottom: 20px; /* Space below code blocks */
-}
-
-/* Styles for code elements within highlighted blocks */
-.highlight code {
-  color: #11158E; /* Custom dark blue color for code text */
-  font-size: 14px; /* Font size for code text */
-  line-height: 1.5; /* Line height for better readability */
-  display: block; /* Ensure code is displayed as a block */
-  white-space: pre; /* Preserve white space formatting */
-}
-
-/* Additional styles for different languages if needed */
-.highlight .keyword {
-  color: #0074d9; /* Blue color for keywords */
-}
-
-.highlight .string {
-  color: #d14; /* Red color for strings */
-}
-
-.highlight .comment {
-  color: #6a737d; /* Grey color for comments */
-}
-
-/* Add more specific styles for other language elements if needed */
 
