@@ -9,24 +9,34 @@
     vertical-align: middle; /* Aligns with text or other elements */
 }
 
-
-/* Ensure custom font-family is applied */
-body {
-    background-color: #EFE6DE; /* Light beige background */
-    color: #191716; /* Dark text color */
-    font-family: Arial, sans-serif !important; /* Force custom font family */
-}
-
 /* Custom styles for code blocks */
-code, pre {
-    background-color: #DDCBBD !important; /* Light beige background for code blocks */
-    color: #11158E !important; /* Dark blue text color for code blocks */
-    border: 1px solid #ddd; /* Light grey border */
-    padding: 10px; /* Padding for code blocks */
+code {
+    background-color: #DDCBBD !important; /* Champagne pink background */
+    border: 1px solid #FC9BC2; /* Amaranth pink border */
+    padding: 2px 4px; /* Padding around the code */
     border-radius: 4px; /* Rounded corners */
-    font-family: 'Courier New', Courier, monospace !important; /* Monospaced font for code */
+    font-family: 'Courier New', Courier, monospace; /* Monospaced font */
+    color: #11158E; /* Blue text color for contrast */
 }
 
 pre {
+    background-color: #DDCBBD !important; /* Champagne pink background */
+    border: 1px solid #FC9BC2; /* Amaranth pink border */
+    padding: 10px; /* More padding for preformatted code blocks */
+    border-radius: 4px; /* Rounded corners */
     overflow-x: auto; /* Scroll horizontally if the code is too wide */
+    font-family: 'Courier New', Courier, monospace; /* Monospaced font */
+    color: #11158E; /* Blue text color for contrast */
+}
+
+pre code {
+    background-color: transparent; /* Ensure code blocks within pre do not have additional background */
+    padding: 0; /* Remove padding for code blocks within pre */
+}
+
+/* Global site styles */
+body {
+    background-color: #EFE6DE; /* Light beige background */
+    color: #191716; /* Dark text color */
+    font-family: Arial, sans-serif; /* Default font family */
 }
