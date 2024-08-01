@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: writeup
 title: Plum - Proving Grounds
 date: 2024-07-12 13:32:20 +0300
 description: A Writeup of the Plum Box from Proving Grounds

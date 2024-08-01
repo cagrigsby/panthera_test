@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: writeup
 title: Helpdesk - Proving Grounds
 date: 2024-07-12 13:32:20 +0300
 description: A Writeup of the Helpdesk Box from Proving Grounds
