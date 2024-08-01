@@ -16,15 +16,15 @@ layout: default
     </div>
   </div>
 
-  {% include addons/share.html %}
+<!--  {% include addons/share.html %}-->
   
-  <div class="writeup-view__body">
-    {{ content }}
-  </div>
+<div class="post-view__body">
+  {{ content }}
+</div>
 
-  {% include addons/share.html %}
+<!--  {% include addons/share.html %}-->
 
-  {% include writeups/related.html %}
+{% include posts/related.html %}
 
-  {% include addons/comments.html %}
+<!--  {% include addons/comments.html %}-->
 </section>

@@ -5,7 +5,8 @@
 {% endif %}
 
 <section class="pan-writeup-list">
-  {% for writeup in all_writeups %}
+  {% assign sorted_writeups = all_writeups | sort: 'date' | reverse %}
+  {% for writeup in sorted_writeups %}
   <div class="pan-writeup-list__item">
     <div class="pan-writeup-list--left">
       <div class="pan-writeup-list--image">
@@ -27,11 +28,12 @@
           </p>
           <p class="desc">{{ writeup.content | strip_html | truncatewords: 20 }}</p>
         </div>
-        </div>
+      </div>
     </div>
   </div>
   {% endfor %}
 </section>
+
 
 {% if paginator.writeups.size %}
   {% include writeups/pagination.html %}
