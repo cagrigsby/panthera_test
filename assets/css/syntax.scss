@@ -1,0 +1,44 @@
+---
+---
+
+@import "panthera-jekyll";
+/* Set the global background color */
+body {
+    background-color: #EFE6DE; /* Light beige background color */
+    color: #191716; /* Default text color */
+    font-family: Arial, sans-serif; /* Ensure a good fallback font */
+  }
+  
+  /* Ensure the default link color is consistent */
+  a {
+    color: #191716; /* Default link color */
+  }
+  
+  /* Set the color for highlighted text (e.g., within <mark> tags) */
+  mark {
+    background-color: #FC9BC2; /* Highlighted text color */
+    color: #191716; /* Default text color on highlighted text */
+  }
+  
+  /* Set styles for code blocks and preformatted text */
+  pre, code {
+    color: #191716; /* Default code color */
+    background-color: #EFE6DE; /* Background for code blocks */
+  }
+  
+  /* Add styles for syntax highlighting if needed */
+  .highlight code {
+    color: #191716; /* Ensure code text is the default color */
+  }
+  
+  /* Additional styling for headings, paragraphs, etc. */
+  h1, h2, h3, h4, h5, h6 {
+    color: #191716; /* Headings color */
+  }
+  
+  p {
+    color: #191716; /* Paragraph text color */
+  }
+  
+  }
+  
