@@ -9,7 +9,6 @@
     vertical-align: middle; /* Aligns with text or other elements */
 }
 
-
 /* Ensure custom font-family is applied */
 body {
     background-color: #EFE6DE; /* Light beige background */
@@ -18,15 +17,23 @@ body {
 }
 
 /* Custom styles for code blocks */
-code, pre {
-    background-color: #DDCBBD !important; /* Light beige background for code blocks */
-    color: #11158E !important; /* Dark blue text color for code blocks */
+code {
+    background-color: #DDCBBD !important; /* Light beige background for inline code */
+    color: #11158E !important; /* Dark blue text color for inline code */
     border: 1px solid #ddd; /* Light grey border */
-    padding: 10px; /* Padding for code blocks */
+    padding: 2px 4px; /* Reduced padding for inline code */
     border-radius: 4px; /* Rounded corners */
-    font-family: 'Courier New', Courier, monospace !important; /* Monospaced font for code */
+    font-family: 'Courier New', Courier, monospace !important; /* Monospaced font for inline code */
 }
 
 pre {
+    background-color: #DDCBBD !important; /* Light beige background for preformatted code */
+    color: #11158E !important; /* Dark blue text color for preformatted code */
+    border: 1px solid #ddd; /* Light grey border */
+    padding: 8px; /* Adjusted padding for preformatted code */
+    border-radius: 4px; /* Rounded corners */
     overflow-x: auto; /* Scroll horizontally if the code is too wide */
+    font-family: 'Courier New', Courier, monospace !important; /* Monospaced font for preformatted code */
+    margin: 10px 0; /* Margin to separate code blocks from surrounding text */
+    line-height: 1.5; /* Increase line height for better readability */
 }
