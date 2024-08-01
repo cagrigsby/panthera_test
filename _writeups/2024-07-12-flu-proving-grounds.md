@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Flu - Proving Grounds
-date: 2020-07-11 13:32:20 +0300
+date: 2024-07-12 13:32:20 +0300
 description: A Writeup of the Flu Box from Proving Grounds
 image: /assets/images/Flu/Flu_1.png
 fig-caption: # Add figcaption (optional)
