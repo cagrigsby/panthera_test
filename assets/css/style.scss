@@ -3,9 +3,33 @@
 
 @import 'panthera-jekyll';
 
-
 .social-icon-img {
     width: 24px; /* Adjust size as needed */
     height: auto;
     vertical-align: middle; /* Aligns with text or other elements */
-  }
+}
+
+/* Custom styles for code blocks */
+code {
+    background-color: #ff0000 !important; /* Bright red background */
+    border: 1px solid #ddd; /* Light grey border */
+    padding: 2px 4px; /* Padding around the code */
+    border-radius: 4px; /* Rounded corners */
+    font-family: 'Courier New', Courier, monospace; /* Monospaced font */
+    color: #fff; /* White text color for contrast */
+}
+
+pre {
+    background-color: #ff0000 !important; /* Bright red background */
+    border: 1px solid #ddd; /* Light grey border */
+    padding: 10px; /* More padding for preformatted code blocks */
+    border-radius: 4px; /* Rounded corners */
+    overflow-x: auto; /* Scroll horizontally if the code is too wide */
+    font-family: 'Courier New', Courier, monospace; /* Monospaced font */
+    color: #fff; /* White text color for contrast */
+}
+
+pre code {
+    background-color: transparent; /* Ensure code blocks within pre do not have additional background */
+    padding: 0; /* Remove padding for code blocks within pre */
+}
