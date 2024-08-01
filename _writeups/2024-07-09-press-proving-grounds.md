@@ -1,9 +1,12 @@
 ---
-title: " Press - Proving Grounds"
-excerpt: "A Writeup of the Press Box from Proving Grounds<br><img src='/assets/images/Press/Press_1.png'>"
-collection: portfolio
+layout: post
+title: Press - Proving Grounds
+date: 2024-07-12 13:32:20 +0300
+description: A Writeup of the Press Box from Proving Grounds
+image: /assets/images/Press/Press_1.png
+fig-caption: # Add figcaption (optional)
+tags: [TJ Null, FlatPress, apt]
 ---
-
 
 Here is a writeup for the Press lab on [Proving Grounds](https://www.offsec.com/labs/), another box from TJ Null's OSCP [lab prep list](https://docs.google.com/spreadsheets/u/1/d/1dwSMIAPIam0PuRBkCiDI88pU3yzrqqHkDtBngUHNCw8/htmlview#). As usual we kick things off with an nmap scan using the `-v` flag so we can see some results before they are finished. We notice port 80 is open, so we check it out. 
 ![Press_1.png](/assets/images/Press/Press_1.png){: .center-aligned width="600px"}

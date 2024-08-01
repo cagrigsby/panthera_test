@@ -1,10 +1,14 @@
 ---
-title: "Pelican - Proving Grounds"
-excerpt: "A Writeup of the Pelican Box from Proving Grounds<br/><img src='/assets/images/Pelican/exhibitor.png'>"
-collection: portfolio
+layout: post
+title: Pelican - Proving Grounds
+date: 2024-07-12 13:32:20 +0300
+description: A Writeup of the Pelican Box from Proving Grounds
+image: /assets/images/Pelican/exhibitor.png
+fig-caption: # Add figcaption (optional)
+tags: [TJ Null, LainKusunagi]
 ---
 
-Alrighty, let's get started with another [Proving Grounds](https://www.offsec.com/labs/) box from TJ Null's OSCP [lab prep list](https://docs.google.com/spreadsheets/u/1/d/1dwSMIAPIam0PuRBkCiDI88pU3yzrqqHkDtBngUHNCw8/htmlview#). This one is called "Pelican," and I had fun with it. It's rated as Intermediate, and I wonder a bit if that's because there's some much information that's ultimately not very necessary to actually solve the machine. I kicked things off with an nmapAutomator scan with this results:
+Alrighty, let's get started with another [Proving Grounds](https://www.offsec.com/labs/) box from TJ Null's OSCP [lab prep list](https://docs.google.com/spreadsheets/u/1/d/1dwSMIAPIam0PuRBkCiDI88pU3yzrqqHkDtBngUHNCw8/htmlview#). It's actually on LainKusanagi's [list of OSCP like machines](https://www.reddit.com/r/oscp/comments/1c8pzyz/lainkusanagi_list_of_oscp_like_machines/) as well. This one is called "Pelican," and I had fun with it. It's rated as Intermediate, and I wonder a bit if that's because there's some much information that's ultimately not very necessary to actually solve the machine. I kicked things off with an nmapAutomator scan with this results:
 
     PORT      STATE SERVICE
     22/tcp    open  ssh

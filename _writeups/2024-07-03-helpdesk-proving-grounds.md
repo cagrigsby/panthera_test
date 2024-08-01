@@ -1,10 +1,14 @@
 ---
-title: "Helpdesk - Proving Grounds"
-excerpt: "A Writeup of the Helpdesk Box from Proving Grounds<br/><img src='/assets/images/Helpdesk/administrator_login.png'>"
-collection: portfolio
+layout: post
+title: Helpdesk - Proving Grounds
+date: 2024-07-12 13:32:20 +0300
+description: A Writeup of the Helpdesk Box from Proving Grounds
+image: /assets/images/Helpdesk/administrator_login.png
+fig-caption: # Add figcaption (optional)
+tags: [TJ Null, LainKusunagi]
 ---
 
-Here's another box from [Proving Grounds](https://www.offsec.com/labs/) called Helpdesk. It was recommended as part of TJ Null's OSCP [lab prep list](https://docs.google.com/spreadsheets/u/1/d/1dwSMIAPIam0PuRBkCiDI88pU3yzrqqHkDtBngUHNCw8/htmlview#) which I've been going through as I prepare for my exam. The initial nmap scan revealed these open ports:
+Here's another box from [Proving Grounds](https://www.offsec.com/labs/) called Helpdesk. It was recommended as part of TJ Null's OSCP [lab prep list](https://docs.google.com/spreadsheets/u/1/d/1dwSMIAPIam0PuRBkCiDI88pU3yzrqqHkDtBngUHNCw8/htmlview#) which I've been going through as I prepare for my exam. It's also on  LainKusanagi's [list of OSCP like machines](https://www.reddit.com/r/oscp/comments/1c8pzyz/lainkusanagi_list_of_oscp_like_machines/), which I've been looking at and want to tag here.. The initial nmap scan revealed these open ports:
 
 135/tcp  open  msrpc         Microsoft Windows RPC
 139/tcp  open  netbios-ssn   Microsoft Windows netbios-ssn

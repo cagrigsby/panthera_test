@@ -1,11 +1,15 @@
 ---
-title: " Crane - Proving Grounds"
-excerpt: "A Writeup of the Crane Box from Proving Grounds<br><img src='/assets/images/Crane/Crane_5.png'>"
-collection: portfolio
+layout: post
+title: Crane - Proving Grounds
+date: 2024-07-12 13:32:20 +0300
+description: A Writeup of the Crane Box from Proving Grounds
+image: /assets/images/Crane/Crane_5.png
+fig-caption: # Add figcaption (optional)
+tags: [TJ Null]
 ---
 
 
-Here is a writeup for the Press lab on [Proving Grounds](https://www.offsec.com/labs/), another box from TJ Null's OSCP [lab prep list](https://docs.google.com/spreadsheets/u/1/d/1dwSMIAPIam0PuRBkCiDI88pU3yzrqqHkDtBngUHNCw8/htmlview#). I start out with an nmap scan and check out port 80 as soon as it pops up. 
+Here is a writeup for the Crane lab on [Proving Grounds](https://www.offsec.com/labs/), another box from TJ Null's OSCP [lab prep list](https://docs.google.com/spreadsheets/u/1/d/1dwSMIAPIam0PuRBkCiDI88pU3yzrqqHkDtBngUHNCw8/htmlview#). I start out with an nmap scan and check out port 80 as soon as it pops up. 
 
 ```
 PORT     STATE SERVICE VERSION

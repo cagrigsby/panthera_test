@@ -1,8 +1,13 @@
 ---
-title: "Flimsy - Proving Grounds"
-excerpt: "A Writeup of the Flimsy Box from Proving Grounds<br/><img src='/assets/images/Flimsy/flimsy_cover.png'>"
-collection: portfolio
+layout: post
+title: Flimsy - Proving Grounds
+date: 2024-07-12 13:32:20 +0300
+description: A Writeup of the Flimsy Box from Proving Grounds
+image: /assets/images/Flimsy/flimsy_cover.png
+fig-caption: # Add figcaption (optional)
+tags: [cron]
 ---
+
 
 Here's another relatively simple box from [Proving Grounds](https://www.offsec.com/labs/) called Flimsy. It turned out to be a decent reminder to be patient and diligent when I'm working through these labs because I would have saved a lot of trouble if I had just done a better job of one simple thing. Right off the bat I ran a simple nmap scan showing ports 22, 80, and 3306 as open. That's going to point toward web exploits or some kind of SQLi, so it makes sense to check out the web page while running a more detailed scans. 
 
