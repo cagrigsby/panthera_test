@@ -12,11 +12,11 @@ paginate_path: "/blog/page:num/"
 title: Chris Grigsby
 subtitle: Generalist. Cryptic. No hookups. 
 
-# left_side:
-#   background_image: "./assets/images/left-background.jpg"
-#   background_color: "#F00"
-#   close_button_color: "#F00"
-#   text_color: "#F00"
+ left_side:
+   background_image: "./assets/images/left-background.jpg"
+   background_color: "#F00"
+   close_button_color: "#F00"
+   text_color: "#F00"
 
 footer:
   copyright_text: "&copy; Christian Ezeani"
