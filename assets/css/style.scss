@@ -15,7 +15,7 @@ code {
     border: 1px solid #DDCBBD; /* Amaranth pink border = #FC9BC2 */
     padding: 1px 2px; /* Padding around the code (was 2px 4px) */
     border-radius: 4px; /* Rounded corners */
-    font-family: 'Courier New', Courier, monospace; /* Monospaced font */
+    font-family: 'Open Sans', monospace; /* Monospaced font */ //said 'Courier New', Courier, monospace
     color: #11158E; /* Blue text color for contrast */
 }
 
@@ -25,7 +25,7 @@ pre {
     padding: 10px; /* More padding for preformatted code blocks */
     border-radius: 4px; /* Rounded corners */
     overflow-x: auto; /* Scroll horizontally if the code is too wide */
-    font-family: 'Courier New', Courier, monospace; /* Monospaced font */
+    font-family: 'Open Sans', monospace; /* Monospaced font */ //said 'Courier New', Courier, monospace
     color: #11158E; /* Blue text color for contrast */
 }
 
