@@ -24,7 +24,7 @@ footer:
 # Side Menu Links
 menu:
   - text: About Me
-    link: /
+    link: /index.html
     icon: ""
 
     text: My Resume
