@@ -1,5 +1,5 @@
 ---
-layout: oscp_notes
+layout: custom
 title: OSCP Notes
 permalink: /oscp_notes/
 ---
