@@ -1,7 +1,11 @@
 ---
-title: "Astronaut - Proving Grounds"
-excerpt: "A Writeup of the Astronaut Box from Proving Grounds<br/><img src='/assets/images/Astronaut/grav_admin.png'>"
-collection: portfolio
+layout: writeup
+title: Astronaut - Proving Grounds
+date: 2024-07-12 13:32:20 +0300
+description: A Writeup of the Astronau Box from Proving Grounds
+image: /assets/images/Astronaut/grav_admin.png
+fig-caption: # Add figcaption (optional)
+tags: [TJ Null]
 ---
 
 Ok we're back with another [Proving Grounds](https://www.offsec.com/labs/) box, also part of TJ Null's OSCP [lab prep list](https://docs.google.com/spreadsheets/u/1/d/1dwSMIAPIam0PuRBkCiDI88pU3yzrqqHkDtBngUHNCw8/htmlview#). 

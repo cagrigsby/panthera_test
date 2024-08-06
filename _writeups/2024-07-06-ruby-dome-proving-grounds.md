@@ -1,7 +1,11 @@
 ---
-title: "Ruby Dome - Proving Grounds"
-excerpt: "A Writeup of the Ruby Dome Box from Proving Grounds<br/><img src='/assets/images/RubyDome/RubyDome.png'>"
-collection: portfolio
+layout: writeup
+title: RubyDome - Proving Grounds
+date: 2024-07-12 13:32:20 +0300
+description: A Writeup of the RubyDome Box from Proving Grounds
+image: /assets/images/RubyDome/RubyDome.png
+fig-caption: # Add figcaption (optional)
+tags: [TJ Null, Ruby]
 ---
 
 Back with another [Proving Grounds](https://www.offsec.com/labs/) box from TJ Null's OSCP [lab prep list](https://docs.google.com/spreadsheets/u/1/d/1dwSMIAPIam0PuRBkCiDI88pU3yzrqqHkDtBngUHNCw8/htmlview#). This one is called "RubyDome" which could give us a little preview on a certain coding language which might be involved.  

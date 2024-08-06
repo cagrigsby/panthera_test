@@ -1,6 +1,6 @@
 ---
 ---
 
-# BLOG POOPS
+# BLOG POSTS
 
 {% include posts/index.html %}

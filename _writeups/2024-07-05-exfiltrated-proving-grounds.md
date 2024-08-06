@@ -1,10 +1,15 @@
 ---
-title: "Exfiltrated - Proving Grounds"
-excerpt: "A Writeup of the Exfiltrated Box from Proving Grounds<br/><img src='/images/Exfiltrated/subrion.png'>"
-collection: portfolio
+layout: writeup
+title: Exfiltrated - Proving Grounds
+date: 2024-07-12 13:32:20 +0300
+description: A Writeup of the Exfiltrated Box from Proving Grounds
+image: /assets/images/Exfiltrated/subrion.png
+fig-caption: # Add figcaption (optional)
+tags: [TJ Null, LainKusunagi]
 ---
 
-Ok, still working through TJ Null's OSCP [lab prep list](https://docs.google.com/spreadsheets/u/1/d/1dwSMIAPIam0PuRBkCiDI88pU3yzrqqHkDtBngUHNCw8/htmlview#) with another [Proving Grounds](https://www.offsec.com/labs/) box. This one is called "Exfiltrated." 
+
+Ok, still working through TJ Null's OSCP [lab prep list](https://docs.google.com/spreadsheets/u/1/d/1dwSMIAPIam0PuRBkCiDI88pU3yzrqqHkDtBngUHNCw8/htmlview#) with another [Proving Grounds](https://www.offsec.com/labs/) box. This one is called "Exfiltrated." It is also on LainKusanagi's [list of OSCP like machines](https://www.reddit.com/r/oscp/comments/1c8pzyz/lainkusanagi_list_of_oscp_like_machines/), which I saw on Reddit, so I've been going through those as well. Nice to have some overlap. 
 
 As usual, let's kick things off with a basic nmap scan which revealed these ports:
 

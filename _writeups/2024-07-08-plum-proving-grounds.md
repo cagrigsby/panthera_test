@@ -1,9 +1,12 @@
 ---
-title: "Plum - Proving Grounds"
-excerpt: "A Writeup of the Plum Box from Proving Grounds<br><img src='/assets/images/Plum/Plum_5.png'>"
-collection: portfolio
+layout: writeup
+title: Plum - Proving Grounds
+date: 2024-07-12 13:32:20 +0300
+description: A Writeup of the Plum Box from Proving Grounds
+image: /assets/images/Plum/Plum_5.png
+fig-caption: # Add figcaption (optional)
+tags: [TJ Null]
 ---
-
 
 Here is a writeup for the Plum lab on [Proving Grounds](https://www.offsec.com/labs/), another box from TJ Null's OSCP [lab prep list](https://docs.google.com/spreadsheets/u/1/d/1dwSMIAPIam0PuRBkCiDI88pU3yzrqqHkDtBngUHNCw8/htmlview#). I got started as usual by scanning for open ports, but while I did I also checked port 80 by simply pasting the target IP in into the address bar, and voila. It looks like we have some kind of blog running on a web service called pluxml. I run a directory scan and check for exploits.
 <br>

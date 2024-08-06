@@ -1,7 +1,11 @@
 ---
-title: "Codo - Proving Grounds"
-excerpt: "A Writeup of the Codo Box from Proving Grounds<br/><img src='/assets/images/codo/initial_web_page.png'>"
-collection: portfolio
+layout: writeup
+title: Codo - Proving Grounds
+date: 2024-07-12 13:32:20 +0300
+description: A Writeup of the Codo Box from Proving Grounds
+image: /assets/images/codo/initial_web_page.png
+fig-caption: # Add figcaption (optional)
+tags: [TJ Null]
 ---
 
 This is a pretty simple box from Offensive Security's [Proving Grounds](https://www.offsec.com/labs/) so I figured it would be a good place to start. As always, I began with an nmap scan of the given IP, which in the case returned two ports open - 22 and 80. I then ran a more detailed scan "nmap -sC -A $IP" while checking out the web page on port 80. Upon first visiting the web page, we are greeted with this screen:

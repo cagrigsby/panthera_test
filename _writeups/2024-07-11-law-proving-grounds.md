@@ -1,9 +1,12 @@
 ---
-title: "Law - Proving Grounds"
-excerpt: "A Writeup of the Law Box from Proving Grounds<br><img src='/assets/images/Law/Law_1.png'>"
-collection: portfolio
+layout: writeup
+title: Law - Proving Grounds
+date: 2024-07-12 13:32:20 +0300
+description: A Writeup of the Law Box from Proving Grounds
+image: /assets/images/Law/Law_1.png
+fig-caption: # Add figcaption (optional)
+tags: [TJ Null]
 ---
-
 
 Here is a writeup for the Law lab on [Proving Grounds](https://www.offsec.com/labs/), another box from TJ Null's OSCP [lab prep list](https://docs.google.com/spreadsheets/u/1/d/1dwSMIAPIam0PuRBkCiDI88pU3yzrqqHkDtBngUHNCw8/htmlview#). Let's kick things off as usual with an nmap scan, using `-v` so we can investigate as we go. We see there is a web server on port 80 and check it out. 
 

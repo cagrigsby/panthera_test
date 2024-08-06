@@ -1,10 +1,15 @@
 ---
-title: "Algernon - Proving Grounds"
-excerpt: "A Writeup of the Algernon Box from Proving Grounds<br/><img src='/assets/images/Algernon/Logs.png'>"
-collection: portfolio
+layout: writeup
+title: Algernon - Proving Grounds
+date: 2024-07-12 13:32:20 +0300
+description: A Writeup of the Algernon Box from Proving Grounds
+image: /assets/images/Algernon/Logs.png
+fig-caption: # Add figcaption (optional)
+tags: [TJ Null, LainKusunagi]
 ---
 
-Alright, this is a pretty quick writeup of Algernon from [Proving Grounds](https://www.offsec.com/labs/), part of TJ Null's OSCP [lab prep list](https://docs.google.com/spreadsheets/u/1/d/1dwSMIAPIam0PuRBkCiDI88pU3yzrqqHkDtBngUHNCw8/htmlview#). 
+
+Alright, this is a pretty quick writeup of Algernon from [Proving Grounds](https://www.offsec.com/labs/), part of TJ Null's OSCP [lab prep list](https://docs.google.com/spreadsheets/u/1/d/1dwSMIAPIam0PuRBkCiDI88pU3yzrqqHkDtBngUHNCw8/htmlview#), as well as LainKusanagi's [list of OSCP like machines](https://www.reddit.com/r/oscp/comments/1c8pzyz/lainkusanagi_list_of_oscp_like_machines/). Apparently that is a useful list as well. 
 
 Right off the bar we get started with an nmap scan which revealed these ports:
 
