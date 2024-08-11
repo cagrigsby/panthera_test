@@ -1,7 +1,7 @@
 ---
 layout: writeup
 title: ZenPhoto - Proving Grounds
-date: 2024-07-26 13:32:20 +0300
+date: # 2024-07-26 13:32:20 +0300
 description: A Writeup of the ZenPhoto Box from Proving Grounds
 image: # /assets/images/Flu/Flu_1.png
 fig-caption: # Add figcaption (optional)
