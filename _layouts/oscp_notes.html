@@ -7,7 +7,6 @@
 
   <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ '/assets/libs/fontawesome-5.9.0/css/all.min.css' | relative_url }}" media="screen" type="text/css">
-
   <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}" media="screen" type="text/css">
   <!-- <link rel="stylesheet" href="{{ '/assets/css/print.css' | relative_url }}" media="print" type="text/css"> -->
 
@@ -18,12 +17,11 @@
   -->
 
   {% seo %}
-
 </head>
 
 <body>
   <section class="pan-layout">
-    {% include oscp_left.html %}
+    {% include oscp_left.html %} <!-- This now includes the custom sidebar -->
 
     <section class="pan-layout-overlay"></section>
 
@@ -51,6 +49,5 @@
       {% else %}
     {% endcase %}
   {% endif %}
- 
 </body>
 </html>
