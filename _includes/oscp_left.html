@@ -1,16 +1,18 @@
-<section class="pan-layout-left"
+<section
+  class="pan-layout-left"
   {% if site.left_side %}
   style="
-    {% if site.left_side.background_image %}
-    background-image: url({{ site.left_side.background_image }});
-    {% endif %}
-    {% if site.left_side.text_color %}
-    color: {{ site.left_side.text_color }};
-    {% endif %}
+  {% if site.left_side.background_image %}
+  background-image: url({{ site.left_side.background_image }});
+  {% endif %}
+  {% if site.left_side.text_color %}
+  color: {{ site.left_side.text_color }};
+  {% endif %}
   "
   {% endif %}
 >
-  <section class="pan-layout-left__overlay"
+  <section
+    class="pan-layout-left__overlay"
     {% if site.left_side %}
     style="{% if site.left_side.background_color %}background-color: {{ site.left_side.background_color }} !important;{% endif %}"
     {% endif %}
@@ -45,19 +47,14 @@
       {% endif %}
     </div>
   </div>
-
+  
   <div class="pan-layout-left__middle">
-    {% if page.content %}
+    {% if site.menu %}
     <ul class="pan-layout-left__menu">
-      {% assign content = page.content | split: "\n" %}
-      {% for line in content %}
-        {% if line contains '#' %}
-          {% assign header_level = line | split: '#' | size %}
-          {% assign header_text = line | remove: '#' | strip %}
-          <li>
-            <a href="#{{ header_text | slugify }}">{{ header_text }}</a>
-          </li>
-        {% endif %}
+      {% for menu in site.menu %}
+      <li data-menu-link="{{ menu.link }}">
+        <a href="{{ menu.link | relative_url }}">{{ menu.text }}</a>
+      </li>
       {% endfor %}
     </ul>
     {% endif %}
@@ -88,11 +85,29 @@
     </div>
   </div>
 
-  <div class="pan-layout-left__close"
+  <div
+    class="pan-layout-left__close"
     {% if site.left_side %}
     style="{% if site.left_side.close_button_color %}color: {{ site.left_side.close_button_color }} !important;{% endif %}"
     {% endif %}
   >
     <i class="fa fa-fw fa-times"></i>
+  </div>
+
+  <!-- Sidebar content specific to 'aaaa_notes' -->
+  <div class="pan-layout-left__headers">
+    <h2>Table of Contents</h2>
+    <ul>
+      {% assign headers = page.content | split: '\n' | where: 'size', 'gt: 0' | map: 'strip' | reject: 'empty' %}
+      {% for line in headers %}
+        {% if line contains '### ' %}
+          <li><a href="#{{ line | remove: '### ' | strip }}">{{ line | remove: '### ' | strip }}</a></li>
+        {% elsif line contains '## ' %}
+          <li><a href="#{{ line | remove: '## ' | strip }}">{{ line | remove: '## ' | strip }}</a></li>
+        {% elsif line contains '# ' %}
+          <li><a href="#{{ line | remove: '# ' | strip }}">{{ line | remove: '# ' | strip }}</a></li>
+        {% endif %}
+      {% endfor %}
+    </ul>
   </div>
 </section>
