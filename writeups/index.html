@@ -3,4 +3,15 @@
 
 <h1>Writeups</h1>
 
+<ul>
+  {% for writeup in site.writeups %}
+    <li>
+      <a href="{{ writeup.url }}">{{ writeup.title }}</a>
+      {% if writeup.tags %}
+        - <span>{{ writeup.tags | join: ", " }}</span>
+      {% endif %}
+    </li>
+  {% endfor %}
+</ul>
+
 {% include writeups/index.html %}
