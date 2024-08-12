@@ -21,8 +21,100 @@
 
 <body>
   <section class="pan-layout">
-    {% include oscp_left.html %} <!-- This now includes the custom sidebar -->
+    <!-- Custom Sidebar for aaaa_notes Page -->
+    <section class="pan-layout-left">
+      <div class="pan-layout-left__overlay"></div>
 
+      <div class="pan-layout-left__top">
+        <div class="pan-layout-left__avatar">
+          {% if site.avatar %}
+            <a href="{{ '/' | relative_url }}">
+              <img src="{{ site.avatar }}" alt="{{ site.title | default: site.github.owner_name }}">
+            </a>
+          {% else if site.github.owner_gravatar_url %}
+            <a href="{{ '/' | relative_url }}">
+              <img src="{{ site.github.owner_gravatar_url }}" alt="{{ site.title | default: site.github.owner_name }}">
+            </a>
+          {% else %}
+            <a href="{{ '/' | relative_url }}">
+              <img src="https://secure.gravatar.com/avatar/?d=mm&r=g&s=150" alt="">
+            </a>
+          {% endif %}
+        </div>
+
+        <div class="pan-layout-left__info">
+          <h1 class="pan-layout-left__title">
+            {{ site.title | default: site.github.owner_name }}
+          </h1>
+          {% if site.subtitle %}
+            <h3 class="pan-layout-left__subtitle">
+              {{ site.subtitle }}
+            </h3>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="pan-layout-left__middle">
+        <h2>Table of Contents</h2>
+        <ul class="pan-layout-left__menu">
+          {% assign headers = page.content | split: '\n' %}
+          {% assign headings = "" | split: "" %}
+          {% for header in headers %}
+            {% if header contains '# ' %}
+              {% assign level = header | slice: 0, 1 %}
+              {% assign heading = header | remove: '#' | remove: ' ' %}
+              <li><a href="#{{ heading | downcase }}">{{ heading }}</a></li>
+            {% elsif header contains '## ' %}
+              {% assign level = header | slice: 0, 2 %}
+              {% assign heading = header | remove: '## ' | remove: ' ' %}
+              <li><a href="#{{ heading | downcase }}">{{ heading }}</a></li>
+            {% elsif header contains '### ' %}
+              {% assign level = header | slice: 0, 3 %}
+              {% assign heading = header | remove: '### ' | remove: ' ' %}
+              <li><a href="#{{ heading | downcase }}">{{ heading }}</a></li>
+            {% elsif header contains '#### ' %}
+              {% assign level = header | slice: 0, 4 %}
+              {% assign heading = header | remove: '#### ' | remove: ' ' %}
+              <li><a href="#{{ heading | downcase }}">{{ heading }}</a></li>
+            {% elsif header contains '##### ' %}
+              {% assign level = header | slice: 0, 5 %}
+              {% assign heading = header | remove: '##### ' | remove: ' ' %}
+              <li><a href="#{{ heading | downcase }}">{{ heading }}</a></li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="pan-layout-left__bottom">
+        <div class="pan-layout-left__small">
+          <span>GET IN TOUCH</span>
+        </div>
+        <div class="pan-layout-left__social">
+          {% if site.social_icons %}
+            <ul>
+              {% for social in site.social_icons %}
+                {% if social.icon %}
+                  <li>
+                    <a target="_blank" href="{{ social.link }}">
+                      {% if social.icon contains 'fa-' %}
+                        <i class="{{ social.icon }}"></i>
+                      {% else %}
+                        <img src="{{ social.icon }}" alt="{{ social.name }}" class="social-icon-img">
+                      {% endif %}
+                    </a>
+                  </li>
+                {% endif %}
+              {% endfor %}
+            </ul>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="pan-layout-left__close">
+        <i class="fa fa-fw fa-times"></i>
+      </div>
+    </section>
+    
     <section class="pan-layout-overlay"></section>
 
     <section class="pan-layout-right">
