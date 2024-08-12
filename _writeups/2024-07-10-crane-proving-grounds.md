@@ -3,9 +3,9 @@ layout: writeup
 title: Crane - Proving Grounds
 date: 2024-07-12 13:32:20 +0300
 description: A Writeup of the Crane Box from Proving Grounds
-image: /assets/images/Crane/Crane_5.png
+image: # /assets/images/Crane/Crane_5.png
 fig-caption: # Add figcaption (optional)
-tags: [TJ Null]
+tags: [TJ Null, Linux]
 ---
 
 
