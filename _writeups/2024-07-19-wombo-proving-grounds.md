@@ -20,6 +20,7 @@ PORT      STATE SERVICE
 ```
 
 I begin by visiting ports 80 and 8080 while running directory scans in the background. Port 80 looks to be the default landing page for nginx, so we may have to wait for directory scans on that one. 
+
 ![Wombo1.png](/assets/images/Wombo/Wombo1.png){: .center-aligned width="600px"}
 
 
