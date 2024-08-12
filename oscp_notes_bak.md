@@ -1,7 +1,7 @@
 ---
 layout: oscp_notes
 title: OSCP Notes
-permalink: /oscp_notes/
+permalink: /oscp_notes_bak/
 ---
 # Enumeration
 ## (0) nmap
