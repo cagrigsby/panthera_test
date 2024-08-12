@@ -8,111 +8,13 @@
   <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ '/assets/libs/fontawesome-5.9.0/css/all.min.css' | relative_url }}" media="screen" type="text/css">
   <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}" media="screen" type="text/css">
-  <!-- <link rel="stylesheet" href="{{ '/assets/css/print.css' | relative_url }}" media="print" type="text/css"> -->
-
-  <!--
-    [if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <![endif]
-  -->
 
   {% seo %}
 </head>
 
 <body>
   <section class="pan-layout">
-    <!-- Custom Sidebar for aaaa_notes Page -->
-    <section class="pan-layout-left">
-      <div class="pan-layout-left__overlay"></div>
-
-      <div class="pan-layout-left__top">
-        <div class="pan-layout-left__avatar">
-          {% if site.avatar %}
-            <a href="{{ '/' | relative_url }}">
-              <img src="{{ site.avatar }}" alt="{{ site.title | default: site.github.owner_name }}">
-            </a>
-          {% else if site.github.owner_gravatar_url %}
-            <a href="{{ '/' | relative_url }}">
-              <img src="{{ site.github.owner_gravatar_url }}" alt="{{ site.title | default: site.github.owner_name }}">
-            </a>
-          {% else %}
-            <a href="{{ '/' | relative_url }}">
-              <img src="https://secure.gravatar.com/avatar/?d=mm&r=g&s=150" alt="">
-            </a>
-          {% endif %}
-        </div>
-
-        <div class="pan-layout-left__info">
-          <h1 class="pan-layout-left__title">
-            {{ site.title | default: site.github.owner_name }}
-          </h1>
-          {% if site.subtitle %}
-            <h3 class="pan-layout-left__subtitle">
-              {{ site.subtitle }}
-            </h3>
-          {% endif %}
-        </div>
-      </div>
-
-      <div class="pan-layout-left__middle">
-        <h2>Table of Contents</h2>
-        <ul class="pan-layout-left__menu">
-          {% assign headers = page.content | split: '\n' %}
-          {% assign toc = "" | split: "" %}
-
-          {% for line in headers %}
-            {% if line contains '###### ' %}
-              {% assign header_text = line | remove: '###### ' | strip %}
-              <li><a href="#{{ header_text | downcase | replace: ' ', '-' }}">{{ header_text }}</a></li>
-            {% elsif line contains '##### ' %}
-              {% assign header_text = line | remove: '##### ' | strip %}
-              <li><a href="#{{ header_text | downcase | replace: ' ', '-' }}">{{ header_text }}</a></li>
-            {% elsif line contains '#### ' %}
-              {% assign header_text = line | remove: '#### ' | strip %}
-              <li><a href="#{{ header_text | downcase | replace: ' ', '-' }}">{{ header_text }}</a></li>
-            {% elsif line contains '### ' %}
-              {% assign header_text = line | remove: '### ' | strip %}
-              <li><a href="#{{ header_text | downcase | replace: ' ', '-' }}">{{ header_text }}</a></li>
-            {% elsif line contains '## ' %}
-              {% assign header_text = line | remove: '## ' | strip %}
-              <li><a href="#{{ header_text | downcase | replace: ' ', '-' }}">{{ header_text }}</a></li>
-            {% elsif line contains '# ' %}
-              {% assign header_text = line | remove: '# ' | strip %}
-              <li><a href="#{{ header_text | downcase | replace: ' ', '-' }}">{{ header_text }}</a></li>
-            {% endif %}
-          {% endfor %}
-        </ul>
-      </div>
-
-      <div class="pan-layout-left__bottom">
-        <div class="pan-layout-left__small">
-          <span>GET IN TOUCH</span>
-        </div>
-        <div class="pan-layout-left__social">
-          {% if site.social_icons %}
-            <ul>
-              {% for social in site.social_icons %}
-                {% if social.icon %}
-                  <li>
-                    <a target="_blank" href="{{ social.link }}">
-                      {% if social.icon contains 'fa-' %}
-                        <i class="{{ social.icon }}"></i>
-                      {% else %}
-                        <img src="{{ social.icon }}" alt="{{ social.name }}" class="social-icon-img">
-                      {% endif %}
-                    </a>
-                  </li>
-                {% endif %}
-              {% endfor %}
-            </ul>
-          {% endif %}
-        </div>
-      </div>
-
-      <div class="pan-layout-left__close">
-        <i class="fa fa-fw fa-times"></i>
-      </div>
-    </section>
+    {% include oscp_left.html %}
 
     <section class="pan-layout-overlay"></section>
 
@@ -120,7 +22,41 @@
       {% include header.html %}
 
       <section class="pan-layout-content">
-        {{ content }}
+        <!-- Custom Table of Contents -->
+        <aside class="custom-toc">
+          <h2>Table of Contents</h2>
+          <ul>
+            {% assign content = page.content | split: '\n' %}
+            {% assign toc = "" | split: "" %}
+
+            {% for line in content %}
+              {% if line contains '###### ' %}
+                {% assign header_text = line | remove: '###### ' | strip %}
+                <li><a href="#{{ header_text | downcase | replace: ' ', '-' }}">{{ header_text }}</a></li>
+              {% elsif line contains '##### ' %}
+                {% assign header_text = line | remove: '##### ' | strip %}
+                <li><a href="#{{ header_text | downcase | replace: ' ', '-' }}">{{ header_text }}</a></li>
+              {% elsif line contains '#### ' %}
+                {% assign header_text = line | remove: '#### ' | strip %}
+                <li><a href="#{{ header_text | downcase | replace: ' ', '-' }}">{{ header_text }}</a></li>
+              {% elsif line contains '### ' %}
+                {% assign header_text = line | remove: '### ' | strip %}
+                <li><a href="#{{ header_text | downcase | replace: ' ', '-' }}">{{ header_text }}</a></li>
+              {% elsif line contains '## ' %}
+                {% assign header_text = line | remove: '## ' | strip %}
+                <li><a href="#{{ header_text | downcase | replace: ' ', '-' }}">{{ header_text }}</a></li>
+              {% elsif line contains '# ' %}
+                {% assign header_text = line | remove: '# ' | strip %}
+                <li><a href="#{{ header_text | downcase | replace: ' ', '-' }}">{{ header_text }}</a></li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="main-content">
+          {{ content }}
+        </div>
       </section>
 
       {% include footer.html %}
@@ -140,5 +76,6 @@
       {% else %}
     {% endcase %}
   {% endif %}
+ 
 </body>
 </html>
