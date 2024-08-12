@@ -58,28 +58,27 @@
         <h2>Table of Contents</h2>
         <ul class="pan-layout-left__menu">
           {% assign headers = page.content | split: '\n' %}
-          {% assign headings = "" | split: "" %}
-          {% for header in headers %}
-            {% if header contains '# ' %}
-              {% assign level = header | slice: 0, 1 %}
-              {% assign heading = header | remove: '#' | remove: ' ' %}
-              <li><a href="#{{ heading | downcase }}">{{ heading }}</a></li>
-            {% elsif header contains '## ' %}
-              {% assign level = header | slice: 0, 2 %}
-              {% assign heading = header | remove: '## ' | remove: ' ' %}
-              <li><a href="#{{ heading | downcase }}">{{ heading }}</a></li>
-            {% elsif header contains '### ' %}
-              {% assign level = header | slice: 0, 3 %}
-              {% assign heading = header | remove: '### ' | remove: ' ' %}
-              <li><a href="#{{ heading | downcase }}">{{ heading }}</a></li>
-            {% elsif header contains '#### ' %}
-              {% assign level = header | slice: 0, 4 %}
-              {% assign heading = header | remove: '#### ' | remove: ' ' %}
-              <li><a href="#{{ heading | downcase }}">{{ heading }}</a></li>
-            {% elsif header contains '##### ' %}
-              {% assign level = header | slice: 0, 5 %}
-              {% assign heading = header | remove: '##### ' | remove: ' ' %}
-              <li><a href="#{{ heading | downcase }}">{{ heading }}</a></li>
+          {% assign toc = "" | split: "" %}
+
+          {% for line in headers %}
+            {% if line contains '###### ' %}
+              {% assign header_text = line | remove: '###### ' | strip %}
+              <li><a href="#{{ header_text | downcase | replace: ' ', '-' }}">{{ header_text }}</a></li>
+            {% elsif line contains '##### ' %}
+              {% assign header_text = line | remove: '##### ' | strip %}
+              <li><a href="#{{ header_text | downcase | replace: ' ', '-' }}">{{ header_text }}</a></li>
+            {% elsif line contains '#### ' %}
+              {% assign header_text = line | remove: '#### ' | strip %}
+              <li><a href="#{{ header_text | downcase | replace: ' ', '-' }}">{{ header_text }}</a></li>
+            {% elsif line contains '### ' %}
+              {% assign header_text = line | remove: '### ' | strip %}
+              <li><a href="#{{ header_text | downcase | replace: ' ', '-' }}">{{ header_text }}</a></li>
+            {% elsif line contains '## ' %}
+              {% assign header_text = line | remove: '## ' | strip %}
+              <li><a href="#{{ header_text | downcase | replace: ' ', '-' }}">{{ header_text }}</a></li>
+            {% elsif line contains '# ' %}
+              {% assign header_text = line | remove: '# ' | strip %}
+              <li><a href="#{{ header_text | downcase | replace: ' ', '-' }}">{{ header_text }}</a></li>
             {% endif %}
           {% endfor %}
         </ul>
@@ -114,7 +113,7 @@
         <i class="fa fa-fw fa-times"></i>
       </div>
     </section>
-    
+
     <section class="pan-layout-overlay"></section>
 
     <section class="pan-layout-right">
