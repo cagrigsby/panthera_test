@@ -1,4 +1,5 @@
-<section class="pan-layout-left"
+<section
+  class="pan-layout-left"
   {% if site.left_side %}
   style="
   {% if site.left_side.background_image %}
@@ -18,27 +19,58 @@
   ></section>
 
   <div class="pan-layout-left__top">
-    <!-- Existing top content here -->
+    <div class="pan-layout-left__avatar">
+      {% if site.avatar %}
+      <a href="{{ '/' | relative_url }}">
+        <img src="{{ site.avatar }}" alt="{{ site.title | default: site.github.owner_name }}">
+      </a>
+      {% else if site.github.owner_gravatar_url %}
+      <a href="{{ '/' | relative_url }}">
+        <img src="{{ site.github.owner_gravatar_url }}" alt="{{ site.title | default: site.github.owner_name }}">
+      </a>
+      {% else %}
+      <a href="{{ '/' | relative_url }}">
+        <img src="https://secure.gravatar.com/avatar/?d=mm&r=g&s=150" alt="">
+      </a>
+      {% endif %}
+    </div>
+    
+    <div class="pan-layout-left__info">
+      <h1 class="pan-layout-left__title">
+        {{ site.title | default: site.github.owner_name }}
+      </h1>
+      
+      {% if site.subtitle %}
+      <h3 class="pan-layout-left__subtitle">
+        {{ site.subtitle }}
+      </h3>
+      {% endif %}
+    </div>
   </div>
   
   <div class="pan-layout-left__middle">
-    <h2>Table of Contents</h2>
-    <ul class="pan-layout-left__menu">
-      {% assign headers = page.content | split: '\n' %}
-      {% for line in headers %}
-        {% if line contains '#' %}
-          {% assign header_level = line | split: ' ' | first | size | minus: 1 %}
-          {% assign header_text = line | remove: '#' | strip %}
-          {% if header_level < 6 %}
-            <li class="header-level-{{ header_level }}">
-              <a href="#{{ header_text | slugify }}">{{ header_text }}</a>
-            </li>
-          {% endif %}
-        {% endif %}
-      {% endfor %}
-    </ul>
+    {% if page.content %}
+      {% assign headers = site.pages | where: "url", page.url | first.content | split: "\n" | where_exp: "line", line contains '#' %}
+      {% if headers.size > 0 %}
+        <div class="table-of-contents">
+          <h2>Table of Contents</h2>
+          <ul>
+            {% for line in headers %}
+              {% capture header_text %}
+                {{ line | strip | remove: '#' | strip }}
+              {% endcapture %}
+              <li><a href="#{{ header_text | slugify }}">{{ header_text }}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% else %}
+        <p>No headers found.</p>
+      {% endif %}
+    {% else %}
+      <p>No content available.</p>
+    {% endif %}
   </div>
-
+  
   <div class="pan-layout-left__bottom">
     <div class="pan-layout-left__small">
       <span>GET IN TOUCH</span>
@@ -73,19 +105,3 @@
     <i class="fa fa-fw fa-times"></i>
   </div>
 </section>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    var headers = document.querySelectorAll('.pan-layout-left__menu a');
-    headers.forEach(function(header) {
-      header.addEventListener('click', function(e) {
-        e.preventDefault();
-        var targetId = header.getAttribute('href').substring(1);
-        var targetElement = document.getElementById(targetId);
-        if (targetElement) {
-          targetElement.scrollIntoView({ behavior: 'smooth' });
-        }
-      });
-    });
-  });
-</script>
