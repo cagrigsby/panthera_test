@@ -4,11 +4,12 @@
 <h1>Writeups</h1>
 
 <ul>
-  {% for writeup in site.writeups %}
+  {% assign sorted_writeups = site.writeups | sort: 'title' %}
+  {% for writeup in sorted_writeups %}
     <li>
       <a href="{{ writeup.url }}">{{ writeup.title }}</a>
-      {% if writeup.tags %}
-        - <span>{{ writeup.tags | join: ", " }}</span>
+      {% if writeup.description %}
+        - <span>{{ writeup.description }}</span>
       {% endif %}
     </li>
   {% endfor %}
