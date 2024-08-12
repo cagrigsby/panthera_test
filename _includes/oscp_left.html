@@ -50,58 +50,14 @@
   
   <div class="pan-layout-left__middle">
     {% if page.content %}
-      {% assign headers = site.pages | where: "url", page.url | first.content | split: "\n" | where_exp: "line", line contains '#' %}
-      {% if headers.size > 0 %}
-        <div class="table-of-contents">
-          <h2>Table of Contents</h2>
-          <ul>
-            {% for line in headers %}
+      {% assign lines = page.content | split: "\n" %}
+      <div class="table-of-contents">
+        <h2>Table of Contents</h2>
+        <ul>
+          {% for line in lines %}
+            {% if line contains '#' %}
               {% capture header_text %}
                 {{ line | strip | remove: '#' | strip }}
               {% endcapture %}
-              <li><a href="#{{ header_text | slugify }}">{{ header_text }}</a></li>
-            {% endfor %}
-          </ul>
-        </div>
-      {% else %}
-        <p>No headers found.</p>
-      {% endif %}
-    {% else %}
-      <p>No content available.</p>
-    {% endif %}
-  </div>
-  
-  <div class="pan-layout-left__bottom">
-    <div class="pan-layout-left__small">
-      <span>GET IN TOUCH</span>
-    </div>
-    <div class="pan-layout-left__social">
-      {% if site.social_icons %}
-      <ul>
-        {% for social in site.social_icons %}
-        {% if social.icon %}
-          <li>
-            <a target="_blank" href="{{ social.link }}">
-              {% if social.icon contains 'fa-' %}
-                <i class="{{ social.icon }}"></i>
-              {% else %}
-                <img src="{{ social.icon }}" alt="{{ social.name }}" class="social-icon-img">
-              {% endif %}
-            </a>
-          </li>
-        {% endif %}
-        {% endfor %}
-      </ul>
-      {% endif %}
-    </div>
-  </div>
-
-  <div
-    class="pan-layout-left__close"
-    {% if site.left_side %}
-    style="{% if site.left_side.close_button_color %}color: {{ site.left_side.close_button_color }} !important;{% endif %}"
-    {% endif %}
-  >
-    <i class="fa fa-fw fa-times"></i>
-  </div>
-</section>
+              {% assign header_id = header_text | slugify %}
+      
