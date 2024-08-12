@@ -1,23 +1,21 @@
-<section
-  class="pan-layout-left"
+<section class="pan-layout-left"
   {% if site.left_side %}
   style="
-  {% if site.left_side.background_image %}
-  background-image: url({{ site.left_side.background_image }});
-  {% endif %}
-  {% if site.left_side.text_color %}
-  color: {{ site.left_side.text_color }};
-  {% endif %}
+    {% if site.left_side.background_image %}
+    background-image: url({{ site.left_side.background_image }});
+    {% endif %}
+    {% if site.left_side.text_color %}
+    color: {{ site.left_side.text_color }};
+    {% endif %}
   "
   {% endif %}
 >
-  <section
-    class="pan-layout-left__overlay"
+  <section class="pan-layout-left__overlay"
     {% if site.left_side %}
     style="{% if site.left_side.background_color %}background-color: {{ site.left_side.background_color }} !important;{% endif %}"
     {% endif %}
   ></section>
-<!--  {% include addons/share.html %}
+
   <div class="pan-layout-left__top">
     <div class="pan-layout-left__avatar">
       {% if site.avatar %}
@@ -46,44 +44,23 @@
       </h3>
       {% endif %}
     </div>
-  </div>  -->
-  
+  </div>
+
   <div class="pan-layout-left__middle">
-    <!-- Container for the generated list of headers -->
-    <ul id="sidebar-menu" class="pan-layout-left__menu"></ul>
-</div>
-
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    // Function to create a list item for each header
-    function createListItem(header) {
-        var li = document.createElement("li");
-        var a = document.createElement("a");
-        a.textContent = header.textContent;
-        a.href = "#" + header.id;
-        li.appendChild(a);
-        return li;
-    }
-
-    // Get the content area and sidebar menu
-    var content = document.querySelector(".content");
-    var sidebarMenu = document.getElementById("sidebar-menu");
-
-    // Select headers (h1 to h5)
-    var headers = content.querySelectorAll("h1, h2, h3, h4, h5");
-
-    // Loop through each header and add to the sidebar menu
-    headers.forEach(function(header) {
-        // Ensure each header has an ID for linking
-        if (!header.id) {
-            header.id = header.textContent.toLowerCase().replace(/ /g, "-");
-        }
-        sidebarMenu.appendChild(createListItem(header));
-    });
-});
-</script>
+    {% if page.content %}
+    <ul class="pan-layout-left__menu">
+      {% assign headers = page.content | split: '\n' | where: 'contains', '#' %}
+      {% for header in headers %}
+        {% assign header_text = header | remove: '#' | strip %}
+        <li>
+          <a href="#{{ header_text | slugify }}">{{ header_text }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </div>
   
- <!-- <div class="pan-layout-left__bottom">
+  <div class="pan-layout-left__bottom">
     <div class="pan-layout-left__small">
       <span>GET IN TOUCH</span>
     </div>
@@ -107,9 +84,8 @@ document.addEventListener("DOMContentLoaded", function() {
       {% endif %}
     </div>
   </div>
--->
-  <div
-    class="pan-layout-left__close"
+
+  <div class="pan-layout-left__close"
     {% if site.left_side %}
     style="{% if site.left_side.close_button_color %}color: {{ site.left_side.close_button_color }} !important;{% endif %}"
     {% endif %}
