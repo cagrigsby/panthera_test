@@ -49,12 +49,15 @@
   <div class="pan-layout-left__middle">
     {% if page.content %}
     <ul class="pan-layout-left__menu">
-      {% assign headers = page.content | split: '\n' | where: 'contains', '#' %}
-      {% for header in headers %}
-        {% assign header_text = header | remove: '#' | strip %}
-        <li>
-          <a href="#{{ header_text | slugify }}">{{ header_text }}</a>
-        </li>
+      {% assign content = page.content | split: "\n" %}
+      {% for line in content %}
+        {% if line contains '#' %}
+          {% assign header_level = line | split: '#' | size %}
+          {% assign header_text = line | remove: '#' | strip %}
+          <li>
+            <a href="#{{ header_text | slugify }}">{{ header_text }}</a>
+          </li>
+        {% endif %}
       {% endfor %}
     </ul>
     {% endif %}
