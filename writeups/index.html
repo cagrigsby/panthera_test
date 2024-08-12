@@ -8,8 +8,8 @@
   {% for writeup in sorted_writeups %}
     <li>
       <a href="{{ writeup.url }}">{{ writeup.title }}</a>
-      {% if writeup.description %}
-        - <span>{{ writeup.description }}</span>
+      {% if writeup.tags %}
+        - <span>{{ writeup.tags | join: ", " }}</span>
       {% endif %}
     </li>
   {% endfor %}
