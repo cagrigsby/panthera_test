@@ -55,9 +55,11 @@
         <ul>
           {% assign headers = page.content | split: "\n" | where: "contains", "#" %}
           {% for header in headers %}
-            {% assign header_text = header | remove: "#" | strip %}
-            {% assign header_id = header_text | slugify %}
-            <li><a href="#{{ header_id }}">{{ header_text }}</a></li>
+            {% if header contains "#" %}
+              {% assign header_text = header | remove: "#" | strip %}
+              {% assign header_id = header_text | slugify %}
+              <li><a href="#{{ header_id }}">{{ header_text }}</a></li>
+            {% endif %}
           {% endfor %}
         </ul>
       </div>
@@ -85,18 +87,4 @@
             </a>
           </li>
         {% endif %}
-        {% endfor %}
-      </ul>
-      {% endif %}
-    </div>
-  </div>
-
-  <div
-    class="pan-layout-left__close"
-    {% if site.left_side %}
-    style="{% if site.left_side.close_button_color %}color: {{ site.left_side.close_button_color }} !important;{% endif %}"
-    {% endif %}
-  >
-    <i class="fa fa-fw fa-times"></i>
-  </div>
-</section>
+        {
