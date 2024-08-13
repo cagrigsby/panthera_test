@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     break;
             }
 
-            tocHTML += `<div style="padding-left: 10px;"><a href="#${header.id}">${indent}${text}</a></div>`;
+            tocHTML += `<div style="padding-left: 10px;"><a href="#${header.id}">${indent}${text}</a></div>`; // can increase the padding if wanted
         });
 
         tocContainer.innerHTML = tocHTML;

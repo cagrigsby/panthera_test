@@ -5,7 +5,7 @@ date: 2024-07-14 13:32:20 +0300
 description: A Writeup of the Readys Box from Proving Grounds
 image: # /assets/images/Flu/Flu_1.png
 fig-caption: # Add figcaption (optional)
-tags: [LainKusunagi, Linux, Redis]
+tags: [Linux, LainKusunagi, Redis]
 ---
 
 Here's a writeup for Readys, an Intermediate Proving Grounds box I saw on the [LainKusanagi list of OSCP like machines](https://www.reddit.com/r/oscp/comments/1c8pzyz/lainkusanagi_list_of_oscp_like_machines/). While this box has been rated Intermediate by OffSec, I'll note that the community has rated it to be Very Hard. I'll keep an eye on that as I have slightly have had boxes that I simply could not finish even when copying and pasting commands from official writeups. Looking at you Postfish. I kick things off with nmapAutomator and check port 80 for a website. Looks like we've got a Wordpress site. 

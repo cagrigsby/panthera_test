@@ -5,7 +5,7 @@ date: 2024-07-16 13:32:20 +0300
 description: A Writeup of the Marketing Box from Proving Grounds
 image: # /assets/images/Flu/Flu_1.png
 fig-caption: # Add figcaption (optional)
-tags: [LainKusunagi, Linux]
+tags: [Linux, LainKusunagi]
 ---
 
 Here's a writeup for Marketing, an Intermediate Proving Grounds box I saw on the [LainKusanagi list of OSCP like machines](https://www.reddit.com/r/oscp/comments/1c8pzyz/lainkusanagi_list_of_oscp_like_machines/). I take note that the community has rated this Very Hard. It was one of the harder boxes I've done to prepare for the OSCP to be honest, so that tracks. It did require writeups for me to complete, but I don't think I looked them up too early. It was simply above my level of understanding. 

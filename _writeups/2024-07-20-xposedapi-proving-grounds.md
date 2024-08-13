@@ -5,7 +5,7 @@ date: 2024-07-20 13:32:20 +0300
 description: A Writeup of the XposedAPI Box from Proving Grounds
 image: # /assets/images/Flu/Flu_1.png
 fig-caption: # Add figcaption (optional)
-tags: [LainKusunagi, Linux]
+tags: [Linux, LainKusunagi]
 ---
 
 ![XposedAPI1.png](/assets/images/XposedAPI/XposedAP1.png){: .center-aligned width="600px"}

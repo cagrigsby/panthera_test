@@ -5,7 +5,7 @@ date: 2024-07-19 13:32:20 +0300
 description: A Writeup of the Wombo Box from Proving Grounds
 image: # /assets/images/Flu/Flu_1.png
 fig-caption: # Add figcaption (optional)
-tags: [LainKusunagi, Linux, Redis]
+tags: [Linux, LainKusunagi, Redis]
 ---
 
 Here's box on the [LainKusanagi list of OSCP like machines](https://www.reddit.com/r/oscp/comments/1c8pzyz/lainkusanagi_list_of_oscp_like_machines/) we have Wombo from Proving Grounds. This box is rated as Easy, and the community rates it as Intermediate. Let's see how complicated I can make it for myself. And I'll kick things off with an nmap scan revealing: 

@@ -5,7 +5,7 @@ date: 2024-07-17 13:32:20 +0300
 description: A Writeup of the Hunit Box from Proving Grounds
 image: # /assets/images/Flu/Flu_1.png
 fig-caption: # Add figcaption (optional)
-tags: [LainKusunagi, Linux]
+tags: [Linux, LainKusunagi]
 ---
 
 Here's another writeup for Apex, an Intermediate Proving Grounds box I saw on the [LainKusanagi list of OSCP like machines](https://www.reddit.com/r/oscp/comments/1c8pzyz/lainkusanagi_list_of_oscp_like_machines/). I take note that the community has rated this Very Hard. As usual, I get started with an nmap scan with the -v flag so I can see results as they appear: `sudo nmap -p- -sC -A -v -T5 192.168.172.125`. We notice quickly that there is an open port on 8080 and head there to check it out. 

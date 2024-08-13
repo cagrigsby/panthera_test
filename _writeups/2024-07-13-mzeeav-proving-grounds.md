@@ -5,7 +5,7 @@ date: 2024-07-13 13:32:20 +0300
 description: A Writeup of the MZEEAV Box from Proving Grounds
 image: # /assets/images/Flu/Flu_1.png
 fig-caption: # Add figcaption (optional)
-tags: [LainKusunagi, Linux]
+tags: [Linux, LainKusunagi]
 ---
 
 Here is a writeup for the MZEEAV lab on [Proving Grounds](https://www.offsec.com/labs/) which I found on another list from LainKusanagi's [list of OSCP like machines](https://www.reddit.com/r/oscp/comments/1c8pzyz/lainkusanagi_list_of_oscp_like_machines/). First things first, I get started with a port scan. This time I'm trying out nmapAutomator, using a `-t Full` option to get a list of open ports and then run some additional scripts on them. That said, I also put the IP in the URL bar just in case there is a web server running on port 80, and in this case, there is.

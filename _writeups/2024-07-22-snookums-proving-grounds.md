@@ -5,7 +5,7 @@ date: 2024-07-22 13:32:20 +0300
 description: A Writeup of the Snookums Box from Proving Grounds
 image: # /assets/images/Flu/Flu_1.png
 fig-caption: # Add figcaption (optional)
-tags: [LainKusunagi, Linux]
+tags: [Linux, LainKusunagi]
 ---
 
 Today I'll be doing a walkthrough for Snookums, an Intermediate Proving Grounds box I saw on the [LainKusanagi list of OSCP like machines](https://www.reddit.com/r/oscp/comments/1c8pzyz/lainkusanagi_list_of_oscp_like_machines/). As usual, I get started with an nmap scan and a quick search of the IP address in the URL bar in case there is a web server on port 80. And there is:
