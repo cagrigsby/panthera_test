@@ -26,7 +26,7 @@ pre {
     border-radius: 4px; /* Rounded corners */
     overflow-x: auto; /* Scroll horizontally if the code is too wide */
     font-family: 'Open Sans', monospace; /* Monospaced font */ //said 'Courier New', Courier, monospace
-    color: #F686BD; /* Blue text color for contrast */
+    color: #F686BD; /* Pink text color for contrast */
 }
 
 pre code {
@@ -43,6 +43,8 @@ pre code {
   #toc-container a:hover {
     color: #ffffff; /* Set your desired hover color, was E86A92 */
     background-color: rgba(255, 255, 255, 0.1); /* Adjust color to match your theme */
+    padding: 0px;
+    margin: 0px;
     /* padding: 15px; Adds some padding for better visual effect, kind of zooms in */
     /* border-radius: 4px; Optional: adds rounded corners */
   }
