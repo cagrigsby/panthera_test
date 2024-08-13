@@ -22,19 +22,19 @@ document.addEventListener("DOMContentLoaded", function () {
                     tocClass = "toc-h1";
                     break;
                 case "h2":
-                    indent = "&nbsp;&nbsp;- "; // where &nbsp; = non breaking space
+                    indent = "&nbsp;&nbsp;&nbsp;&nbsp; "; // where &nbsp; = non breaking space
                     tocClass = "toc-h2";
                     break;
                 case "h3":
-                    indent = "&nbsp;&nbsp;&nbsp;-- ";
+                    indent = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ";
                     tocClass = "toc-h3";
                     break;
                 case "h4":
-                    indent = "&nbsp;&nbsp;&nbsp;&nbsp;--- ";
+                    indent = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ";
                     tocClass = "toc-h4";
                     break;
                 case "h5":
-                    indent = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;---- ";
+                    indent = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ";
                     tocClass = "toc-h5";
                     break;
             }
