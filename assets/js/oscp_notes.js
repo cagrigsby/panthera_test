@@ -22,19 +22,19 @@ document.addEventListener("DOMContentLoaded", function () {
                     tocClass = "toc-h1";
                     break;
                 case "h2":
-                    indent = "- ";
+                    indent = " ^ ";
                     tocClass = "toc-h2";
                     break;
                 case "h3":
-                    indent = "-- ";
+                    indent = " ^ ^ ";
                     tocClass = "toc-h3";
                     break;
                 case "h4":
-                    indent = "--- ";
+                    indent = " ^ ^ ^ ";
                     tocClass = "toc-h4";
                     break;
                 case "h5":
-                    indent = "---- ";
+                    indent = " ^ ^ ^ ^ ";
                     tocClass = "toc-h5";
                     break;
             }
