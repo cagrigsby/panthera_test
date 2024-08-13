@@ -5,7 +5,7 @@ date: 2024-07-26 13:32:20 +0300
 description: A Writeup of the ZenPhoto Box from Proving Grounds
 image: # /assets/images/Flu/Flu_1.png
 fig-caption: # Add figcaption (optional)
-tags: [LainKusunagi, Linux, kernel]
+tags: [Linux, LainKusunagi, kernel]
 ---
 
 ![ZenPhoto1.png](/assets/images/ZenPhoto/ZenPhoto1.png){: .center-aligned width="600px"}

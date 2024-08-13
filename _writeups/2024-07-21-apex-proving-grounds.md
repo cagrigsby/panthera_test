@@ -5,7 +5,7 @@ date: 2024-07-21 13:32:20 +0300
 description: A Writeup of the Apex Box from Proving Grounds
 image: # /assets/images/Flu/Flu_1.png
 fig-caption: # Add figcaption (optional)
-tags: [LainKusunagi, Linux]
+tags: [Linux, LainKusunagi]
 ---
 
 Here's another writeup for Apex, an Intermediate Proving Grounds box I saw on the [LainKusunagi list of OSCP like machines](https://www.reddit.com/r/oscp/comments/1c8pzyz/lainkusanagi_list_of_oscp_like_machines/). I take note that the community has rated this Very Hard. As usual, I get started with an nmap scan (trying nmap Automator this time) and a quick search of the IP address in the URL bar in case there is a web server on port 80. It looks like there is:

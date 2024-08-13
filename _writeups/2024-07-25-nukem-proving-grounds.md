@@ -5,7 +5,7 @@ date: 2024-07-25 13:32:20 +0300
 description: A Writeup of the Nukem Box from Proving Grounds
 image: # /assets/images/Flu/Flu_1.png
 fig-caption: # Add figcaption (optional)
-tags: [LainKusunagi, Linux, MySQL]
+tags: [Linux, LainKusunagi, MySQL]
 ---
 
 Here's a writeup for Nukem, an Intermediate Proving Grounds box I saw on the [LainKusanagi list of OSCP like machines](https://www.reddit.com/r/oscp/comments/1c8pzyz/lainkusanagi_list_of_oscp_like_machines/). I take note that the community has rated this Hard. Let's kick things off with a port scan using nmap: `sudo nmap -p- -T4 -v 192.168.195.105`. I also notice there is a website open on port 80 as I usually throw that in the URL bar to check just in case, so I go ahead and scan that with feroxbuster: `feroxbuster -u http://192.168.195.105/ --thorough -r`. 

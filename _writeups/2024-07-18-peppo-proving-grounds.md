@@ -5,7 +5,7 @@ date: 2024-07-18 13:32:20 +0300
 description: A Writeup of the Peppo Box from Proving Grounds
 image: # /assets/images/Flu/Flu_1.png
 fig-caption: # Add figcaption (optional)
-tags: [LainKusunagi, Linux]
+tags: [Linux, LainKusunagi]
 ---
 
 Here's a writeup for Marketing, an Intermediate Proving Grounds box I saw on the LainKusunagi OSCP Prep List. I take note that the community has rated this Hard. Let's kick things off with a port scan using nmap: `sudo nmap -p- -T4 -v 192.168.242.60`.

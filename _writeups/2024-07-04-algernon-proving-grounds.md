@@ -5,7 +5,7 @@ date: 2024-07-12 13:32:20 +0300
 description: A Writeup of the Algernon Box from Proving Grounds
 image: /assets/images/Algernon/Logs.png
 fig-caption: # Add figcaption (optional)
-tags: [TJ Null, LainKusunagi, Windows]
+tags: [Windows, TJ Null, LainKusunagi]
 ---
 
 

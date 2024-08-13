@@ -5,7 +5,7 @@ date: 2024-07-23 13:32:20 +0300
 description: A Writeup of the QuackerJack Box from Proving Grounds
 image: # /assets/images/Flu/Flu_1.png
 fig-caption: # Add figcaption (optional)
-tags: [LainKusunagi, Linux, Python]
+tags: [Linux, LainKusunagi, Python]
 ---
 
 This is a writeup for QuackerJack, which I saw on the [LainKusanagi list of OSCP like machines](https://www.reddit.com/r/oscp/comments/1c8pzyz/lainkusanagi_list_of_oscp_like_machines/). I kick things off with an nmapAutomator Full scan and check port 80 by entering the IP into firefox. I get the nmap scan back, and it looks like we'll have a lot to go through. 
