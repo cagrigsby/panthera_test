@@ -23,7 +23,7 @@
 
 <body>
   <section class="pan-layout">
-    {% include oscp_left.html %}
+    {% include aaaa_left.html %}
     <div id="toc-container">
       <!-- JavaScript will insert the table of contents here -->
     </div>
@@ -44,6 +44,7 @@
   <script type="text/javascript" src="{{ '/assets/libs/jquery-3.4.1.min.js' | relative_url }}"></script>
   <script type="text/javascript" src="{{ '/assets/libs/jquery-migrate-3.0.1.min.js' | relative_url }}"></script>
   <script type="text/javascript" src="{{ '/assets/js/panthera-jekyll.js?v=' | append: site.github.build_revision | relative_url }}"></script>
+  <script type="text/javascript" src="{{ '/assets/js/toc.js?v=' | append: site.github.build_revision | relative_url }}"></script>
 
   {% if site.data.comments.enabled == true %}
     {% case site.data.comments.type %}
