@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (tocContainer && contentSection) {
       const headers = contentSection.querySelectorAll("h1, h2, h3, h4, h5");
-      let tocHTML = "<ul>";
+      let tocHTML = "";
 
       headers.forEach(function (header) {
           let indent = "";
@@ -16,6 +16,9 @@ document.addEventListener("DOMContentLoaded", function () {
           }
 
           switch (header.tagName.toLowerCase()) {
+              case "h1":
+                  indent = "";
+                  break;
               case "h2":
                   indent = "- ";
                   break;
@@ -30,10 +33,9 @@ document.addEventListener("DOMContentLoaded", function () {
                   break;
           }
 
-          tocHTML += `<li><a href="#${header.id}">${indent}${text}</a></li>`;
+          tocHTML += `<div><a href="#${header.id}">${indent}${text}</a></div>`;
       });
 
-      tocHTML += "</ul>";
       tocContainer.innerHTML = tocHTML;
   }
 });
