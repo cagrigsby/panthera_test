@@ -34,17 +34,45 @@ pre code {
     padding: 0; /* Remove padding for code blocks within pre */
 }
 
+/* Custom styles for TOC */
+#toc-container {
+    font-family: inherit;
+}
+
 #toc-container a {
     color: #ffffff; /* Set your desired link color */
     display: block; /* Makes each link a block element to ensure it takes up the full width */
     text-decoration: none; /* Removes underline from links */
-  }
-  
-  #toc-container a:hover {
+    padding-left: 10px; /* Adjust padding for spacing from left edge */
+}
+
+#toc-container a:hover {
     color: #F686BD; /* Set your desired hover color, was E86A92 */
     background-color: rgba(255, 255, 255, 0.1); /* Adjust color to match your theme */
     padding: 0px;
     margin: 0px;
     /* padding: 15px; Adds some padding for better visual effect, kind of zooms in */
     /* border-radius: 4px; Optional: adds rounded corners */
-  }
+}
+
+#toc-container a.toc-h1 {
+    font-size: 1.4em;
+    font-weight: bold;
+}
+
+#toc-container a.toc-h2 {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+#toc-container a.toc-h3 {
+    font-size: 1em;
+}
+
+#toc-container a.toc-h4 {
+    font-size: 0.8em;
+}
+
+#toc-container a.toc-h5 {
+    font-size: 0.6em;
+}
