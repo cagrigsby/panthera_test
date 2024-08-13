@@ -17,19 +17,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
           switch (header.tagName.toLowerCase()) {
               case "h1":
-                  indent = "";
+                  indent = " ";
                   break;
               case "h2":
-                  indent = "- ";
+                  indent = " - ";
                   break;
               case "h3":
-                  indent = "-- ";
+                  indent = " -- ";
                   break;
               case "h4":
-                  indent = "--- ";
+                  indent = " --- ";
                   break;
               case "h5":
-                  indent = "---- ";
+                  indent = " ---- ";
                   break;
           }
 
