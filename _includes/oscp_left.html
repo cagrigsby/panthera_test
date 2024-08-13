@@ -17,7 +17,7 @@
     style="{% if site.left_side.background_color %}background-color: {{ site.left_side.background_color }} !important;{% endif %}"
     {% endif %}
   ></section>
-<!--  {% include addons/share.html %}
+
   <div class="pan-layout-left__top">
     <div class="pan-layout-left__avatar">
       {% if site.avatar %}
@@ -46,44 +46,17 @@
       </h3>
       {% endif %}
     </div>
-  </div>  -->
-  
+  </div>
+
+  <!-- Table of Contents placeholder inserted below subtitle -->
   <div class="pan-layout-left__middle">
-    <!-- Container for the generated list of headers -->
-    <ul id="sidebar-menu" class="pan-layout-left__menu"></ul>
-</div>
+    <!-- Insert the TOC container directly -->
+    <div id="toc-container">
+      <!-- JavaScript will insert the table of contents here -->
+    </div>
+  </div>
 
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    // Function to create a list item for each header
-    function createListItem(header) {
-        var li = document.createElement("li");
-        var a = document.createElement("a");
-        a.textContent = header.textContent;
-        a.href = "#" + header.id;
-        li.appendChild(a);
-        return li;
-    }
-
-    // Get the content area and sidebar menu
-    var content = document.querySelector(".content");
-    var sidebarMenu = document.getElementById("sidebar-menu");
-
-    // Select headers (h1 to h5)
-    var headers = content.querySelectorAll("h1, h2, h3, h4, h5");
-
-    // Loop through each header and add to the sidebar menu
-    headers.forEach(function(header) {
-        // Ensure each header has an ID for linking
-        if (!header.id) {
-            header.id = header.textContent.toLowerCase().replace(/ /g, "-");
-        }
-        sidebarMenu.appendChild(createListItem(header));
-    });
-});
-</script>
-  
- <!-- <div class="pan-layout-left__bottom">
+  <div class="pan-layout-left__bottom">
     <div class="pan-layout-left__small">
       <span>GET IN TOUCH</span>
     </div>
@@ -107,7 +80,7 @@ document.addEventListener("DOMContentLoaded", function() {
       {% endif %}
     </div>
   </div>
--->
+
   <div
     class="pan-layout-left__close"
     {% if site.left_side %}

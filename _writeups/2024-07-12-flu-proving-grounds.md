@@ -3,9 +3,9 @@ layout: writeup
 title: Flu - Proving Grounds
 date: 2024-07-12 13:32:20 +0300
 description: A Writeup of the Flu Box from Proving Grounds
-image: /assets/images/Flu/Flu_1.png
+image: # /assets/images/Flu/Flu_1.png
 fig-caption: # Add figcaption (optional)
-tags: [LainKusunagi, Confluence]
+tags: [LainKusunagi, Confluence, Linux]
 ---
 
 Here is a writeup for the Flu lab on [Proving Grounds](https://www.offsec.com/labs/). This one actually isn't on TJ Null's OSCP prep list; it's on another list from LainKusanagi's [list of OSCP like machines](https://www.reddit.com/r/oscp/comments/1c8pzyz/lainkusanagi_list_of_oscp_like_machines/). Still on Proving Grounds, but I think I may have ran through TJ Null's list. Maybe I will go back over them and write up some of the machine's I've completed but not bothered to put on here. As usual, I got started with an nmap scan which finds port 8090 open, so I go to my browser and check out a Confluence page. 

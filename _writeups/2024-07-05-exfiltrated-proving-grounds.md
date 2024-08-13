@@ -3,9 +3,9 @@ layout: writeup
 title: Exfiltrated - Proving Grounds
 date: 2024-07-12 13:32:20 +0300
 description: A Writeup of the Exfiltrated Box from Proving Grounds
-image: /assets/images/Exfiltrated/subrion.png
+image: # /assets/images/Exfiltrated/subrion.png
 fig-caption: # Add figcaption (optional)
-tags: [TJ Null, LainKusunagi]
+tags: [TJ Null, LainKusunagi, Linux]
 ---
 
 

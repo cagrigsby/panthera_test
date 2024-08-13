@@ -1,0 +1,48 @@
+---
+---
+
+@import 'panthera-jekyll';
+
+.social-icon-img {
+    width: 24px; /* Adjust size as needed */
+    height: auto;
+    vertical-align: middle; /* Aligns with text or other elements */
+}
+
+/* Custom styles for code blocks */
+code {
+    background-color: #DDCBBD !important; /* Champagne pink background */
+    border: 1px solid #DDCBBD; /* Amaranth pink border = #FC9BC2 */
+    padding: 1px 2px; /* Padding around the code (was 2px 4px) */
+    border-radius: 4px; /* Rounded corners */
+    font-family: 'Open Sans', monospace; /* Monospaced font */ //said 'Courier New', Courier, monospace
+    color: #11158E; /* Blue text color for contrast */
+}
+
+pre {
+    background-color: #DDCBBD !important; /* Champagne pink background */
+    border: 1px solid #DDCBBD; /* Amaranth pink border = #FC9BC2 */
+    padding: 10px; /* More padding for preformatted code blocks */
+    border-radius: 4px; /* Rounded corners */
+    overflow-x: auto; /* Scroll horizontally if the code is too wide */
+    font-family: 'Open Sans', monospace; /* Monospaced font */ //said 'Courier New', Courier, monospace
+    color: #11158E; /* Blue text color for contrast */
+}
+
+pre code {
+    background-color: transparent; /* Ensure code blocks within pre do not have additional background */
+    padding: 0; /* Remove padding for code blocks within pre */
+}
+
+#toc-container a {
+    color: #ffffff; /* Set your desired link color */
+    display: block; /* Makes each link a block element to ensure it takes up the full width */
+    text-decoration: none; /* Removes underline from links */
+  }
+  
+  #toc-container a:hover {
+    color: #ffffff; /* Set your desired hover color, was E86A92 */
+    background-color: rgba(255, 255, 255, 0.1); /* Adjust color to match your theme */
+    /* padding: 15px; Adds some padding for better visual effect, kind of zooms in */
+    /* border-radius: 4px; Optional: adds rounded corners */
+  }

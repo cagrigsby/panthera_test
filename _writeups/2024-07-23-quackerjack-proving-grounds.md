@@ -8,8 +8,7 @@ fig-caption: # Add figcaption (optional)
 tags: [LainKusunagi, Linux, Python]
 ---
 
-This is a writeup for QuackerJack, which I saw on the 
-[LainKusanagi list of OSCP like machines](https://www.reddit.com/r/oscp/comments/1c8pzyz/lainkusanagi_list_of_oscp_like_machines/). I kick things off with an nmapAutomator Full scan and check port 80 by entering the IP into firefox. I get the nmap scan back, and it looks like we'll have a lot to go through. 
+This is a writeup for QuackerJack, which I saw on the [LainKusanagi list of OSCP like machines](https://www.reddit.com/r/oscp/comments/1c8pzyz/lainkusanagi_list_of_oscp_like_machines/). I kick things off with an nmapAutomator Full scan and check port 80 by entering the IP into firefox. I get the nmap scan back, and it looks like we'll have a lot to go through. 
 ```
 PORT     STATE SERVICE
 21/tcp   open  ftp
