@@ -7,14 +7,23 @@
 
   <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ '/assets/libs/fontawesome-5.9.0/css/all.min.css' | relative_url }}" media="screen" type="text/css">
+
   <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}" media="screen" type="text/css">
+  <!-- <link rel="stylesheet" href="{{ '/assets/css/print.css' | relative_url }}" media="print" type="text/css"> -->
+
+  <!--
+    [if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <![endif]
+  -->
 
   {% seo %}
+
 </head>
 
 <body>
   <section class="pan-layout">
-    {% include oscp_left.html %}
+    {% include left.html %}
 
     <section class="pan-layout-overlay"></section>
 
@@ -22,40 +31,8 @@
       {% include header.html %}
 
       <section class="pan-layout-content">
-        <!-- Custom Table of Contents -->
-        <aside class="custom-toc">
-          <h2>Table of Contents</h2>
-          <ul>
-            {% assign content = page.content | split: '\n' %}
-            {% assign toc = "" | split: "" %}
-
-            {% for line in content %}
-              {% if line contains '###### ' %}
-                {% assign header_text = line | remove: '###### ' | strip %}
-                <li><a href="#{{ header_text | downcase | replace: ' ', '-' }}">{{ header_text }}</a></li>
-              {% elsif line contains '##### ' %}
-                {% assign header_text = line | remove: '##### ' | strip %}
-                <li><a href="#{{ header_text | downcase | replace: ' ', '-' }}">{{ header_text }}</a></li>
-              {% elsif line contains '#### ' %}
-                {% assign header_text = line | remove: '#### ' | strip %}
-                <li><a href="#{{ header_text | downcase | replace: ' ', '-' }}">{{ header_text }}</a></li>
-              {% elsif line contains '### ' %}
-                {% assign header_text = line | remove: '### ' | strip %}
-                <li><a href="#{{ header_text | downcase | replace: ' ', '-' }}">{{ header_text }}</a></li>
-              {% elsif line contains '## ' %}
-                {% assign header_text = line | remove: '## ' | strip %}
-                <li><a href="#{{ header_text | downcase | replace: ' ', '-' }}">{{ header_text }}</a></li>
-              {% elsif line contains '# ' %}
-                {% assign header_text = line | remove: '# ' | strip %}
-                <li><a href="#{{ header_text | downcase | replace: ' ', '-' }}">{{ header_text }}</a></li>
-              {% endif %}
-            {% endfor %}
-          </ul>
-        </aside>
-
-        <!-- Main Content -->
-        <div class="main-content">
-          {{ content }}
+        <div id="toc-container">
+          <!-- JavaScript will insert the table of contents here -->
         </div>
       </section>
 
