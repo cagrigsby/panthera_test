@@ -23,7 +23,10 @@
 
 <body>
   <section class="pan-layout">
-    {% include left.html %}
+    {% include oscp_left.html %}
+    <div id="toc-container">
+      <!-- JavaScript will insert the table of contents here -->
+    </div>
 
     <section class="pan-layout-overlay"></section>
 
@@ -31,9 +34,7 @@
       {% include header.html %}
 
       <section class="pan-layout-content">
-        <div id="toc-container">
-          <!-- JavaScript will insert the table of contents here -->
-        </div>
+        {{ content }}
       </section>
 
       {% include footer.html %}
@@ -56,3 +57,7 @@
  
 </body>
 </html>
+
+
+
+
