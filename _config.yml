@@ -54,7 +54,7 @@ social_icons:
     #icon: fab fa-google
 
   - name: github
-    link: https://github.com/cagrigsby
+    link: https://github.com/pentestpop
     icon: fab fa-github-square
 
   - name: mastodon
