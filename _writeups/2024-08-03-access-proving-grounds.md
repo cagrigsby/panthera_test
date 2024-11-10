@@ -5,7 +5,7 @@ date: 2024-07-12 13:32:20 +0300
 description: A Writeup of the Access Box from Proving Grounds
 image: # /assets/images/Access/Access.png
 fig-caption: # Add figcaption (optional)
-tags: [TJ Null, LainKusanagi, Windows, Active Directory, WerTrigger, Invoke-RunasCs]
+tags: [Windows, TJ Null, LainKusanagi, Active Directory, WerTrigger, Invoke-RunasCs]
 ---
 
 Today I'm doing a writeup for a [Hack The Box](https://app.hackthebox.com/profile/2013658) box from both TJ Null’s OSCP [lab prep list](https://docs.google.com/spreadsheets/u/1/d/1dwSMIAPIam0PuRBkCiDI88pU3yzrqqHkDtBngUHNCw8/htmlview#)and LainKusanagi’s [list of OSCP like machines](https://www.reddit.com/r/oscp/comments/1c8pzyz/lainkusanagi_list_of_oscp_like_machines/). It is called Active, and it is rated Intermediate by Proving Grounds and Very hard by the community. As usual, we get started with an nmap scan. I'm using my own [custom script](https://github.com/pentestpop/verybasicenum/blob/main/vbnmap.sh) for this which (gives more detail but) shows these open ports:
