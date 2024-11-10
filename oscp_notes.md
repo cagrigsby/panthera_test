@@ -121,7 +121,7 @@ Swaks (Sending email from command line when you have creds for mail server)
 3. `MAIL FROM: user@domain` (this may not need to be a real user)
 4. `RCPT TO: targetUser@domaain` (does need to be real)
 5. `DATA`
-6. 
+
 ```
 Subject: RE: password reset
 
