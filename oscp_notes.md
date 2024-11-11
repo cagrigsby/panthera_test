@@ -1695,11 +1695,11 @@ If an attacker can influence the `PATH` environment variable (perhaps by modifyi
 For example, the attacker might do the following:
 
 1. **Create a Malicious Script**: The attacker creates a script named `ls` in a directory they control:
+
 ```
 #!/bin/bash
 echo "Malicious ls executed!"
 # Potentially harmful actions could be added here
-
 ```
 
 2. **Modify the PATH**: The attacker then modifies the `PATH` variable to include the directory containing the malicious `ls` script before `/bin`:
