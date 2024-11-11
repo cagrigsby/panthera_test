@@ -1673,7 +1673,7 @@ print("Str = Str + " + '"' + str[i:i+n] + '"')
 
 A Linux PATH vulnerability typically arises when a malicious user is able to exploit the environment variable `PATH` to execute unintended commands. This is especially problematic when scripts or programs with elevated privileges (like root) inadvertently execute malicious code instead of legitimate system binaries. Here's a classic example of such a vulnerability:
 
-### Example: 
+### Linux Example: 
 Misconfigured PATH in a Privileged Script Scenario:
 
 Imagine there's a script that is run by the root user or by a setuid root binary. This script includes a line that calls a common command like `ls` without specifying the full path (e.g., `/bin/ls`). The script assumes that the `ls` command is being run from `/bin/ls`, but it doesn’t explicitly set the `PATH` variable.
@@ -1711,10 +1711,9 @@ export PATH=/home/attacker:$PATH
 3. **Execute the Vulnerable Script**: When the vulnerable script (`example_script.sh`) is executed by root, it searches for `ls` in the directories listed in `PATH` in order. Since the attacker’s directory is listed first, the script will execute the malicious `ls` instead of the legitimate `/bin/ls`.
 
 
-### Example: Windows PATH Vulnerability
+### Windows Example
 
 #### Scenario:
-
 Consider a scenario where a privileged Windows service or script is executed with administrator rights. The script calls common Windows commands, such as `net.exe` (used for managing network settings) without specifying the full path (e.g., `C:\Windows\System32\net.exe`).
 
 If an attacker can control the `PATH` environment variable, they can place a malicious executable named `net.exe` in a directory that appears earlier in the `PATH` order, causing the system to execute their malicious code instead of the legitimate system command.
