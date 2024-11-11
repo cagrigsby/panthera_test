@@ -3,6 +3,8 @@ layout: oscp_notes
 title: OSCP Notes
 permalink: /oscp_notes/
 ---
+*To be moved to a gitbook format in the future)*
+
 # Enumeration
 ## 0 nmap
 Starting commands:
