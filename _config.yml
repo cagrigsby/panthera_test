@@ -27,9 +27,9 @@ menu:
     link: /
     icon: ""
 
-    text: My Resume
-    link: /resume
-    icon: ""
+    #text: My Resume
+    #link: /resume
+    #icon: ""
 
   - text: Pentest Lab Writeups
     link: /writeups
