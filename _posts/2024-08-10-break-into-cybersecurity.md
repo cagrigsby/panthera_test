@@ -1,8 +1,8 @@
 ---
 layout: post
-title: Everything I Did To Get Into Cybersecurity
+title: My Cybersecurity PATH
 date: 2024-11-10 13:32:20 +0300
-description: A retelling of the steps to begin my career
+description: Get It? PATH?
 image: /assets/images/hacker.jpg
 fig-caption: # Add figcaption (optional)
 tags: [personal, professional]
