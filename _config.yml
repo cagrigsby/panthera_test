@@ -10,7 +10,7 @@ paginate: 10
 paginate_path: "/blog/page:num/"
 
 title: Chris Grigsby
-subtitle: Generalist. Cryptic. No hookups. 
+subtitle: No hookups. 
 
 # left_side:
 #   background_image: "./assets/images/left-background.jpg"
