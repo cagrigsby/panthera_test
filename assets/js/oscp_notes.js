@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     <li>
                         <div class="toc-item">
                             ${hasChildren ? 
-                                '<span class="toggle-btn">▶</span>' : 
+                                '<span class="toggle-btn" role="button" tabindex="0">▶</span>' : 
                                 '<span class="toggle-btn-placeholder" style="width: 20px; display: inline-block;"></span>'
                             }
                             <a href="#${item.id}" class="toc-link toc-h${level}">${item.text}</a>
@@ -91,11 +91,17 @@ document.addEventListener("DOMContentLoaded", function () {
         tocContainer.innerHTML = createTocHTML(tocStructure);
 
         // Add click handlers for toggle buttons
-        tocContainer.addEventListener('click', (e) => {
-            if (e.target.classList.contains('toggle-btn')) {
-                const listItem = e.target.closest('li');
-                listItem.classList.toggle('expanded');
-            }
-        });
-    }
-});
+        document.querySelectorAll('.toggle-btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                console.log('Toggle button clicked'); // Debug log
+                const listItem = this.closest('li');
+                if (listItem) {
+                    console.log('Found list item, toggling expanded class'); // Debug log
+                    listItem.classList.toggle('expanded');
+                }
+                e.stopPropagation(); // Prevent event bubbling
+            });
+
+            // Add keyboard support
+            button.addEventListener('keypress', function(e) {
+                if (e.key =
