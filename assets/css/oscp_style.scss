@@ -1,7 +1,28 @@
----
----
-
 @import 'panthera-jekyll';
+@import 'syntax-highlighting';  // Add this line if it exists in the theme
+
+// Add these syntax highlighting styles
+.highlight {
+    margin: 1em 0;
+    padding: 1em;
+    background-color: #272822;
+    
+    pre {
+        margin: 0;
+        padding: 0;
+        background-color: transparent;
+    }
+    
+    code {
+        background-color: transparent;
+        color: #f8f8f2;
+    }
+}
+
+pre.highlight {
+    background-color: #272822;
+    color: #f8f8f2;
+}
 
 /* Custom styles for TOC */
 #toc-container {
