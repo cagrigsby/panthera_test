@@ -43,3 +43,11 @@ pre code {
     background: #F686BD;  /* Firefox needs its own declaration */
     color: #101935;
 }
+/*added by me */
+.center-aligned {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+  
