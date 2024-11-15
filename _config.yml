@@ -39,9 +39,9 @@ menu:
     link: /oscp_notes
     icon: ""
 
-    #text: Blog
-    #link: /blog
-    #icon: ""
+  - text: Blog
+    link: /blog
+    icon: ""
 
 # Socialmedia Icons
 social_icons:
