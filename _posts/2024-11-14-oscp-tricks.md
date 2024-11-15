@@ -11,40 +11,43 @@ tags: [personal, professional]
 # OSCP+ Guide and Tips
 ## Table of Contents
 
-1. [[#Purpose|Purpose]]
-1. [[#Who Am I|Who Am I]]
-1. [[#How Did I Prepare|How Did I Prepare]]
-1. [[#My Setup|My Setup]]
-1. [[#General Advice|General Advice]]
-	1. [[#General Advice#Do The Suggested Labs|Do The Suggested Labs]]
-	1. [[#General Advice#Have a Process For Taking Notes ?? Needs Links|Have a Process For Taking Notes ?? Needs Links]]
-	1. [[#General Advice#Use AI|Use AI]]
-	1. [[#General Advice#Automate By Writing Your Own Scripts ?? link|Automate By Writing Your Own Scripts ?? link]]
-		1. [[#Automate By Writing Your Own Scripts ?? link#Checklists|Checklists]]
-1. [[#More Specific Tips|More Specific Tips]]
-	1. [[#More Specific Tips#adPEAS|adPEAS]]
-	1. [[#More Specific Tips#Bloodhound Abuse|Bloodhound Abuse]]
-	1. [[#More Specific Tips#Maintain Your Wordlists|Maintain Your Wordlists]]
-	1. [[#More Specific Tips#No nano, no problem|No nano, no problem]]
-	1. [[#More Specific Tips#This Not That|This Not That]]
-	1. [[#More Specific Tips#XFreeRDP|XFreeRDP]]
-	1. [[#More Specific Tips#Speedier, Thorough Enumeration|Speedier, Thorough Enumeration]]
-	1. [[#More Specific Tips#Other ~/.zshrc Options|Other ~/.zshrc Options]]
-	1. [[#More Specific Tips#Prevent Hanging|Prevent Hanging]]
-	1. [[#More Specific Tips#A Note on SublimeText|A Note on SublimeText]]
-	1. [[#More Specific Tips#Soup Up Your VM|Soup Up Your VM]]
-1. [[#FAQ|FAQ]]
-	1. [[#FAQ#How many lab machines is enough?|How many lab machines is enough?]]
-	1. [[#FAQ#Is the course material enough to pass the exam?|Is the course material enough to pass the exam?]]
-	1. [[#FAQ#Oh cool, which labs?|Oh cool, which labs?]]
-	1. [[#FAQ#What other material would you recommend?|What other material would you recommend?]]
-	1. [[#FAQ#Is the OSCP Worth It?|Is the OSCP Worth It?]]
-1. [[#Valuable Resources|Valuable Resources]]
-	1. [[#Valuable Resources#Kali Package Manager|Kali Package Manager]]
-	1. [[#Valuable Resources#GitHub|GitHub]]
-	1. [[#Valuable Resources#Websites/Gitbooks|Websites/Gitbooks]]
-	1. [[#Valuable Resources#YouTube|YouTube]]
-1. [[#Closing Thoughts|Closing Thoughts]]
+- [OSCP+ Guide and Tips](#oscp-guide-and-tips)
+	- [Table of Contents](#table-of-contents)
+	- [Purpose](#purpose)
+	- [Who Am I](#who-am-i)
+	- [How Did I Prepare](#how-did-i-prepare)
+	- [My Setup](#my-setup)
+	- [General Advice](#general-advice)
+		- [Do The Suggested Labs](#do-the-suggested-labs)
+		- [Have a Process For Taking Notes](#have-a-process-for-taking-notes)
+		- [Use AI](#use-ai)
+		- [Automate By Writing Your Own Scripts](#automate-by-writing-your-own-scripts)
+			- [Checklists](#checklists)
+	- [More Specific Tips](#more-specific-tips)
+		- [adPEAS](#adpeas)
+		- [Bloodhound Abuse](#bloodhound-abuse)
+		- [Maintain Your Wordlists](#maintain-your-wordlists)
+		- [No Nano, ~~No~~ Fewer Problems](#no-nano-no-fewer-problems)
+		- [Other .zshrc Options](#other-zshrc-options)
+		- [Prevent Hanging](#prevent-hanging)
+		- [Speedier, Thorough Enumeration](#speedier-thorough-enumeration)
+		- [SublimeText or Equivalent](#sublimetext-or-equivalent)
+		- [XFreeRDP](#xfreerdp)
+		- [This, Not That](#this-not-that)
+		- [Soup Up Your VM](#soup-up-your-vm)
+	- [FAQ](#faq)
+		- [How many lab machines is enough?](#how-many-lab-machines-is-enough)
+		- [Is the course material enough to pass the exam?](#is-the-course-material-enough-to-pass-the-exam)
+		- [Oh cool, which labs?](#oh-cool-which-labs)
+		- [What other material would you recommend?](#what-other-material-would-you-recommend)
+		- [Is the OSCP Worth It?](#is-the-oscp-worth-it)
+	- [Valuable Resources](#valuable-resources)
+		- [Kali Package Manager](#kali-package-manager)
+		- [GitHub](#github)
+		- [Websites/Gitbooks](#websitesgitbooks)
+		- [YouTube](#youtube)
+	- [Closing Thoughts](#closing-thoughts)
+
 
 ## Purpose
 While preparing to take the OSCP, I frequently browsed the [OSCP subreddit](http://old.reddit.com/r/oscp) checking guides and advice posts, and I saw [this one](https://eins.li/posts/oscp-secret-sauce/) in particular which helped a ton despite the content being mostly just a few helpful commands. I don't want to just copy their stuff, but you should check it out. The busybox shell and Mimikatz one-liner it references were vital for me. I figured I could share a few other suggestions that I found useful outside the PEN-200 material. I want to give (or rather underscore) some general tips on how to prepare, make note of a few specific suggestions I wish I'd known, and then I'll dig into some FAQs. 
