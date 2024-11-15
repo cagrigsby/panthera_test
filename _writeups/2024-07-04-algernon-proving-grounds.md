@@ -24,26 +24,26 @@ PORT      STATE SERVICE
 
 A little bit of enumeration revealed that the FTP server allowed anonymous login, so I checked that out while I scanned the web page for directories. 
 
-![Algernon FTP](/assets/images/Algernon/ftp_connected.png){: .center-aligned width="800px"}
+![Algernon FTP](/assets/images/Algernon/ftp_connected.png){: .responsive-image}
 
 We search around in the FTP server to reveal a bunch of logs, including a few that say administrative. That could be a clue.
 
-![Algernon Logs](/assets/images/Algernon/Logs.png){: .center-aligned width="800px"}
+![Algernon Logs](/assets/images/Algernon/Logs.png){: .responsive-image}
 
 Unfortunately I didn't really find anything in there, and in fact later realized that new administrative logs continued to be written as I checked out the web page. Port 80 returned the default Microsoft IIS landing page and no interesting sub-directories. So that was a dead end, and I decided to check out port 9998. 
 
-![Algernon SmarterMail](/assets/images/Algernon/SmarterMail.png){: .center-aligned width="800px"}
+![Algernon SmarterMail](/assets/images/Algernon/SmarterMail.png){: .responsive-image}
 
 So that could be something. We can see the software is called SmarterMail, so we'll check the web for any exploits while fuzzing for more sub-directories (which also didn't show anything particularly interesting.) Side note - I also ran a full port scan at this port which returned an unknown open port on 17001, a clue for later. 
 
-![Algernon Exploits](/assets/images/Algernon/smartermail_exploits.png){: .center-aligned width="800px"}
+![Algernon Exploits](/assets/images/Algernon/smartermail_exploits.png){: .responsive-image}
 
 After checking through a few of these exploits, we ultimately settle on the RCE exploit for Build 6985. At that point, I didn't know the build, but it felt worth checking out. As I looked through the exploit I noticed that the ports and addresses are hardcoded and need to be changed to my port and IP, as well as the target point and IP. 
 
-![Algernon Ports and IPs](/assets/images/Algernon/change_this.png){: .center-aligned width="800px"}
+![Algernon Ports and IPs](/assets/images/Algernon/change_this.png){: .responsive-image}
 
 And we see 17001 as the target port. I think I might have assumed 9998 because that's where the SmarterMail application was hosted, but it helped to realize that the unknown open port I'd already found was also being used for the exploit. After that we ran the exploit, caught the root shell, and checked for proof.txt. 
 
-![Algernon Root](/assets/images/Algernon/caught_root_shell.png){: .center-aligned width="800px"}
+![Algernon Root](/assets/images/Algernon/caught_root_shell.png){: .responsive-image}
 
 Bingo! Another quick box here, I should probably start writing up some of the more complex ones, but these go nice and quick. 

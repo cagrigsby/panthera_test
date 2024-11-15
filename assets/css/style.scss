@@ -43,3 +43,14 @@ pre code {
     background: #F686BD;  /* Firefox needs its own declaration */
     color: #101935;
 }
+
+/* responsive images */
+.responsive-image {
+    display: block !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: 100%; /* Adjust this to a fixed percentage or px if you prefer */
+    max-width: 85% !important; /* Adjust as needed */
+    height: auto !important;
+  }
+  

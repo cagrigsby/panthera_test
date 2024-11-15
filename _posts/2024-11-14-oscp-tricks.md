@@ -100,7 +100,7 @@ I really only mention this because I considered alternatives like:
 
 **Do not do any of that.** ARM is fine for the exam and the free version of VMWare is fine. Do not take notes on a VM, unless you already pay for a cloud feature or something. Do not become enamored with the simplicity of CherryTree. Do not fiddle with Flameshot hot keys. Do not put yourself in any kind of position that you need to transfer files between your VM and host. Either you know this already or you haven't spent enough time screwing around yet. **In fact, if you are a prospective employer, I was joking about taking notes locally on a VM. I never did that, obviously. I am very smart, and I would never make such an embarrassing and foolish mitsake.**
 
-![](/assets/images/OSCP_Tricks/joking.png){: .center-aligned width="800px"}
+![](/assets/images/OSCP_Tricks/joking.png){: .responsive-image}
 
 ## General Advice
 ### Do The Suggested Labs
@@ -113,7 +113,7 @@ You need to be able to knock out Proving Grounds Easy machines with no help for 
 ### Have a Process For Taking Notes
 Notice that I did not say something generic like "take good notes." You need a process. Maybe this is a no brainer, but I never said this was a post for people with brains. I think sometimes I failed at this because I figured I understood something well enough to not need notes, buta couple mistakes with that is too many. Look at all the random OSCP gitbooks on the internet, those are from people who prioritized taking notes. Look at them, think seriously about the best way for you to emulate them, and then do it. Copy mine if you like, they're [here](https://github.com/pentestpop/OSCP_Vault). You can download the repo and open it as a vault in Obsidian. Here's a taste: 
 
-![](/assets/images/OSCP_Tricks/tasty.png){: .center-aligned width="800px"}
+![](/assets/images/OSCP_Tricks/tasty.png){: .responsive-image}
 
 I just keep this open in a window at all times and add to it when I learn something new or want to remember some syntax. 
 
@@ -123,7 +123,7 @@ I know you can't do it on the exam, but you can learn a lot from asking ChatGPT 
 Btw, as of November 2024, [Claude](https://claude.ai/) is better for code, but the free tier is more limited by message, so sadly you might want to skip the "Perfect, that works, thank you" messages. I tend to be polite to chat bots, but hey I'm from the South. 
 
 ### Automate By Writing Your Own Scripts
-Automate by forcing your robot friends to write your own scripts!  Yeah, you'll learn more trying to write every line yourself, but you'll learn nothing if you give up because it's too confusing. I have a few custom scripts on my [GitHub](https://github.com/pentestpop/PopScripts), so you can get more details from the README there, but basically if I know some task is going to require multiple commands, or long commands I might mistype, I (or [someone](https://miro.medium.com/v2/resize:fit:4800/format:webp/1*GmDjVtGv2I7A8-X5vC4tAQ.jpeg))create a script which runs the commands and echos anything I might need to paste into another window. Examples:
+Automate by forcing your robot friends to write your own scripts!  Yeah, you'll learn more trying to write every line yourself, but you'll learn nothing if you give up because it's too confusing. I have a few custom scripts on my [GitHub](https://github.com/pentestpop/PopScripts), so you can get more details from the README there, but basically if I know some task is going to require multiple commands, or long commands I might mistype, I (or [someone](https://miro.medium.com/v2/resize:fit:4800/format:webp/1*GmDjVtGv2I7A8-X5vC4tAQ.jpeg)) create a script which runs the commands and echos anything I might need to paste into another window. Examples:
 - `liggy` starts Ligolo, asks for what subnet to pivot into, and then prints commands to run into the shell on the target.
 - `ivan` prompts the user for a IP and Port before generating a new copy of Ivan Sincek's [PHP-Reverse-Shell](https://github.com/ivan-sincek/php-reverse-shell/blob/master/src/reverse/php_reverse_shell.php) in the working directory.
 - `served` prints certutil, iwr, and wget commands to be run on a remote target to download files from your machine using the `tun0` IP. So `served -f file.txt` returns `iwr -uri http://tun0/file.txt -o file.txt` and so on. 
@@ -175,24 +175,24 @@ It addition to listing out useful information (like ASREPRoastable and Kerberoas
 ### Bloodhound Abuse
 This is touched on in the course material, but it is glossed over pretty heavily. Bloodhound includes explicit direction on how to abuse certain permissions and relationships. See this output from HackTheBox's Support lab (no spoilers in this one):
 
-![](/assets/images/OSCP_Tricks/bloodhound1.png){: .center-aligned width="800px"}
+![](/assets/images/OSCP_Tricks/bloodhound1.png){: .responsive-image}
 
 The Administrator has DCSync permissions over Support.HTB. If we right-click on that edge (right where the cursors is above), we get this view:
 
-![](/assets/images/OSCP_Tricks/bloodhound2.png){: .center-aligned width="800px"}
+![](/assets/images/OSCP_Tricks/bloodhound2.png){: .responsive-image}
 
 Click Help, and we get this view:
 
-![](/assets/images/OSCP_Tricks/bloodhound3.png){: .center-aligned width="800px"}
+![](/assets/images/OSCP_Tricks/bloodhound3.png){: .responsive-image}
 
 It explains the relationship, and if we click Windows Abuse:
 
-![](/assets/images/OSCP_Tricks/bloodhound4.png){: .center-aligned width="800px"}
+![](/assets/images/OSCP_Tricks/bloodhound4.png){: .responsive-image}
 
 We get the exact command we would need to perform a DC Sync attack. In this example it doesn't really make a difference because we would already have Administrator access, but it can seriously help. It just happened to be quick to find this example in my files. What you can do, is check the `Node Info` tab on the the users you do have access, and the click on the different `Outbound Object Control` buttons to see what rights that user has over other nodes. In this case the Administrator user has rights over 94 nodes because it is in the "Domain Admins" group, hence `Group Delegated Object Control`.
 
 
-![](/assets/images/OSCP_Tricks/Screenshot%202024-11-13%20at%2011.48.31%20PM.png){: .center-aligned width="800px"}
+![](/assets/images/OSCP_Tricks/bloodhound5.png){: .responsive-image}
 
 Anyway, this is super helpful on a few labs. 
 
@@ -249,27 +249,28 @@ To prevent hanging while running Linux commands:
 This seems a little too simple for this post, but at some point I didn't know it, and then I learned it, and then life was better. And I definitely learned some of it later than I should. Here are a few commands and their output in a sample directory `example`:
 
 `ls`:
-![](/assets/images/OSCP_Tricks/enumeration1.png){: .center-aligned width="800px"}
+
+![](/assets/images/OSCP_Tricks/enumeration1.png){: .responsive-image}
 
 `ls -A`:
 
-![](/assets/images/OSCP_Tricks/enumeration2.png){: .center-aligned width="800px"}
+![](/assets/images/OSCP_Tricks/enumeration2.png){: .responsive-image}
 
 `ls -lA`:
 
-![](/assets/images/OSCP_Tricks/enumeration3.png){: .center-aligned width="800px"}
+![](/assets/images/OSCP_Tricks/enumeration3.png){: .responsive-image}
 
 `tree`:
 
-![](/assets/images/OSCP_Tricks/enumeration4.png){: .center-aligned width="800px"}
+![](/assets/images/OSCP_Tricks/enumeration4.png){: .responsive-image}
 
 `tree -a`:
 
-![](/assets/images/OSCP_Tricks/enumeration5.png){: .center-aligned width="800px"}
+![](/assets/images/OSCP_Tricks/enumeration5.png){: .responsive-image}
 
 `find .`:
 
-![](/assets/images/OSCP_Tricks/enumeration6.png){: .center-aligned width="800px"}
+![](/assets/images/OSCP_Tricks/enumeration6.png){: .responsive-image}
 
 I highly recommend you consider these commands and how to use them. The `tree` command is even available on Windows (try `tree /a /f`). For the longest time I was `cd`ing into a directory, running `ls` and then `cd`ing into another directory. It was ridiculous. I'm sure most of you aren't doing that but for the few who don't know yet, here ya go buddy. 
 
@@ -282,7 +283,7 @@ I like to add this to my `~/.zshrc` file:
 ### SublimeText or Equivalent
 Obviously use whatever equivalent you prefer, but if you have the monitor space, it's pretty great to keep a Sublime window open in your working directory. I've grown to love working from the command line, but it's nice to have everything in one window, and it updates live as you add new files. To show you what I mean, here are my working directory for the HackTheBox machine Return:
 
-![](/assets/images/OSCP_Tricks/Return.png){: .center-aligned width="800px"}
+![](/assets/images/OSCP_Tricks/Return.png){: .responsive-image}
 
 Here I can see a git repo I downloaded, everything I download from an SMB share, a file with creds I'd found, nmap results, and winpeas output all quickly in one place. If you like [autorecon](https://github.com/Tib3rius/AutoRecon), you know it can take a while to run, but you can view the results as it goes. Simple, but I'd been studying for months before I started doing this. I usually have this, a terminal window, and a web window open, and that's about all I need unless I need to check into BurpSuite Wireshark, or BloodHound for whatever reason. 
 
@@ -293,7 +294,8 @@ Here I can see a git repo I downloaded, everything I download from an SMB share,
 Rapid fire:
 - Maybe you know already, but [the Ivan Sincek PHP reverse shell](https://github.com/ivan-sincek/php-reverse-shell) is the best PHP reverse shell in my opinion. I never once had it fail when another worked. 
 - I prefer [LSE](https://github.com/diego-treitos/linux-smart-enumeration) to Linpeas. Here is part of the output from the Monitored box on HackTheBox. See how it only gives the output it thinks is notable. If you don't find anything here, run linpeas sure. But I start with `./lse.sh -l1`. 
-![](/assets/images/OSCP_Tricks/lse.png){: .center-aligned width="800px"}
+- 
+![](/assets/images/OSCP_Tricks/lse.png){: .responsive-image}
 
 - `ldapdomaindump` over `ldapsearch` and `bloodhound-python`. It does both, it outputs to a chosen directory `.grep` files, `.json` files, and `.html` files for easy viewing in browser.  
 	- `ldapdomaindump -u $domain.com\\$user -p '$Password' $domain.com -o $outputDirectory`
@@ -317,7 +319,7 @@ Intellectually I know it to be a stupid thing to spend time on. But the thing is
 
 I use [Terminator](https://gnome-terminator.org/)terminal emulator which has a ton of themes to choose from. There are some very simple instructions [here](https://github.com/EliverLara/terminator-themes). I prefer using bright colors so I can recognize my own commands quickly when scrolling. You can also set up a default grid for every time you open it. Mine looks like this: 
 
-![](/assets/images/OSCP_Tricks/grid.png){: .center-aligned width="800px"}
+![](/assets/images/OSCP_Tricks/grid.png){: .responsive-image}
 
 I use [coolers.co](https://coolors.co/201e1f-ff4000-faaa8d-feefdd-50b2c0)to generate color schemes and use them when I can. I have a custom background I made with a free Photoshop clone called [Photopea](https://www.photopea.com/). 
 
@@ -423,7 +425,7 @@ To be honest, when you get started you tend to hoard this kind of stuff, but you
 ### YouTube
 [IppSec](https://www.youtube.com/channel/UCa6eh7gCkpPo5XXUDfygQQA)- He does a ton of lab walkthroughs which are super helpful, espcially if you want to knock some labs off of the TJ Null or LainKusanagi list but can't or won't use your machine for some reason. His website, [ippSec.rocks](https://ippsec.rocks/?#) is awesome too because it has a search tool that links to the specific timestamp and video where he uses it. So for example if you want to know more about dfunc-bypasser, you can search it and get a link to the videos where he uses it. 
 
-![](/assets/images/OSCP_Tricks/ippsec.png){: .center-aligned width="800px"}
+![](/assets/images/OSCP_Tricks/ippsec.png){: .responsive-image}
 
 [OffSec](https://www.youtube.com/@OffSecTraining) - A lot of good walkthroughs on these. They tend to be slower I guess, but they also tend to focus more on techniques for the course material. 
 

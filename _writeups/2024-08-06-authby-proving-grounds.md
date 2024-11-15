@@ -50,14 +50,14 @@ Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
 ```
 
 First thing that pops up when I ran an nmap scan with the `-v` flag was port 21, so I tried to log in to ftp with `anonymous:anonymous`, and it worked:
-![Authby1.png](/assets/images/Authby/Authby1.png){: .center-aligned width="600px"}
+![Authby1.png](/assets/images/Authby/Authby1.png){: .responsive-image}
 
 I can't see anything in the first couple directories, but I do see this in accounts: 
-![Authby2.png](/assets/images/Authby/Authby2.png){: .center-aligned width="600px"}
+![Authby2.png](/assets/images/Authby/Authby2.png){: .responsive-image}
 
 I can't retrieve anything in this FTP server, but I can see accounts here which might be helpful. At this point I go check out the other open ports, namely 242 and 3145, but I can't actually do anything with them because 242 requires Auth and 3145 hangs. I tried to log back into the the FTP server using `admin:admin` because admin was listed in the accounts, and it worked, showing this:
 
-![Authby3.png](/assets/images/Authby/Authby3.png){: .center-aligned width="600px"}
+![Authby3.png](/assets/images/Authby/Authby3.png){: .responsive-image}
 
 Because I see the `index.php` file, I'm wondering this is is a root directory, and I could potentially put another file there and execute it from the browser. But I also download these files, and check them out. The .htaccess shows:
 ```
@@ -68,10 +68,10 @@ AuthUserFile c:\\wamp\www\.htpasswd
 Require valid-user
 </Limit>   
 ```
-And the .htpasswd file says: `offsec:$apr1$oRfRsc/K$UpYpplHDlaemqseM39Ugg0`. So it looks like we have a password or a hash anyway (it's a hash). I use `nth` (NameThatHash) to determine that it is a MD5 hash and run hashcat to crack it. The credentials are `offsec:elite`. That won't let me log into the FTP server again, but it's fine because I can log into the basic Auth on port 242. That takes me to this page which fits with the description from nmap (and index.php): ![Authby4.png](/assets/images/Authby/Authby4.png){: .center-aligned width="600px"}
+And the .htpasswd file says: `offsec:$apr1$oRfRsc/K$UpYpplHDlaemqseM39Ugg0`. So it looks like we have a password or a hash anyway (it's a hash). I use `nth` (NameThatHash) to determine that it is a MD5 hash and run hashcat to crack it. The credentials are `offsec:elite`. That won't let me log into the FTP server again, but it's fine because I can log into the basic Auth on port 242. That takes me to this page which fits with the description from nmap (and index.php): ![Authby4.png](/assets/images/Authby/Authby4.png){: .responsive-image}
 I am also able to put a php reverse shell in to the ftp server and access it over this port in the browser as expected.
 
-![Authby5.png](/assets/images/Authby/Authby5.png){: .center-aligned width="600px"}
+![Authby5.png](/assets/images/Authby/Authby5.png){: .responsive-image}
 
 And I get a shell. I further notice after running `whoami /priv` that we have `SeImpersonatePrivilege`. I spend some time trying a few different Potato attacks, but can't get any of them to actually do anything. When I run PrintSpoofer (64-bit), I at least get this error: `This version of C:\wamp\www\PrintSpoofer.exe is not compatible with the version of Windows you're running. Check your computer's system information to see whether you need a x86 (32-bit) or x64 (64-bit) version of the program, and then contact the software publisher.` Most of them give no output at all. When I run `systeminfo`, I do get `System Type: X86-based PC`, but it doesn't help me with any of the Potato attacks to exploit the SeImpersonatePrivilege. Weirdly, I also can't seem to run winpeas either. It would make me think I can't execute anything, but the PrintSpoofer did give me some output. 
 
@@ -79,11 +79,11 @@ At that point I actually tested the msfvenom stageless windows shell on its own 
 
 At this point, I'm a little confused about what is oging on because I've tried several versions of Winpeas, and none of them have done anything. So I check the Windows version and find that it's pretty old. 
 
-![Authby6.png](/assets/images/Authby/Authby6.png){: .center-aligned width="600px"}
+![Authby6.png](/assets/images/Authby/Authby6.png){: .responsive-image}
 
 When we search for "windows Version 6.0.6001 exploit" in google, we notice a result from [exploit-db](https://www.exploit-db.com/exploits/40564)which clarifies that the vulnerability is `MS11-046`. I actually transferred this exploit from my computer to the target using the FTP service, but it didn't execute immediately. I googled around and found a .exe rather than a .c file [here in a github repo](https://github.com/SecWiki/windows-kernel-exploits/blob/master/MS11-046/ms11-046.exe), so I downloaded that, and it worked. 
 
-![Authby7.png](/assets/images/Authby/Authby7.png){: .center-aligned width="600px"}
+![Authby7.png](/assets/images/Authby/Authby7.png){: .responsive-image}
 
 Done. 
 

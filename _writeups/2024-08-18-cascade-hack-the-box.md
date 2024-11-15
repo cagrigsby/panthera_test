@@ -64,7 +64,7 @@ Group: Remote Management Users' (RID: 1126) has member: CASCADE\s.smith
 
 I try a few different things with impacket and ultimately wind up getting more information through ldapsearch, first by trying to search all object classes and then narrowing to users with `ldapsearch -x -H ldap://10.10.10.182 -D 'CN=CascGuest,DC=cascade,DC=local' -W -b 'DC=cascade,DC=local' 'objectClass=user'`. There is still a ton of noise, but we do find what appears to be a password at the end of the r.thompson user. 
 
-![Cascade2.png](/assets/images/Cascade/Cascade2.png){: .center-aligned width="600px"}
+![Cascade2.png](/assets/images/Cascade/Cascade2.png){: .responsive-image}
 
 I realize it's actually base64 encoded after trying to figure out what kind of hash it is for a bit. I use CyberChef to decode it and get `rY4n5eva`. With nxc, I confirm that the creds are valid as `r.thompson:rY4n5eva`. So I check smbclient again to list the shares, and I'm able to (not possible without valid creds):
 ```
@@ -82,46 +82,46 @@ SYSVOL          Disk      Logon server share
 
 Off the bat the `Data` share seems the most promising so I check that out. We are able to access a folder call `IT` inside this share, which makes sense because `r.thompson` is a part of the `IT` group according to enum4linux. Inside we have a file called `Meeting_Notes_June_2018.html` which gives us some interesting info about an account:
 
-![Screenshot 2024-10-21 at 11.22.39 PM.png](/assets/images/Cascade/Screenshot 2024-10-21 at 11.22.39 PM.png){: .center-aligned width="600px"}
+![Screenshot 2024-10-21 at 11.22.39 PM.png](/assets/images/Cascade/Screenshot 2024-10-21 at 11.22.39 PM.png){: .responsive-image}
 
 We're not sure what the normal admin password is, but we do have a potentially high-privilege account. It's worth also noting that when I add this `TempAdmin` user to the users.txt file, I can not actually confirm its existence with kerbrute's userenum function. So maybe it is a local account.
 
 Continuing through the SMB share, we also see a file called `VNC Install.reg` which seems like it could have a password. 
-![Cascade3.png](/assets/images/Cascade/Cascade3.png){: .center-aligned width="600px"}
+![Cascade3.png](/assets/images/Cascade/Cascade3.png){: .responsive-image}
 
 Writeups for this box came up when I tried to google it, which isn't uncommon, but it could be a pretty good if kinda spoilery sign. Doing some more googling around the file name, I find this github ["repo"](https://github.com/billchaison/VNCDecrypt)which just contains a simple script to decode it. The script looks like this: `echo -n d7a514d8c556aade | xxd -r -p | openssl enc -des-cbc --nopad --nosalt -K e84ad660c4721ae0 -iv 0000000000000000 -d -provider legacy -provider default | hexdump -Cv`, but I swap out the `d7a514d8c556aade` with `6bcf2a4b6e5aca0f` from the highlighted portion above, and it works: 
 
-![Cascade4.png](/assets/images/Cascade/Cascade4.png){: .center-aligned width="600px"}
+![Cascade4.png](/assets/images/Cascade/Cascade4.png){: .responsive-image}
 
 We get a password of `sT333ve2`. We can guess this password goes to `s.smith` as it is in their folder, but we check against all of the usernames. We run `nxc winrm 10.10.10.182 -u users.txt -p sT333ve2 --continue-on-success` and confirm that these are the correct credentials and that we are able to access the machine via winrm and grab user.txt.
 
-![Cascade5.png](/assets/images/Cascade/Cascade5.png){: .center-aligned width="600px"}
+![Cascade5.png](/assets/images/Cascade/Cascade5.png){: .responsive-image}
 
 At this point I spend a lot of time trying different things with Rubeus, mimikatz, winpeas, adPEAS, and bloodhound. None of them amount to much, except I do notice that we're working with Windows Server 2008, which is old enough that there's going to be some exploits for it. 
 
-![Cascade6.png](/assets/images/Cascade/Cascade6.png){: .center-aligned width="600px"}
+![Cascade6.png](/assets/images/Cascade/Cascade6.png){: .responsive-image}
 
 I don't really like to look for OS exploits in labs like these, often they are not the point. So I don't spend much time with them here. I do notice that our user `s.smith` is in the Audit Share and IT groups, but I don't know what they do. When we run `net user s.smith`, we see a Logon script called `MapAuditDrive.vbs`, and searching for it with `Get-ChildItem` we find it in the `C:\Windows\SYSVOL\domain\scripts` directory looking like this:
 
-![Cascade7.png](/assets/images/Cascade/Cascade7.png){: .center-aligned width="600px"}
+![Cascade7.png](/assets/images/Cascade/Cascade7.png){: .responsive-image}
 
 I notice that it specifically calls out a share called `Audit$`, a share which I was not able to enumerate with the `r.thompson` user. When I enter the share with smbclient and the `s.smith` user, I see these files and download them for inspection. 
 
-![Cascade8.png](/assets/images/Cascade/Cascade8.png){: .center-aligned width="600px"}
+![Cascade8.png](/assets/images/Cascade/Cascade8.png){: .responsive-image}
 
 The Audit.db file in particular is interesting and contains a table called Ldap which seems to show a password, or at least a password hash, for the `ArkSvc` user. 
 
-![Cascade9.png](/assets/images/Cascade/Cascade9.png){: .center-aligned width="600px"}
+![Cascade9.png](/assets/images/Cascade/Cascade9.png){: .responsive-image}
 
 It looks like base64, but I can't seem to decode it, and nth and crackstation don't know what to do with it either. 
 
 To be honest I got stuck here, and I needed to look for a nudge. I kinda feel ok about it though because I learned to use a new tool that I didn't know was possible. All of the writeups I found required you to reverse engineer the CascAudit.exe binary, and they all suggested using [dnsSpy](https://github.com/dnSpy/dnSpy). This tool is not available for ARM machines which I am using. What is available to use though is [ILSpy](https://github.com/icsharpcode/ILSpy/releases)This is an open-source .NET assembly browser and decompiler. I had learned to do some of this while taking the PEN-200 course but skimmed over it thinking that it wasn't possible for my machine, and I would have to re-learn it when I get a new one. Good new though, I got a chance to do it now. For reference, you simply download and unzip the latest release [here](https://github.com/icsharpcode/ILSpy/releases) and then simply run `./ILSpy` and open the binary. From there we check out the main function - `Main(): void`.
 
-![Cascade10.png](/assets/images/Cascade/Cascade10.png){: .center-aligned width="600px"}
+![Cascade10.png](/assets/images/Cascade/Cascade10.png){: .responsive-image}
 
 One thing that sticks out is that there is what appears could be a password, but is actually a key that the actual password is encrypted with. The binary is using a function called `Crypto.DecryptString` to decrypt the Pwd found in the database with this key. If I'm able to find that function, I may be able to do the same thing. We search through the code and find it:
 
-![Cascade11.png](/assets/images/Cascade/Cascade11.png){: .center-aligned width="600px"}
+![Cascade11.png](/assets/images/Cascade/Cascade11.png){: .responsive-image}
 
 We can see from the highlighted line that it is taking two arguments, the EncryptedString (which will be`BQO5l5Kj9MdErXx6Q6AGOw==` for us) and the key (`c4scadek3y654321`). Unfortunately, I can't simply rerun this code in an [online compiler](https://www.programiz.com/csharp-programming/online-compiler/)with the parameters replaced as it either gets errors or does not print to the console. 
 
@@ -174,11 +174,11 @@ I use `nxc` to confirm we have winrm access with these credentials and then use 
 
 At this point I tried a few different things, and even caved and asked ChatGPT how to recover these deleted objects. Nothing worked. So I reverted the machine and the hacktricks command worked: `Get-ADObject -filter 'isDeleted -eq $true' -includeDeletedObjects -Properties *`. And we get this line that sticks out pretty clearly given that we know the TempAdmin password was the same as the normal Administrator password. 
 
-![Cascade12.png](/assets/images/Cascade/Cascade12.png){: .center-aligned width="600px"}
+![Cascade12.png](/assets/images/Cascade/Cascade12.png){: .responsive-image}
 
 I decode it with base64 again and get `baCT3r1aN00dles`. Then I simply use evil-winrm to get a shell as the Administrator. 
 
-![Cascade13.png](/assets/images/Cascade/Cascade13.png){: .center-aligned width="600px"}
+![Cascade13.png](/assets/images/Cascade/Cascade13.png){: .responsive-image}
 
 And I grab the root.txt file and we're done!
 

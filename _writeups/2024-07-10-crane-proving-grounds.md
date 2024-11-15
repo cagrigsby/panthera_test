@@ -38,7 +38,7 @@ Looks like we have a web app entitled SuiteCRM. I check the source for a version
 
 It looks like this one actually has admin:admin hardcoded. Maybe I can check authenticated exploits for clues like that in the future. We'll download it and change the URL.
 
-![Crane_4.png](/assets/images/Crane/Crane_4.png){: .center-aligned width="600px"}
+![Crane_4.png](/assets/images/Crane/Crane_4.png){: .responsive-image}
 
 I can't get this one working, but I look around on Google, and I find another one here: https://github.com/manuelz120/CVE-2022-23940. 
 
@@ -48,15 +48,15 @@ I try a few other reverse shells and can't seem to get them working on any port,
 
 I download and run `linpeas.sh` to scope the machine out. The /usr/sbin/service binary immediately jumps out while I'm scrolling through the linpeas output. 
 
-![Crane_3.png](/assets/images/Crane/Crane_3.png){: .center-aligned width="600px"}
+![Crane_3.png](/assets/images/Crane/Crane_3.png){: .responsive-image}
 
 Then I notice I can run it using sudo. That's a good sign. 
 
-![Crane_2.png](/assets/images/Crane/Crane_2.png){: .center-aligned width="600px"}
+![Crane_2.png](/assets/images/Crane/Crane_2.png){: .responsive-image}
 
 Bingo. 
 
-![Crane_1.png](/assets/images/Crane/Crane_1.png){: .center-aligned width="600px"}
+![Crane_1.png](/assets/images/Crane/Crane_1.png){: .responsive-image}
 
 What did we learn on this box? Don't give up if a few shells don't work, and spend some more time with that busybox one in particular. Oh - and try admin:admin when logging into a service. Note that there is a local.txt file in the /var/www/html directory. I missed that when I got the initial shell. 
 

@@ -8,7 +8,7 @@ fig-caption: # Add figcaption (optional)
 tags: [TJ Null, Windows, Active Directory, Bloodhound, Reverse Engineering]
 ---
 
-![Support1.png](/assets/images/Support/Support1.png){: .center-aligned width="600px"}
+![Support1.png](/assets/images/Support/Support1.png){: .responsive-image}
 
 Today I'm doing a writeup for a [Hack The Box](https://app.hackthebox.com/profile/2013658) box from TJ Null’s OSCP [lab prep list](https://docs.google.com/spreadsheets/u/1/d/1dwSMIAPIam0PuRBkCiDI88pU3yzrqqHkDtBngUHNCw8/htmlview#). It is called Support, and it is rated Easy by HackTheBox. As usual, we get started with an nmap scan. I'm using my own [custom script](https://github.com/pentestpop/verybasicenum/blob/main/vbnmap.sh) for this which (gives more detail but) shows these open ports:
 
@@ -42,13 +42,13 @@ SYSVOL          Disk      Logon server share
 
 I checked support-tools since that one sticks out the most, and I find these files. 
 
-![Support2.png](/assets/images/Support/Support2.png){: .center-aligned width="600px"}
+![Support2.png](/assets/images/Support/Support2.png){: .responsive-image}
 
 #### Reverse Engineering
 
 There's a lot to go with here. I check a few of them with the `strings` command, but I don't really see anything that sticks out. The `UserInfo.exe.zip` file contains the binary `UserInfo.exe`, and that seems to stick out, particularly because it is not what I know to be an existing binary. So I need to get a little bit closer look at that with `ILSpy`.
 
-![Support3.png](/assets/images/Support/Support3.png){: .center-aligned width="600px"}
+![Support3.png](/assets/images/Support/Support3.png){: .responsive-image}
 
 Essentially this is taking a hardcoded password hash, decoded it from base64, and then running two operations on it, one of which uses another key `0xDFu`. I'm not really sure how to decrypt it. When I try to simply run it in an [online C# Compiler](https://dotnetfiddle.net/), it doesn't run. We get this error: `Fatal Error: Public Main() method is required in a public class`. 
 
@@ -86,11 +86,11 @@ ldapdomaindump -u support.htb\\ldap -p 'nvEfEK16^1aM4$e7AclUf8x$tRWxPWO1%lmz' su
 
 We check wirnm and we can use it with `evil-winrm -i 10.10.11.174 -u support -p 'Ironside47pleasure40Watchful'`. That gets me an initial shell. I spend some time running winpeas and a [custom script](https://github.com/pentestpop/verybasicenum/blob/main/vbenum.ps1), but I can't find anything interesting. It doesn't look like I have any especially interesting privileges, and nothing really seems out of place. But we know we have LDAP, so maybe there's something interesting with bloodhound. I run `bloodhound-python` from kali with the credentials we do have, and I look around. It turns out that while we don't have direct permissions, we are a part of the `SHARED SUPPORT ACCOUNTS` which has `GenericAll` over `DC.SUPPORT.HTB`. 
 
-![Support4.png](/assets/images/Support/Support4.png){: .center-aligned width="600px"}
+![Support4.png](/assets/images/Support/Support4.png){: .responsive-image}
 
 We can right-click the `GenericAll` edge and click `Help` to get some instruction to abuse this privilege. 
 
-![Support5.png](/assets/images/Support/Support5.png){: .center-aligned width="600px"}
+![Support5.png](/assets/images/Support/Support5.png){: .responsive-image}
 
 The guidance list three programs to complete the attack:
 - [PowerMad.ps1](https://github.com/Kevin-Robertson/Powermad) -  to add a new attacker-controlled computer account.
@@ -127,7 +127,7 @@ We need to upload all three to the target machine. Here are the steps:
 
 There's a lot of steps here, but the result is a base64 encoded ticket.kirbi for SPN `cifs/dc.support.htb`. The end result is actually going to print out three tickets, but we need to use the last one. The output looks like this:
 
-![Support6.png](/assets/images/Support/Support6.png){: .center-aligned width="600px"}
+![Support6.png](/assets/images/Support/Support6.png){: .responsive-image}
 
 We can copy and paste the last ticket onto our kali machine, but make sure to remove spaces and line breaks. Initially I did this manually, but I'm trying to practice with cut, so I did wind up doing it more quickly with `cat ticket64.spaces | cut -d ' ' -f 7 | tr -d '\n' > ticket64.kirbi`. 
 
@@ -137,7 +137,7 @@ Then we need to convert it so we can actually use it with impacket. `impacket-ti
 
 Then we can use it with `impacket-psexec`. The full command in this case is: `KRB5CCNAME=ticket.ccache impacket-psexec support.htb/administrator@dc.support.htb -k -no-pass`. And we get a shell. 
 
-![Support7.png](/assets/images/Support/Support7.png){: .center-aligned width="600px"}
+![Support7.png](/assets/images/Support/Support7.png){: .responsive-image}
 
 I grab the root.txt file from `C:\Users\Administrator\Desktop\root.txt`, and we're done. 
 

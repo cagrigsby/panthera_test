@@ -68,11 +68,11 @@ We can quickly get a `users.txt` file by running `cat aboveList.txt | cut -d [ -
 
 I start a `nxc winrm 10.10.10.161 -u users.txt -p users.txt` just in case to see if any of the users have their own username as the password, and run that in the background. I also use ldapsearch with blank credentials to see if I can find anything interesting in there. The full command is `ldapsearch -x -H ldap://10.10.10.161 -D 'CN=admin,DC=htb,DC=local' -W -b 'DC=HTB,DC=LOCAL' 'objectClass=*'` and we enter a blank password after. It gives a ton of output, too much to be useful, but it shows that we are able to get it without authenticating. At that point, is is worth to check if we can kerberoast or aspreproast. I am not able to enumerate SPNs for Kerberoasting, but I do find a user with Pre-Authentication disabled. 
 
-![Forest2.png](/assets/images/Forest/Forest2.png){: .center-aligned width="600px"}
+![Forest2.png](/assets/images/Forest/Forest2.png){: .responsive-image}
 
 I try to crack this password with hashcat: `hashcat -m 18200 svc-alfresco.asreproast /usr/share/wordlists/rockyou.txt -r /usr/share/hashcat/rules/best64.rule --force`. Eventually it cracks and we get: `svc-alfresco:s3rvice`. At this point, I see that the previous nxc command has stopped, and I see this: 
 
-![Forest3.png](/assets/images/Forest/Forest3.png){: .center-aligned width="600px"}
+![Forest3.png](/assets/images/Forest/Forest3.png){: .responsive-image}
 
 Interesting. I try to connect via winrm (`evil-winrm -i 10.10.10.161 -u 'GenkaiChan' -p 'GenkaiChan'`), and it works. I do the same with the `svc-alfresco` account, and it works as well. So I actually have two users, though I'm a little suspicious of the GenkaiChan account given that HTB does not uses unique boxes for each user. I can file that away for the moment. I grab the user.txt flag at `C:\Users\svc-alfresco\Desktop\flag.txt` and move on. 
 
@@ -80,11 +80,11 @@ At this point I ran through a few of the usual first enumeration steps - checkin
 
 When I mark my user as owned and run "Reachable High Value Targets", I get this map. 
 
-![Forest4.png](/assets/images/Forest/Forest4.png){: .center-aligned width="600px"}
+![Forest4.png](/assets/images/Forest/Forest4.png){: .responsive-image}
 
 It is a little bit confusing because as I previously stated, I suspect the GenKaiChan user and possibly Test2 user are created by other student users on the machine. (For what it's worth, this is later confirmed.) This makes it kind of confusing, but the crucial part is that we are (transitive) members of the Account Operators group. The Account Operators group has GenericAll privileges on the Exchange Windows Permissions Group, which has WriteDACL Privileges on HTB.Local. 
 
-![Forest5.png](/assets/images/Forest/Forest5.png){: .center-aligned width="600px"}
+![Forest5.png](/assets/images/Forest/Forest5.png){: .responsive-image}
 
 What this means is that we can create a user, add it to the `Exchange Windows Permissions` group, and then use that user to perform a DCSync attack on the domain. The steps are as follows:
 1. Create the user: `net user poppop '321!Password' /add /domain`
@@ -100,11 +100,11 @@ Then we can simply perform the DCSync attack remotely with our new user:
 
 This will get us just the Administrator's NTLM hash, but it can be run without the `-just-dc-user Administrator` flag to get the other users. 
 
-![Forest6.png](/assets/images/Forest/Forest6.png){: .center-aligned width="600px"}
+![Forest6.png](/assets/images/Forest/Forest6.png){: .responsive-image}
 
 I did try cracking it, but no luck. It didn't actually matter though because we can simply run evil-winrm with the NTLM hash: `evil-winrm -i 10.10.10.161 -u Administrator -H '32693b11e6aa90eb43d32c72a07ceea6'`.
 
-![Forest7.png](/assets/images/Forest/Forest7.png){: .center-aligned width="600px"}
+![Forest7.png](/assets/images/Forest/Forest7.png){: .responsive-image}
 
 And boom, we get a shell, and we can grab the root flag on `C:\Users\Administrator\Desktop\root.txt`.
 
