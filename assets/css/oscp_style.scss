@@ -2,29 +2,37 @@
 ---
 
 @import 'panthera-jekyll';
-// Add this line if it exists in the theme
 
-// Add these syntax highlighting styles
+// Inline code styling (single backticks)
+code.highlighter-rouge {
+    background-color: #DDCBBD;
+    color: #101935;
+    padding: 2px 4px;
+    border-radius: 3px;
+}
+
+// Block code styling (triple backticks)
 .highlight {
     margin: 1em 0;
     padding: 1em;
-    background-color: #272822;
+    background-color: #DDCBBD;
+    border-radius: 4px;
     
     pre {
         margin: 0;
         padding: 0;
-        background-color: #DDCBBD;
+        background-color: transparent;
     }
     
     code {
-        background-color: #DDCBBD;
-        color: #f8f8f2;
+        background-color: transparent;
+        color: #101935;
     }
 }
 
 pre.highlight {
-    background-color: #272822;
-    color: #f8f8f2;
+    background-color: #DDCBBD;
+    color: #101935;
 }
 
 /* Custom styles for TOC */
