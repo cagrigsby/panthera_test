@@ -3,77 +3,101 @@
 
 @import 'panthera-jekyll';
 
-.social-icon-img {
-    width: 24px; /* Adjust size as needed */
-    height: auto;
-    vertical-align: middle; /* Aligns with text or other elements */
-}
-
-/* Custom styles for code blocks */
-code {
-    background-color: #DDCBBD !important; /* Champagne pink background */
-    border: 1px solid #DDCBBD; /* Amaranth pink border = #FC9BC2 */
-    padding: 1px 2px; /* Padding around the code (was 2px 4px) */
-    border-radius: 4px; /* Rounded corners */
-    font-family: 'Open Sans', monospace; /* Monospaced font */ //said 'Courier New', Courier, monospace
-    color: #101935; /* was 11158E Blue text color for contrast */
-}
-
-pre {
-    background-color: #DDCBBD !important; /* Champagne pink background */
-    border: 1px solid #DDCBBD; /* Amaranth pink border = #FC9BC2 */
-    padding: 10px; /* More padding for preformatted code blocks */
-    border-radius: 4px; /* Rounded corners */
-    overflow-x: auto; /* Scroll horizontally if the code is too wide */
-    font-family: 'Open Sans', monospace; /* Monospaced font */ //said 'Courier New', Courier, monospace
-    color: #101935; /* Pink text color for contrast */
-}
-
-pre code {
-    background-color: transparent; /* Ensure code blocks within pre do not have additional background */
-    padding: 0; /* Remove padding for code blocks within pre */
-}
-
 /* Custom styles for TOC */
 #toc-container {
     font-family: inherit;
+    padding: 1rem;
+    
+    .toc-list {
+        margin: 0;
+        list-style: none;
+        padding-left: 0;
+        
+        /* Nested lists */
+        .toc-list {
+            display: none; /* Hidden by default */
+            padding-left: 20px; /* Indentation for nested levels */
+        }
+    }
+    
+    .toc-item-container {
+        margin: 5px 0;
+    }
+    
+    .toc-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    .toggle-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        width: 20px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #ffffff;
+        transition: transform 0.2s;
+        padding: 0;
+        
+        &[aria-expanded="true"] {
+            transform: rotate(90deg);
+            color: #F686BD;
+        }
+        
+        &:hover {
+            color: #F686BD;
+        }
+    }
+    
+    .toggle-placeholder {
+        width: 20px;
+        display: inline-block;
+    }
+    
+    .toc-link {
+        color: #ffffff;
+        text-decoration: none;
+        display: block;
+        padding-left: 10px;
+        
+        &:hover {
+            color: #F686BD;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 0;
+            margin: 0;
+        }
+    }
+    
+    /* Header sizes */
+    .toc-h1 {
+        font-size: 1.5em;
+        font-weight: bold;
+        text-decoration: underline;
+    }
+    
+    .toc-h2 {
+        font-size: 1.3em;
+        font-weight: bold;
+    }
+    
+    .toc-h3 {
+        font-size: 1.0em;
+    }
+    
+    .toc-h4 {
+        font-size: 0.8em;
+    }
+    
+    .toc-h5 {
+        font-size: 0.6em;
+    }
 }
 
-#toc-container a {
-    color: #ffffff; /* Set your desired link color */
-    display: block; /* Makes each link a block element to ensure it takes up the full width */
-    text-decoration: none; /* Removes underline from links */
-    padding-left: 10px; /* Adjust padding for spacing from left edge */
-}
-
-#toc-container a:hover {
-    color: #F686BD; /* Set your desired hover color, was E86A92 */
-    background-color: rgba(255, 255, 255, 0.1); /* Adjust color to match your theme */
-    padding: 0px;
-    margin: 0px;
-    /* padding: 15px; Adds some padding for better visual effect, kind of zooms in */
-    /* border-radius: 4px; Optional: adds rounded corners */
-}
-
-#toc-container a.toc-h1 {
-    font-size: 1.5em;
-    font-weight: bold;
-    text-decoration: underline;
-}
-
-#toc-container a.toc-h2 {
-    font-size: 1.3em;
-    font-weight: bold;
-}
-
-#toc-container a.toc-h3 {
-    font-size: 1.0em;
-}
-
-#toc-container a.toc-h4 {
-    font-size: 0.8em;
-}
-
-#toc-container a.toc-h5 {
-    font-size: 0.6em;
+/* Show nested lists when parent is expanded */
+#toc-container .toc-item-container:has(> .toc-item > .toggle-btn[aria-expanded="true"]) > .toc-list {
+    display: block;
 }
