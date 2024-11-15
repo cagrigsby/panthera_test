@@ -24,15 +24,15 @@ PORT   STATE SERVICE VERSION
 
 So it looks primarily like we're dealing with a web app here. It looks like there is a field for entering a host to check and see if it is up:
 
-![UpDown2.png](/assets/images/UpDown/UpDown2.png){: .center-aligned width="600px"}
+![UpDown2.png](/assets/images/UpDown/UpDown2.png){: .responsive-image}
 
 I'll add `siteisup.htb` to my `/etc/hosts` file and run a directory scan on it. Feroxbuster says the is a directory called `/dev` as well, though I can't see anything there. If I enter `http://127.0.0.1`, `http://10.10.11.177`, or `http://siteisup.htb`, I get the response that the site is up, and if it's with the Debug mode on, it shows the html of the site. 
 
-![UpDown3.png](/assets/images/UpDown/UpDown3.png){: .center-aligned width="600px"}
+![UpDown3.png](/assets/images/UpDown/UpDown3.png){: .responsive-image}
 
 If I enter my just an IP, it says `Hacking attempt was detected!`. But if I actually start an http server, and then call `http://myIP`, it returns the html of the directory listing, in my case only having `nmap_scan.txt`. 
 
-![UpDown4.png](/assets/images/UpDown/UpDown4.png){: .center-aligned width="600px"}
+![UpDown4.png](/assets/images/UpDown/UpDown4.png){: .responsive-image}
 
 I tried a bunch of things here, but i couldn't see to figure it out, so I started brute-forcing for sub-domains. I ran `wfuzz -c -f sub-domains -w /usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-20000.txt -u 'siteisup.htb' -H "Host: FUZZ.siteisup.htb" --hw 93` where:
 - The `-c` flag prints output with colors
@@ -81,23 +81,23 @@ Allow from env=Required-Header
 ```
 
 The `checker.php` file suggests that you can upload a file to scan a list of
-![UpDown5.png](/assets/images/UpDown/UpDown5.png){: .center-aligned width="600px"}
+![UpDown5.png](/assets/images/UpDown/UpDown5.png){: .responsive-image}
 
-It also lists which extension are not allowed. ![UpDown6.png](/assets/images/UpDown/UpDown6.png){: .center-aligned width="600px"}
+It also lists which extension are not allowed. ![UpDown6.png](/assets/images/UpDown/UpDown6.png){: .responsive-image}
 After looking around I learn that we can add a custom header to the Burp Proxy. After turning on our Burp Proxy in FoxyProxy, we open Burp -> Proxy -> Proxy Settings and click Add. We then just add the header, in our case `Special-Dev: only4dev` to the replace section and click Ok.
 
-![UpDown7.png](/assets/images/UpDown/UpDown7.png){: .center-aligned width="600px"}
+![UpDown7.png](/assets/images/UpDown/UpDown7.png){: .responsive-image}
 
 Then when we go to the `http://dev.siteisup.htb` site, we can see the upload function.
-![UpDown8.png](/assets/images/UpDown/UpDown8.png){: .center-aligned width="600px"}
+![UpDown8.png](/assets/images/UpDown/UpDown8.png){: .responsive-image}
 
 So now it's jst a matter of uploading something like a reverse shell and figuring out how we can call it. We can do that from the `/uploads` directory which we know. exists from the `checker.php` file.
 
-![UpDown9.png](/assets/images/UpDown/UpDown9.png){: .center-aligned width="600px"}
+![UpDown9.png](/assets/images/UpDown/UpDown9.png){: .responsive-image}
 
 I try this with a simple `.txt` file which is not forbidden by the `checker.php` list, and I can see that a directory has been created, but it is empty when I click on it.
 
-![UpDown10.png](/assets/images/UpDown/UpDown10.png){: .center-aligned width="600px"}
+![UpDown10.png](/assets/images/UpDown/UpDown10.png){: .responsive-image}
 
 Furthermore, I can see from the `dev.siteisup.htb` page that it is checking every line. Then I compressed a reverse shell as a `.7z` file, and attempted to upload it. This time I could see it, but it only download from the `/uploads` directory.
 
@@ -110,11 +110,11 @@ The key here is actually to upload a zip folder of some kind with an allowed ext
 This wrapper will basically treat the zip file as a php archive with the contents as php. So we can zip up a test file with a test payload. A typical one is `<?php phpinfo();?>`. So we save that into `info.php` and then save that in a zip file called `info.fart` (the extension doesn't matter unless it's deny-listed.) Then we can upload it, then browse to the file using the php wrapper. Note that it treats the uploaded zip file as a directory, so we call it that way. The full URL is:
 `http://siteisup.htb/?page=phar://uploads/458716db95ee534143288abf73f08b91/info.fart/info`. You do leave off the php at the end, and you get the info page.
 
-![UpDown11.png](/assets/images/UpDown/UpDown11.png){: .center-aligned width="600px"}
+![UpDown11.png](/assets/images/UpDown/UpDown11.png){: .responsive-image}
 
 Naturally, I tried to upload my favorite [reverse shell](https://github.com/ivan-sincek/php-reverse-shell), but it didn't work. Apparently this is because a lot of the php functions are disabled. There will be a list of the disabled functions on the php info page, but I didn't screenshot there here, and it was crashing too often to go back and grab. There are a lot of recommendations to use a tool called [dfunc-bypasser](https://github.com/teambi0s/dfunc-bypasser), which is a tool "used by developers to check if exploitation using LD_PRELOAD is still possible given the current disable_functions in the php.ini file and taking into consideration the PHP modules installed on the server." The output allows us to know which functions should be disabled for safety purposes, and we can run it on the php info file to check. The full command is: `python3 dfunc-bypasser.py --url http://dev.siteisup.htb/?page=phar://uploads/1dcef0390cd58502002b8060a9851baa/info.fart/info --headers Special-Dev:only4dev`, and it gives us this output:
 
-![UpDown12.png](/assets/images/UpDown/UpDown12.png){: .center-aligned width="600px"}
+![UpDown12.png](/assets/images/UpDown/UpDown12.png){: .responsive-image}
 
 It specifies that `proc_open` should be disabled, meaning it is currently enabled, and we can use it for out purposes. Luckily there is a php reverse shell on [revshells.com](http://revshell.scom) which uses it. 
 
@@ -183,31 +183,31 @@ SyntaxError: invalid syntax
 
 Maybe I can try some python here. I try a few reverse shells, but they don't work. I suspect this is because they have too many quotations marks. At this point, I try entering `import pty;pty.spawn("/bin/bash")`, but the box keeps dying, like every time I try something I do not have time for this, so it's hard to tell if this is working. It turns out that it needs to be `__import__('pty').spawn('/bin/bash')` which does spawn us a shell as the `developer` user.
 
-![UpDown13.png](/assets/images/UpDown/UpDown13.png){: .center-aligned width="600px"}
+![UpDown13.png](/assets/images/UpDown/UpDown13.png){: .responsive-image}
 
 For some reason, I can't get `user.txt`, but I can at least `cat .ssh/id_rsa` so hopefully I can speed every thing up now by sshing directly into the machine. No such luck, it contains to have problems. 
 
 From there I run `sudo -l` as usual when getting a new shell, and I see something. 
 
-![UpDown14.png](/assets/images/UpDown/UpDown14.png){: .center-aligned width="600px"}
+![UpDown14.png](/assets/images/UpDown/UpDown14.png){: .responsive-image}
 
 Not being familiar with this binary, I run `cat /usr/local/bin/easy_install` to check it out. 
-![UpDown15.png](/assets/images/UpDown/UpDown15.png){: .center-aligned width="600px"}
+![UpDown15.png](/assets/images/UpDown/UpDown15.png){: .responsive-image}
 
 And then I try to run it, just to see what happens, which predictably creates an error as the script calls for `sys.argv[0]`, but I don't pass an argument:
 
 `error: No urls, filenames, or requirements specified (see --help)`
 
 So I check out the help page. 
-![UpDown16.png](/assets/images/UpDown/UpDown16.png){: .center-aligned width="600px"}
+![UpDown16.png](/assets/images/UpDown/UpDown16.png){: .responsive-image}
 
 I'm not familiar with this binary, but the fact that there is a help page at all makes me think this is not custom binary so maybe it's on [GTFOBins](https://gtfobins.github.io/gtfobins/easy_install/), and it is:
 
-![UpDown17.png](/assets/images/UpDown/UpDown17.png){: .center-aligned width="600px"}
+![UpDown17.png](/assets/images/UpDown/UpDown17.png){: .responsive-image}
 
 And at this point, it actually is that simple. Just run those exact commands in order and:
 
-![UpDown18.png](/assets/images/UpDown/UpDown18.png){: .center-aligned width="600px"}
+![UpDown18.png](/assets/images/UpDown/UpDown18.png){: .responsive-image}
 
 We get a root shell. All in all, this was a pretty miserable lab experience. The box died a lot, which mattered because there was also a script clearing out my files in the `/uploads` directory, making it harder to test things. I do still feel like I learned some things though. 
 

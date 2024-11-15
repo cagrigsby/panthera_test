@@ -68,13 +68,13 @@ SVC_TGS
 
 At this point I decided to try a few different impacket options including asreproasting and kerberoasting. I am able to pull a hash for the Administrator user using impacket `impacket-GetUserSPNs active.htb/'svc_tgs':'GPPstillStandingStrong2k18' -dc-ip 10.10.10.100 -request`:
 
-![Active2.png](/assets/images/Active/Active2.png){: .center-aligned width="600px"}
+![Active2.png](/assets/images/Active/Active2.png){: .responsive-image}
 
 It takes a while but eventually it cracks through `hashcat -m 13100 Administrator.kerberoast /usr/share/wordlists/rockyou.txt -r /usr/share/hashcat/rules/best64.rule --force` which gives us: `Administrator:Ticketmaster1968`
 
 After that I simply use impacket-psexec to get a shell on the machine and grab the flags. 
 
-![Active3.png](/assets/images/Active/Active3.png){: .center-aligned width="600px"}
+![Active3.png](/assets/images/Active/Active3.png){: .responsive-image}
 
 ### Lessons Learned
 This was a relatively simple box. I was briefly unsure how to deal with the GPP password, but it was cracked relatively easily with hashcat and `gpp-decrypt`. 

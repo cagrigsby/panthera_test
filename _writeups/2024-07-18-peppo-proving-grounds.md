@@ -22,14 +22,14 @@ PORT      STATE  SERVICE
 
 Pretty quickly we see there is a port open on 8080, so I go to the browser to check it and begin a gobuster scan to check for any particularly interesting directories. 
 
-![Peppo1.png](/assets/images/Peppo/Peppo1.png){: .center-aligned width="600px"}
+![Peppo1.png](/assets/images/Peppo/Peppo1.png){: .responsive-image}
 The directory scan shows a page called `/users` which prompts us to login. I try `admin:admin` which works, but we get prompted for a new password (`party321`). I click around a while in the application and check for exploits online. While I'm enumerating the site, I create a test project to see what that does. I can't exactly tell, but once I'm in the project, I see a field for files, and that reminds me of a settings page with allowed extensions. 
 
-![Peppo2.png](/assets/images/Peppo/Peppo2.png){: .center-aligned width="600px"}
+![Peppo2.png](/assets/images/Peppo/Peppo2.png){: .responsive-image}
 
 I add a few, including Ruby due to Wappalyzer. I create a ruby shell and upload it, but it seems to only show the text when clicking the file after.
 
-![Peppo3.png](/assets/images/Peppo/Peppo3.png){: .center-aligned width="600px"}
+![Peppo3.png](/assets/images/Peppo/Peppo3.png){: .responsive-image}
 Maybe there's another way to execute or access, but I don't immediately see one in browser or in my still-running gobuster scan. 
 
 I try an [exploit](https://github.com/slowmistio/Redmine-CVE-2019-18890) I saw earlier on, but I can't seem to get it working. It is a SQL injection with a sample `SLEEP(5)` injection, and the output says it was successful, but it doesn't take 5 sections, and it says it's successful even when I use a URL with a sub-directory that doesn't exist. Checking the Information panel in the admin console shows us that we are working with `Redmine version 4.1.1.stable`, so that's probably a dead end. It may be time to explore ports 113, 5432, and 10000. 
@@ -40,14 +40,14 @@ I try to use that with `psql` to connect to the PostgreSQL service, but I can't 
 
 After a few hours I give up and look for a hint. It turns out we can log in through SSH using `eleanor:eleanor`. I have rarely if ever seen that in a lab like this. SSH usually seems to be for administration for the lab, not the first foothold. So that's lesson learned 1 - remember to try that. Dumb. But I SSH in and find the shell is restricted. 
 
-![Peppo4.png](/assets/images/Peppo/Peppo4.png){: .center-aligned width="600px"}
+![Peppo4.png](/assets/images/Peppo/Peppo4.png){: .responsive-image}
 
 I can't `cd`, `cat`, or redirect output (`>` or `>>`), and a number of basic commands are not found. I try to use `scp` to copy files into eleanor's home directory, but I get a connection closed. We can however `echo $PATH` which returns `/home/eleanor/bin`, and then we can `ls /home/eleanor/bin` to find which commands we can run. 
-![Peppo5.png](/assets/images/Peppo/Peppo5.png){: .center-aligned width="600px"}
+![Peppo5.png](/assets/images/Peppo/Peppo5.png){: .responsive-image}
 
 Maybe we can use one of those. Gtfobins says we can use `ed` to break out of a restricted environment so I run `ed` and `!/bin/sh`. This kind of works, but tit turns out we need the full path to run some commands like `cat`. 
 
-![Peppo6.png](/assets/images/Peppo/Peppo6.png){: .center-aligned width="600px"}
+![Peppo6.png](/assets/images/Peppo/Peppo6.png){: .responsive-image}
 
 Not that big of a deal. I can also cd into helloworld and find `index.js` which shows: 
 
@@ -68,17 +68,17 @@ That looks like what we see in port 10000. I try echoing a .js shell in the same
 
 Linpeas really wants us to notice the docker group we are a part of. 
 
-![Peppo7.png](/assets/images/Peppo/Peppo7.png){: .center-aligned width="600px"}
+![Peppo7.png](/assets/images/Peppo/Peppo7.png){: .responsive-image}
 
 I check for docker commands on gtfobins, and most of them seem to need some kind of downloaded image. For example when I run `CONTAINER_ID="$(docker run -d alpine)"`, I get the response, `Unable to find image 'alpine:latest' locally` - same with debian which we are actually on according to `/bin/uname -a`. Apparently docker images are usually stored in `/var/lib/docker`, but we don't have access. I can however run `/usr/bin/docker ps -a` to get a list of all images and see that redmine and postgres are available. Unfortunately even substituting these images does not seem to allow us to overwrite `/etc/sudoers` (like in [Nukem](remember to link)) or `/etc/passwd` as in others. It also won't allow me to read protected files so I'm not exactly sure why linpeas flagged it.
 
 After a few more hours I give up and check a writeup. Turns out I did need docker, and I was just looking at the wrong code on gtfobins. I can't use it to do privileged read or writes, but just using it to get a shell automatically gives you a root shell. 
 
-![Peppo8.png](/assets/images/Peppo/Peppo8.png){: .center-aligned width="600px"}
+![Peppo8.png](/assets/images/Peppo/Peppo8.png){: .responsive-image}
 
 My experience to this point is that this section of gtfobins just gets you a shell. This is what we did with `ed` actually, but it didn't give you a root shell. Now I know I guess. 
 
-![Peppo9.png](/assets/images/Peppo/Peppo9.png){: .center-aligned width="600px"}
+![Peppo9.png](/assets/images/Peppo/Peppo9.png){: .responsive-image}
 
 Lessons learned: Try to log into ssh even though it's a Proving Grounds lab, and make sure to do a little more reading on the topic. After I "completed" the lab, I went back and read a little bit more to try to solidify my understanding. [This](https://flast101.github.io/docker-privesc/)post helped. It also pointed out that I was only still in the container, but I was able to read the proof flag. So I did go ahead and edit /`/etc/passwd` and create a new user with a password generated from openssl. I was able to ssh using that user getting full root access over the machine. 
 
