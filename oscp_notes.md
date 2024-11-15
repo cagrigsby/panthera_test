@@ -5,7 +5,7 @@ permalink: /oscp_notes/
 ---
 
 # Enumeration
-## 0 nmap
+## Initial Scanning
 Starting commands:
 1. `sudo nmap -p- -v -T4 -sC -A $IP --open` to reveal `$port1`, `$port2`, and so on
 2. Then: `sudo nmap -sC -A -p$port1,$port2,etc $IP -T4`
