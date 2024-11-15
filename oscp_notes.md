@@ -5,7 +5,7 @@ permalink: /oscp_notes/
 ---
 
 # Enumeration
-## 0 nmap
+## Initial Scanning
 Starting commands:
 1. `sudo nmap -p- -v -T4 -sC -A $IP --open` to reveal `$port1`, `$port2`, and so on
 2. Then: `sudo nmap -sC -A -p$port1,$port2,etc $IP -T4`
@@ -25,13 +25,6 @@ nmap flags:
 -A (runs all scans)
 -n (No DNS)
 -T 0-5 (Timing of scans, 0 is fastest, 3 is default)
-
-### Print Open Ports (test)
-- Print open ports: `nmap $Ip |  grep '/tcp' | cut -d '/' -f 1 | paste -sd ','`
-- include the standard output in a file (scan.txt) and also the ports in a second line
-`nmap $Ip -oN scan.txt && grep '/tcp' scan.txt | cut -d '/' -f 1 | paste -sd ','`
-- no file creating
-`output=$(nmap 192.168.247.122); echo "$output"; echo -n "Ports: "; echo "$output" | grep '/tcp' | cut -d '/' -f 1 | paste -sd ','`
 
 ### Scripting Engine
 - Nmap Scripting Engine
@@ -130,7 +123,7 @@ Hi user,
 
 Click this link or your skip manager gets it - http://$kaliIP/
 
-Ragrads, 
+Regards, 
 
 .   
 ```
@@ -232,7 +225,7 @@ On Linux, we can use the `/etc/passwd` file to test directory traversal vulnerab
 	- `/image?filename=../../../etc/passwd%00.jpg`
 	- **The `%00` is a null byte which effectively terminates the file path before the extension. **
 
-### Encoding Notes (not sure)
+### Encoding Notes
 Examples:	`%20 = " "` and `%5C = "\"` and `%2e = "."` and `%2f = "/"`
 - Note: Don't encode the "-" character in flags, and it looks like "/" characters also don't need to be encoded. 
 - [URL Encoder](https://www.urlencoder.org/)
@@ -596,7 +589,7 @@ https://medium.com/@opabravo/manually-exploit-blind-sql-injection-with-ffuf-9288
 ### Brute forcing with ffuf
 https://medium.com/@opabravo/manually-exploit-blind-sql-injection-with-ffuf-92881a199345
 
-## ~ Brute Forcing
+## Brute Forcing
 
 ### Check for default credentials
 - Google default credentials for the application (duh)
@@ -638,7 +631,7 @@ https://medium.com/@opabravo/manually-exploit-blind-sql-injection-with-ffuf-9288
 	- `cewl --lowercase $URL`
 - Generate a username list from names: https://github.com/jseidl/usernamer
 
-## ~ OSINT
+## OSINT
 1. DNS
 	1. netcraft.com
 	2. whois

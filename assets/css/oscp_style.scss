@@ -3,77 +3,192 @@
 
 @import 'panthera-jekyll';
 
-.social-icon-img {
-    width: 24px; /* Adjust size as needed */
-    height: auto;
-    vertical-align: middle; /* Aligns with text or other elements */
+// Inline code styling (single backticks)
+code.highlighter-rouge {
+    background-color: #DDCBBD;
+    color: #101935;
+    padding: 2px 4px;
+    border-radius: 3px;
 }
 
-/* Custom styles for code blocks */
-code {
-    background-color: #DDCBBD !important; /* Champagne pink background */
-    border: 1px solid #DDCBBD; /* Amaranth pink border = #FC9BC2 */
-    padding: 1px 2px; /* Padding around the code (was 2px 4px) */
-    border-radius: 4px; /* Rounded corners */
-    font-family: 'Open Sans', monospace; /* Monospaced font */ //said 'Courier New', Courier, monospace
-    color: #101935; /* was 11158E Blue text color for contrast */
+// Block code styling (triple backticks)
+.highlight {
+    margin: 1em 0;
+    padding: 1em;
+    background-color: #DDCBBD;
+    border-radius: 4px;
+    
+    pre {
+        margin: 0;
+        padding: 0;
+        background-color: transparent;
+    }
+    
+    code {
+        background-color: transparent;
+        color: #101935;
+    }
 }
 
-pre {
-    background-color: #DDCBBD !important; /* Champagne pink background */
-    border: 1px solid #DDCBBD; /* Amaranth pink border = #FC9BC2 */
-    padding: 10px; /* More padding for preformatted code blocks */
-    border-radius: 4px; /* Rounded corners */
-    overflow-x: auto; /* Scroll horizontally if the code is too wide */
-    font-family: 'Open Sans', monospace; /* Monospaced font */ //said 'Courier New', Courier, monospace
-    color: #101935; /* Pink text color for contrast */
+pre.highlight {
+    background-color: #DDCBBD;
+    color: #101935;
 }
 
-pre code {
-    background-color: transparent; /* Ensure code blocks within pre do not have additional background */
-    padding: 0; /* Remove padding for code blocks within pre */
+// Target headers only in the main content area
+.pan-layout-content {
+    h1 {
+        font-size: 2.5em;
+        font-weight: 800;
+        border-bottom: 2px solid #101935;
+        padding-bottom: 0.3em;
+        margin-top: 1.5em;
+    }
+
+    h2 {
+        font-size: 2em;
+        font-weight: 700;
+        border-bottom: 1px solid #101935;
+        padding-bottom: 0.2em;
+        margin-top: 1.2em;
+    }
+
+    h3 {
+        font-size: 1.5em;
+        font-weight: 600;
+        margin-top: 1em;
+    }
+
+    h4 {
+        font-size: 1.2em;
+        font-weight: 600;
+        text-decoration: underline;
+        margin-top: 0.8em;
+    }
+
+    h5 {
+        font-size: 1.1em;
+        font-weight: 600;
+        font-style: italic;
+        margin-top: 0.6em;
+    }
+
+    h6 {
+        font-size: 1em;
+        font-weight: 600;
+        font-style: italic;
+        color: #666;
+        margin-top: 0.6em;
+    }
 }
 
 /* Custom styles for TOC */
 #toc-container {
     font-family: inherit;
+    padding: 1rem;
+    
+    .toc-list {
+        margin: 0;
+        list-style: none;
+        padding-left: 0;
+        
+        /* Nested lists */
+        .toc-list {
+            display: none; /* Hidden by default */
+            padding-left: 20px; /* Indentation for nested levels */
+        }
+    }
+    
+    .toc-item-container {
+        margin: 3px 0;
+    }
+    
+    .toc-item {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            
+            .toc-link {
+                color: #F686BD;
+            }
+        }
+
+        &.has-children {
+            cursor: pointer;
+        }
+    }
+    
+    .toggle-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        width: 16px;
+        height: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #ffffff;
+        padding: 0;
+        margin-right: 4px;
+        font-size: 14px;
+        line-height: 1;
+        
+        &[aria-expanded="true"] {
+            color: #F686BD;
+        }
+        
+        &:hover {
+            color: #F686BD;
+        }
+    }
+    
+    .toggle-placeholder {
+        width: 16px;
+        display: inline-block;
+        margin-right: 4px;
+    }
+    
+    .toc-link {
+        color: #ffffff;
+        text-decoration: none;
+        display: block;
+        padding: 2px 8px;
+        flex-grow: 1;
+        
+        &:hover {
+            color: #F686BD;
+        }
+    }
+    
+    /* Header sizes */
+    .toc-h1 {
+        font-size: 1.2em;
+        font-weight: bold;
+        text-decoration: underline;
+    }
+    
+    .toc-h2 {
+        font-size: 1.1em;
+        font-weight: bold;
+    }
+    
+    .toc-h3 {
+        font-size: 1.0em;
+    }
+    
+    .toc-h4 {
+        font-size: 0.9em;
+    }
+    
+    .toc-h5 {
+        font-size: 0.8em;
+    }
 }
 
-#toc-container a {
-    color: #ffffff; /* Set your desired link color */
-    display: block; /* Makes each link a block element to ensure it takes up the full width */
-    text-decoration: none; /* Removes underline from links */
-    padding-left: 10px; /* Adjust padding for spacing from left edge */
-}
-
-#toc-container a:hover {
-    color: #F686BD; /* Set your desired hover color, was E86A92 */
-    background-color: rgba(255, 255, 255, 0.1); /* Adjust color to match your theme */
-    padding: 0px;
-    margin: 0px;
-    /* padding: 15px; Adds some padding for better visual effect, kind of zooms in */
-    /* border-radius: 4px; Optional: adds rounded corners */
-}
-
-#toc-container a.toc-h1 {
-    font-size: 1.5em;
-    font-weight: bold;
-    text-decoration: underline;
-}
-
-#toc-container a.toc-h2 {
-    font-size: 1.3em;
-    font-weight: bold;
-}
-
-#toc-container a.toc-h3 {
-    font-size: 1.0em;
-}
-
-#toc-container a.toc-h4 {
-    font-size: 0.8em;
-}
-
-#toc-container a.toc-h5 {
-    font-size: 0.6em;
+/* Show nested lists when parent is expanded */
+#toc-container .toc-item-container:has(> .toc-item > .toggle-btn[aria-expanded="true"]) > .toc-list {
+    display: block;
 }
