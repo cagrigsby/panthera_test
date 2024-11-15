@@ -33,3 +33,13 @@ pre code {
     background-color: transparent; /* Ensure code blocks within pre do not have additional background */
     padding: 0; /* Remove padding for code blocks within pre */
 }
+
+::selection {
+    background: #F686BD;  /* The highlight color you want */
+    color: #101935;      /* Text color when highlighted */
+}
+
+::-moz-selection {
+    background: #F686BD;  /* Firefox needs its own declaration */
+    color: #101935;
+}
