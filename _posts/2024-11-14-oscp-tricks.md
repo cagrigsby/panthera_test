@@ -192,7 +192,7 @@ It explains the relationship, and if we click Windows Abuse:
 We get the exact command we would need to perform a DC Sync attack. In this example it doesn't really make a difference because we would already have Administrator access, but it can seriously help. It just happened to be quick to find this example in my files. What you can do, is check the `Node Info` tab on the the users you do have access, and the click on the different `Outbound Object Control` buttons to see what rights that user has over other nodes. In this case the Administrator user has rights over 94 nodes because it is in the "Domain Admins" group, hence `Group Delegated Object Control`.
 
 
-![](/assets/images/OSCP_Tricks/Screenshot%202024-11-13%20at%2011.48.31%20PM.png){: .center-aligned width="800px"}
+![](/assets/images/OSCP_Tricks/bloodhound5.png){: .center-aligned width="800px"}
 
 Anyway, this is super helpful on a few labs. 
 
