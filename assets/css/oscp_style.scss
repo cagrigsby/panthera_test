@@ -35,49 +35,51 @@ pre.highlight {
     color: #101935;
 }
 
-// Header styling
-h1 {
-    font-size: 2.5em;
-    font-weight: 800;
-    border-bottom: 1px solid #101935;
-    padding-bottom: 0.3em;
-    margin-top: 1.5em;
-}
+// Target headers only in the main content area
+.pan-layout-content {
+    h1 {
+        font-size: 2.5em;
+        font-weight: 800;
+        border-bottom: 2px solid #101935;
+        padding-bottom: 0.3em;
+        margin-top: 1.5em;
+    }
 
-h2 {
-    font-size: 2em;
-    font-weight: 700;
-    border-bottom: 1px solid #101935;
-    padding-bottom: 0.2em;
-    margin-top: 1.2em;
-}
+    h2 {
+        font-size: 2em;
+        font-weight: 700;
+        border-bottom: 1px solid #101935;
+        padding-bottom: 0.2em;
+        margin-top: 1.2em;
+    }
 
-h3 {
-    font-size: 1.5em;
-    font-weight: 600;
-    margin-top: 1em;
-}
+    h3 {
+        font-size: 1.5em;
+        font-weight: 600;
+        margin-top: 1em;
+    }
 
-h4 {
-    font-size: 1.2em;
-    font-weight: 600;
-    text-decoration: underline;
-    margin-top: 0.8em;
-}
+    h4 {
+        font-size: 1.2em;
+        font-weight: 600;
+        text-decoration: underline;
+        margin-top: 0.8em;
+    }
 
-h5 {
-    font-size: 1.1em;
-    font-weight: 600;
-    font-style: italic;
-    margin-top: 0.6em;
-}
+    h5 {
+        font-size: 1.1em;
+        font-weight: 600;
+        font-style: italic;
+        margin-top: 0.6em;
+    }
 
-h6 {
-    font-size: 1em;
-    font-weight: 600;
-    font-style: italic;
-    color: #666;
-    margin-top: 0.6em;
+    h6 {
+        font-size: 1em;
+        font-weight: 600;
+        font-style: italic;
+        color: #666;
+        margin-top: 0.6em;
+    }
 }
 
 /* Custom styles for TOC */
