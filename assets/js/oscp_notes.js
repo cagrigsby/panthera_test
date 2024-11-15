@@ -104,4 +104,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Add keyboard support
             button.addEventListener('keypress', function(e) {
-                if (e.key =
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    this.click();
+                }
+            });
+        });
+    }
+});

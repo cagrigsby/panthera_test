@@ -69,12 +69,12 @@
 
 /* Collapsible functionality */
 #toc-container .toc-list ul {
-    display: none;
+    display: none !important; /* Force hide nested lists */
     padding-left: 20px;  /* Indentation for nested levels */
 }
 
 #toc-container .toc-list.expanded > ul {
-    display: block;
+    display: block !important; /* Force show when expanded */
 }
 
 #toc-container .toc-list.expanded > li > .toc-item > .toggle-btn {
