@@ -123,7 +123,7 @@ Hi user,
 
 Click this link or your skip manager gets it - http://$kaliIP/
 
-Ragrads, 
+Regards, 
 
 .   
 ```
