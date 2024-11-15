@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const headerObj = {
                 text: text,
-                id: header.id || createIdFromText(text), // Fallback for headers without IDs
+                id: header.id || createIdFromText(text),
                 children: []
             };
 
@@ -81,9 +81,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 const hasChildren = item.children && item.children.length > 0;
                 html += `
                     <li class="toc-item-container">
-                        <div class="toc-item">
+                        <div class="toc-item ${hasChildren ? 'has-children' : ''}">
                             ${hasChildren ? 
-                                '<button class="toggle-btn" aria-expanded="false">▶</button>' : 
+                                '<button class="toggle-btn" aria-expanded="false">+</button>' : 
                                 '<span class="toggle-placeholder"></span>'
                             }
                             <a href="#${item.id}" class="toc-link toc-h${level}">${item.text}</a>
@@ -100,22 +100,48 @@ document.addEventListener("DOMContentLoaded", function () {
         // Render the initial TOC
         tocContainer.innerHTML = createTocHTML(tocStructure);
 
-        // Add click handlers for toggle buttons
-        document.querySelectorAll('.toggle-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                const listItem = this.closest('.toc-item-container');
-                const isExpanded = this.getAttribute('aria-expanded') === 'true';
+        // Function to toggle expansion
+        function toggleExpansion(element) {
+            const listItem = element.closest('.toc-item-container');
+            const button = listItem.querySelector('.toggle-btn');
+            if (button) {
+                const isExpanded = button.getAttribute('aria-expanded') === 'true';
                 
                 // Toggle the expanded state
-                this.setAttribute('aria-expanded', !isExpanded);
-                this.textContent = isExpanded ? '▶' : '▼';
+                button.setAttribute('aria-expanded', !isExpanded);
+                button.textContent = isExpanded ? '+' : '-';
                 
                 // Toggle visibility of child list
                 const childList = listItem.querySelector('.toc-list');
                 if (childList) {
                     childList.style.display = isExpanded ? 'none' : 'block';
                 }
+            }
+        }
+
+        // Add click handlers for toggle buttons and items
+        document.querySelectorAll('.toc-item.has-children').forEach(item => {
+            // Handle clicks on the entire item
+            item.addEventListener('click', function(e) {
+                // Only toggle if clicking the item itself or the button
+                // (not when clicking the link)
+                if (!e.target.classList.contains('toc-link')) {
+                    toggleExpansion(this);
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
             });
+
+            // Add keyboard support for the button
+            const button = item.querySelector('.toggle-btn');
+            if (button) {
+                button.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        toggleExpansion(this);
+                    }
+                });
+            }
         });
 
         // Initially hide all nested lists

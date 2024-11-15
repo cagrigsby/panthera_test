@@ -21,13 +21,13 @@
     }
     
     .toc-item-container {
-        margin: 5px 0;
+        margin: 3px 0;
     }
     
     .toc-item {
         display: flex;
         align-items: center;
-        margin: -5px 0; /* Negative margin to counteract container margin */
+        cursor: pointer;
         
         &:hover {
             background-color: rgba(255, 255, 255, 0.1);
@@ -36,24 +36,28 @@
                 color: #F686BD;
             }
         }
+
+        &.has-children {
+            cursor: pointer;
+        }
     }
     
     .toggle-btn {
         background: none;
         border: none;
         cursor: pointer;
-        width: 20px;
-        height: 20px;
+        width: 16px;
+        height: 16px;
         display: flex;
         align-items: center;
         justify-content: center;
         color: #ffffff;
-        transition: transform 0.2s;
         padding: 0;
-        margin: 5px; /* Add some padding around the button */
+        margin-right: 4px;
+        font-size: 14px;
+        line-height: 1;
         
         &[aria-expanded="true"] {
-            transform: rotate(90deg);
             color: #F686BD;
         }
         
@@ -63,17 +67,17 @@
     }
     
     .toggle-placeholder {
-        width: 20px;
+        width: 16px;
         display: inline-block;
-        margin: 5px;
+        margin-right: 4px;
     }
     
     .toc-link {
         color: #ffffff;
         text-decoration: none;
         display: block;
-        padding: 5px 10px; /* Added vertical padding */
-        flex-grow: 1; /* Makes the link take up remaining space */
+        padding: 2px 8px;
+        flex-grow: 1;
         
         &:hover {
             color: #F686BD;
