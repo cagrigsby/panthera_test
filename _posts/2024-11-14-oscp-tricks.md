@@ -377,29 +377,18 @@ I have a script that I run on fresh Kali spinups, and these are the tools I tend
 - [wsgidav](https://www.kali.org/tools/wsgidav/)- a generic and extendable WebDAV server
 
 ### GitHub
-[PayloadsAllTheThings](https://github.com/swisskyrepo/PayloadsAllTheThings)- a ton of useful payloads
-
-[SharpCollection](https://github.com/Flangvik/SharpCollection) - a ton of useful binaries for Windows privesc like Rubeus, Sharphound, Snaffler, and SweetPotato
-
-[adPEAS](https://github.com/61106960/adPEAS) - Winpeas/Linpeas for Active Directory
-
-[Penelope](https://github.com/brightio/penelope)- This is a reverse shell listener with some extended functionality like automatically upgrading shells to Python pty shells and additional commands which allow you to upload and download files directly from the shell. 
-
-[ConPtyShell](https://github.com/antonioCoco/ConPtyShell)- a stable reverse shell for Windows
-
-[LSE](https://github.com/diego-treitos/linux-smart-enumeration) - similar functionality to linpeas, but I personally prefer the output to linpeas. Sometimes I run both, but I always run `lse.sh -l1` first. 
-
-[Windows Exploit Suggester](https://github.com/AonCyberLabs/Windows-Exploit-Suggester)- it suggest exploits for windows. 
-
-[Ivan Sincek Reverse Shell](https://github.com/ivan-sincek/php-reverse-shell) - My favorite PHP reverse shell, it should be on your machine. 
-
-[git-dumper](https://github.com/arthaud/git-dumper) - Dumps git repos from the web, especially useful for those which aren't easily cloned with `git`. 
-
-[verybasicenum](https://github.com/pentestpop/verybasicenum) - My personal custom enumeration scripts. Simpler and faster than winpeas/linpeas though much less detail. I like to run them first, then the more detailed scripts after.
-
-[Kerbrute](https://github.com/ropnop/kerbrute)- for brute forcing Kerberos
-
-[ILSpy](https://github.com/icsharpcode/ILSpy/releases) - For reverse engineering on AMD64 binaries on ARM machines. Very helpful. 
+- [PayloadsAllTheThings](https://github.com/swisskyrepo/PayloadsAllTheThings)- a ton of useful payloads.
+- [SharpCollection](https://github.com/Flangvik/SharpCollection) - a ton of useful binaries for Windows privesc like Rubeus, Sharphound, Snaffler, and SweetPotato.
+- [adPEAS](https://github.com/61106960/adPEAS) - Winpeas/Linpeas for Active Directory.
+- [Penelope](https://github.com/brightio/penelope)- This is a reverse shell listener with some extended functionality like automatically upgrading shells to Python pty shells and additional commands which allow you to upload and download files directly from the shell. 
+- [ConPtyShell](https://github.com/antonioCoco/ConPtyShell)- a stable reverse shell for Windows.
+- [LSE](https://github.com/diego-treitos/linux-smart-enumeration) - similar functionality to linpeas, but I personally prefer the output to linpeas. Sometimes I run both, but I always run `lse.sh -l1` first. 
+- [Windows Exploit Suggester](https://github.com/AonCyberLabs/Windows-Exploit-Suggester)- it suggest exploits for windows. 
+- [Ivan Sincek Reverse Shell](https://github.com/ivan-sincek/php-reverse-shell) - My favorite PHP reverse shell, it should be on your machine. 
+- [git-dumper](https://github.com/arthaud/git-dumper) - Dumps git repos from the web, especially useful for those which aren't easily cloned with `git`. 
+- [verybasicenum](https://github.com/pentestpop/verybasicenum) - My personal custom enumeration scripts. Simpler and faster than winpeas/linpeas though much less detail. I like to run them first, then the more detailed scripts after.
+- [Kerbrute](https://github.com/ropnop/kerbrute)- for brute forcing Kerberos.
+- [ILSpy](https://github.com/icsharpcode/ILSpy/releases) - For reverse engineering on AMD64 binaries on ARM machines. Very helpful. 
 
 ### Websites/Gitbooks
 These are pretty much all of my relevant bookmarks on my Kali machine. You will probably be using most of these, if not all.
