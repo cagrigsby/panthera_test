@@ -311,7 +311,7 @@ Intellectually I know it to be a stupid thing to spend time on. But the thing is
 
 ![](/assets/images/OSCP_Tricks/hackerbaby.webp){: .responsive-image}
 
-I use [Terminator](https://gnome-terminator.org/) terminal emulator which has a ton of themes to choose from. There are some very simple instructions [here](https://github.com/EliverLara/terminator-themes). I prefer using bright colors so I can recognize my own commands quickly when scrolling. You can also set up a default grid for every time you open it. Mine looks like this: 
+Believe it or not, that ^ is an AI-generated image. I also use [Terminator](https://gnome-terminator.org/) terminal emulator which has a ton of themes to choose from. There are some very simple instructions [here](https://github.com/EliverLara/terminator-themes). I prefer using bright colors so I can recognize my own commands quickly when scrolling. You can also set up a default grid for every time you open it. Mine looks like this: 
 
 ![](/assets/images/OSCP_Tricks/grid.png){: .responsive-image}
 
