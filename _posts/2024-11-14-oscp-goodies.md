@@ -52,10 +52,10 @@ While preparing to take the OSCP, I frequently browsed the [OSCP subreddit](http
 
 Please note that this post is written for people who are attempting or want to attempt the OSCP, with a special focus on those with a little less experience. **I am trying to share some of the things I learned outside the PEN-200 course that made the experience easier on me.** Some of them *should* be too simple for you. 
 
-For a more technical/methodological guide/runbook, I like [this one](https://medium.com/@redefiningreality/your-bs-less-guide-to-acing-oscp-4eccaf497410). For my personal notes, they are available [here](link) in repo form, and [here](https://pentestpop.github.io/oscp_notes/)in a web page, though I'm likely going to move that to a gitbook style when I get a chance. 
+For a more complete technical/methodological guide, I like [this one](https://medium.com/@redefiningreality/your-bs-less-guide-to-acing-oscp-4eccaf497410). For my personal notes, they are available [here](link) in repo form, and [here](https://pentestpop.github.io/oscp_notes/) on this very site.  
 
 ## Who Am I
-I may have a more detailed blog post about this, but the gist is that I became interested in cybersecurity during the Covid-19 pandemic and from 0 in late 2020, I completed a bunch of online courses in IT generally, cybersecurity specifically, and also programming, in particular for Python, SQL, and bash. I spent tons and tons of time on [TryHackMe](https://tryhackme.com). I picked up a few certifications including Sec+, CySA+, and the ethical Junior Penetration Tester, or [eJPT](https://security.ine.com/certifications/ejpt-certification/) from INE security. I mention it because while it's not as prestigious, it can be seen as jumping off point for OSCP. I would say it's a good place to start, especially to figure out whether you have a passion for this, but it's not essential. If you can do that, you're ready to move on, but of course there are a ton of other signals that it's time. For work, I spent a little over three years in security compliance, both outside as a consultant and inside in GRC. 
+I may have a more detailed blog post about this, but the gist is that I became interested in cybersecurity during the Covid-19 pandemic and from 0 in late 2020, I completed a bunch of online courses in IT generally, cybersecurity specifically, and also programming, in particular for Python, SQL, and bash. I spent tons and tons of time on [TryHackMe](https://tryhackme.com). I picked up a few certifications including Sec+, CySA+, and the ethical Junior Penetration Tester, or [eJPT](https://security.ine.com/certifications/ejpt-certification/) from INE security. I mention the last one because while it's not as prestigious, it can be seen as jumping off point for OSCP. I would say it's a good place to start, especially to figure out whether you have a passion for this, but it's not essential. If you can do that, you're ready to move on, but of course there are a ton of other signals that it's time. For work, I spent a little over three years in security compliance, both outside as a consultant and inside in GRC. 
 
 All this to say that I'm approaching this guide as someone who did not spend a ton of time IT or engineering, without much formal training. If I did it, you can too, but you're gonna need to love it. 
 
@@ -90,10 +90,10 @@ It's difficult to know how much this is going to help given that we all start fr
 ## My Setup
 - M1 Macbook Pro
 - VMWare Fusion (free) with Kali on the external monitor.
-- Two Obisdian notes on built-in monitor - notes repo to continuously add to on one side, current working note (like writeup) on the other. 
+- Two Obisdian notes on built-in monitor - with my notes repo to continuously update on one side and my current working note (like writeup) on the other. 
 
 I really only mention this because I considered alternatives like:
-- Getting a used AMD64 machine because some of the material references tools that don't work well on ARM
+- Getting a used AMD64 machine because some of the material references tools that don't work well on ARM (reverse engineering and buffer overflows)
 - Paying for a hypervisor like Parallels
 - Taking notes on my Kali VM (smh my damn head)
 
@@ -105,19 +105,19 @@ I really only mention this because I considered alternatives like:
 ### Do The Suggested Labs
 Duh. TJ Null list [here](https://docs.google.com/spreadsheets/u/1/d/1dwSMIAPIam0PuRBkCiDI88pU3yzrqqHkDtBngUHNCw8/htmlview), LainKusanagi list [here](https://docs.google.com/spreadsheets/d/18weuz_Eeynr6sXFQ87Cd5F0slOj9Z6rt/edit?gid=487240997#gid=487240997). A reddit user named [/u/obeyeater](https://www.reddit.com/r/oscp/comments/1gee7m4/from_zero_to_90_points/) compiled them both into a study tracker [here](https://docs.google.com/spreadsheets/d/1nzEN0G6GzneWCfs6qte6Qqv-i8cV_j6po-tFlZAOx1k/edit?gid=488959887#gid=488959887). Make a copy, update it, check your progress. 
 
-How many do you need to do? This is impossible to know, and as much as you may want a discrete number, anyone who gives you one is pandering. Your background is different from mine, your test will be different from mine. I would say do writeups as you go and take note of when you need to look for hints. If it's on something not covered by the Exam material, fine. If you're needing to search for writeups because you forgot to do something simple or just never got the syntax right, you're probably not ready. 
+How many do you need to do? This is impossible to know, and as much as you may want a discrete number, anyone who gives you one is pandering. Your background is different from mine; your test will be different from mine. I would say do writeups as you go and take note of when you need to look for hints. If it's on something not covered by the Exam material, fine. If you're needing to search for writeups because you forgot to do something simple or just never got the syntax right, you're probably not ready. 
 
-You need to be able to knock out Proving Grounds Easy machines with no help for sure. If you need help on a Medium box, it better be because you had something to learn. 
+You need to be able to knock out Proving Grounds Easy machines with no help for sure. If you need help on a Medium box, it better be because you had something to learn outside the course material. 
 
 ### Have a Process For Taking Notes
-Notice that I did not say something generic like "take good notes." You need a process. Maybe this is a no brainer, but I never said this was a post for people with brains. I think sometimes I failed at this because I figured I understood something well enough to not need notes, buta couple mistakes with that is too many. Look at all the random OSCP gitbooks on the internet, those are from people who prioritized taking notes. Look at them, think seriously about the best way for you to emulate them, and then do it. Copy mine if you like, they're [here](https://github.com/pentestpop/OSCP_Vault). You can download the repo and open it as a vault in Obsidian. Here's a taste: 
+Notice that I did not say something generic like "take good notes." You need a process. Maybe this is a no brainer, but I never said this was a post for people with brains. I think sometimes I failed at this because I figured I understood something well enough to not need notes, but a couple mistakes with that is too many. Look at all the random OSCP gitbooks on the internet, those are from people who prioritized taking notes. Look at them, think seriously about the best way for you to emulate them, and then do it. Copy mine if you like, again they're [here](https://github.com/pentestpop/OSCP_Vault). You can download the repo and open it as a vault in Obsidian. Here's a taste: 
 
 ![](/assets/images/OSCP_Tricks/tasty.png){: .responsive-image}
 
 I just keep this open in a window at all times and add to it when I learn something new or want to remember some syntax. 
 
 ### Use AI
-I know you can't do it on the exam, but you can learn a lot from asking ChatGPT to breakdown a command or *why* something is failing. Google is great, Stack Overflow is great, reddit is great, the Offsec discord is great, but AI tools can be awesome for specific questions or questions people on other forums deem unworthy to answer for one reason or another. Yes, ChatGPT can hallucinate, but you'll probably learn from that blowing up in your face too. The tools are incredibly useful, and it's a waste not to use especially knowing that the other team is. 
+I know you can't do it on the exam, but you can learn a lot from asking ChatGPT to break down a command or *why* something is failing. Google is great, Stack Overflow is great, reddit is great, the Offsec discord is great, but AI tools can be awesome for specific questions or questions people on other forums deem unworthy to answer for one reason or another. Yes, ChatGPT can hallucinate, but you'll probably learn from that blowing up in your face too. The tools are incredibly useful, and it's a waste not to use especially knowing that the other team is. 
 
 Btw, as of November 2024, [Claude](https://claude.ai/) is better for code, but the free tier is more limited by message, so sadly you might want to skip the "Perfect, that works, thank you" messages. I tend to be polite to chat bots, but hey I'm from the South. 
 
@@ -175,7 +175,7 @@ It addition to listing out useful information (like ASREPRoastable and Kerberoas
 *I do want to take a second to note that at times the formatting can be weird. It's possible that you may need to re-run Sharphound/bloodhound-python or Rubeus. Most of the time it's fine, but if you're patient, you may be better off treating this as simply as a tool that checks for low-hanging fruit.*
 
 ### Bloodhound Abuse
-This is touched on in the course material, but it is glossed over pretty heavily. Bloodhound includes explicit direction on how to abuse certain permissions and relationships. See this output from HackTheBox's Support lab (no spoilers in this one):
+This is touched on in the course material, but it is glossed over pretty heavily. Bloodhound actually includes explicit direction on how to abuse certain permissions and relationships. See this output from HackTheBox's Support lab (no spoilers in this one):
 
 ![](/assets/images/OSCP_Tricks/bloodhound1.png){: .responsive-image}
 
@@ -193,15 +193,14 @@ It explains the relationship, and if we click Windows Abuse:
 
 We get the exact command we would need to perform a DC Sync attack. In this example it doesn't really make a difference because we would already have Administrator access, but it can seriously help. It just happened to be quick to find this example in my files. What you can do, is check the `Node Info` tab on the the users you do have access, and the click on the different `Outbound Object Control` buttons to see what rights that user has over other nodes. In this case the Administrator user has rights over 94 nodes because it is in the "Domain Admins" group, hence `Group Delegated Object Control`.
 
-
 ![](/assets/images/OSCP_Tricks/bloodhound5.png){: .responsive-image}
 
-Anyway, this is super helpful on a few labs. 
+Anyway, I probably wouldn't have known this without doing a bunch of labs and reading writeups, and it can be super helpful. You should be able to find this info anyway, but it's nice to have in one place. 
 
 ### Maintain Your Wordlists
 Wordlists are a thoroughly discussed topic for the OSCP, but I wanted to call out a few things. Yes, `rockyou.txt` is fine for passwords, you shouldn't need anything else, especially with hashcat rules. I like `hashcat -m $mode $hashFile /usr/share/wordlists/rockyou.txt -r /usr/share/hashcat/rules/best64.rule --force`.
 
-But you should be more careful with directory brute forcing. If you do enough labs, you may notice that `.git` is missing on a lot of well-used directory wordlists? For example, it is not on:
+But you should be more careful with directory brute forcing. I needed help on a few labs because I couldn't find the hidden directory. If you do enough of the TJ Null and LainKusanagi lists, you may realize that `.git` is missing on a lot of well-used directory wordlists. For example, it is not on:
 -  `/usr/share/seclists/Discovery/Web-Content/raft-medium-directories.txt` - the default wordlist for `feroxbuster` is
 - `/usr/share/wordlists/dirb/big.txt`
 - `/usr/share/dirbuster/wordlists/directory-list-lowercase-2.3-small.txt`
@@ -311,7 +310,7 @@ Intellectually I know it to be a stupid thing to spend time on. But the thing is
 
 ![](/assets/images/OSCP_Tricks/hackerbaby.webp){: .responsive-image}
 
-Believe it or not, that ^ is an AI-generated image. I also use [Terminator](https://gnome-terminator.org/) terminal emulator which has a ton of themes to choose from. There are some very simple instructions [here](https://github.com/EliverLara/terminator-themes). I prefer using bright colors so I can recognize my own commands quickly when scrolling. You can also set up a default grid for every time you open it. Mine looks like this: 
+Believe it or not, that ^ is an AI-generated image. HACKERBABY is a menace at Roblox hacking. I also use [Terminator](https://gnome-terminator.org/) terminal emulator which has a ton of themes to choose from. There are some very simple instructions [here](https://github.com/EliverLara/terminator-themes). I prefer using bright colors so I can recognize my own commands quickly when scrolling. You can also set up a default grid for every time you open it. Mine looks like this: 
 
 ![](/assets/images/OSCP_Tricks/grid.png){: .responsive-image}
 
@@ -326,14 +325,15 @@ I don't know. No one knows. As many as you can do, I guess. As I said [above](#d
 I want to reiterate, no one can really answer this because no one knows your background and no one knows what kind of exam you get. Maybe you could even speed through the course once and still pass the exam if you so happen to retain only the exact most useful information for your specific exam like some kind of Slumdog Millionaire situation. Maybe don't plan on that. 
 
 ### Is the course material enough to pass the exam?
-This is a better question to me, and I think the answer is technically yes. The benefit of doing a bunch of outside labs and courses is to get reps in, build your notes, and perhaps most importantly to gain exposure to different kinds of problems. I would say there were specific labs from outside the course material that included the exact same technologies that I encountered on the exam itself. If I didn't have that exposure, maybe the outcome would have been different. 
+This is a better question to me, and I think the answer is technically yes. The benefit of doing a bunch of outside labs and courses is to get reps in, build your notes, and perhaps most importantly to gain exposure to different kinds of problems. I would say there were specific labs from outside the course material that included the same technologies that I encountered on the exam itself, even if not necessarily the same solution. If I didn't have that exposure, maybe the outcome would have been different. 
 
 ### Oh cool, which labs?
-Nice try officer. 
+Nice try officer.
+
 ![](/assets/images/OSCP_Tricks/nope.webp){: .responsive-image}
 
 ### What other material would you recommend?
-I guess just see the How Did I Prepare Section. I can tell you with certainty that that was enough to pass my exam. I'll clarify a bit here - there's a ton over overlapping information among those resources and the exam material itself. Part of how I learned, like actually learned, was to see it more than once in different contexts. Maybe you don't need that, maybe you do. So I can't really say whether TCM's Windows Privsec course is a must-do addition or not. I can just say that it helped me to revisit. **I suggest you do a course, then spend a few weeks doing labs, then do another course, then do some labs, then revisit a course, then do some labs, and so on**. It's just a good way to hammer everything home. 
+I guess just see the How Did I Prepare Section. I can tell you with certainty that that was enough to pass my exam. I'll clarify a bit here - there's a ton over overlapping information among those resources and the exam material itself. Part of how I learned, like actually learned, was to see it more than once in different contexts. Maybe you don't need that, maybe you do. So I can't really say whether TCM's Windows Privsec course is a must-do addition or not. I can just say that it helped me to revisit a lot of the material I'd already learned because I had built up my greater context by the second time I saw it. **I suggest you do a course, then spend a few weeks doing labs, then do another course, then do some labs, then revisit a course, then do some labs, and so on**. It's just a good way to hammer everything home. 
 
 ### Is the OSCP Worth It?
 I don't know. It's definitely the most challenging and most fun certification I've done. Probably the most interesting exam I've had in my life actually. 
@@ -360,7 +360,7 @@ I have a script that I run on fresh Kali spinups, and these are the tools I tend
 - [peass](https://www.kali.org/tools/peass-ng/) - well-known privilege escalation scripts for Windows and Linux (and MacOS)
 - [pspy](https://www.kali.org/tools/pspy/)- a command line tool designed to snoop on processes without need for root permissions. You'll want to run a binary on target machines.  
 - [python3-ldapdomaindump](https://www.kali.org/tools/python-ldapdomaindump/) - Active Directory information dumper via LDAP
-- python3-pip(https://www.kali.org/tools/python-pip/#python3-pip) - Python3 package installer
+- [python3-pip](https://www.kali.org/tools/python-pip/#python3-pip) - Python3 package installer
 - [python3-venv](https://docs.python.org/3/library/venv.html) - Python3 package for creating virtual environments, in case you need to briefly use some dependencies that might conflict with your installed libraries 
 - [remmina](https://remmina.org/) - an RDP client, alternative to xfreerdp when it didn't want to work for whatever reason
 - [rlwrap](https://github.com/hanslub42/rlwrap) - a 'readline wrapper', a small utility that uses the [GNU Readline](https://tiswww.case.edu/php/chet/readline/rltop.html) library to allow the editing of keyboard input for any command, making certain shells more stable/easier to use. 
@@ -389,10 +389,10 @@ These are pretty much all of my relevant bookmarks on my Kali machine. You will 
 
 [Crackstation](https://crackstation.net/) - Throw your password hashes in here and see what comes out. Often nothing, but it also often identifies the hash type which is nice. 
 [CyberChef](https://gchq.github.io/CyberChef/)- One stop shop for transforming data to and from base64, URL encoding, etc. 
-[exploit-db](https://www.exploit-db.com/) - You know
+[exploit-db](https://www.exploit-db.com/) - You know this one. 
 [GTFOBins](https://gtfobins.github.io/) - You know GTFOBins from the course material, it rocks. 
 [HackTricks](https://book.hacktricks.xyz/) - Very much the gold standard. Get used to putting `$searchTerm hacktricks` into google. 
-[NTLM.PW](https://ntlm.pw/)Cracks some NTLM hashes
+[NTLM.PW](https://ntlm.pw/) - Cracks some NTLM hashes, maybe redundant with crackstation. 
 [PayloadsAllTheThings](https://swisskyrepo.github.io/PayloadsAllTheThings/) in gitbook form. 
 [RevShells](https://www.revshells.com/) - You probably already know about RevShells, but it allows you to input your IP and listening port and plugs them into a bunch of reverse shells automatically. 
 [wadcoms](https://wadcoms.github.io/)- This is a great little tool. It is an interactive cheat sheet, containing a curated list of offensive security tools and their respective commands, to be used against Windows/AD environments. You can select what you have such as a user but no password or an NTLM hash, and then it filters what commands are available. I have worked on a tool to further this work, so we'll see about that in the future. 
