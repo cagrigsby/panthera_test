@@ -102,15 +102,17 @@ I really only mention this because I considered alternatives like:
 ![](/assets/images/OSCP_Tricks/joking.png){: .responsive-image}
 
 ## General Advice
+For the most part, you probably know this stuff already, but you really should take it to heart. These sections also contain a few different resources that have helped me along the way. 
+
 ### Do The Suggested Labs
-Duh. TJ Null list [here](https://docs.google.com/spreadsheets/u/1/d/1dwSMIAPIam0PuRBkCiDI88pU3yzrqqHkDtBngUHNCw8/htmlview), LainKusanagi list [here](https://docs.google.com/spreadsheets/d/18weuz_Eeynr6sXFQ87Cd5F0slOj9Z6rt/edit?gid=487240997#gid=487240997). A reddit user named [/u/obeyeater](https://www.reddit.com/r/oscp/comments/1gee7m4/from_zero_to_90_points/) compiled them both into a study tracker [here](https://docs.google.com/spreadsheets/d/1nzEN0G6GzneWCfs6qte6Qqv-i8cV_j6po-tFlZAOx1k/edit?gid=488959887#gid=488959887). Make a copy, update it, check your progress. 
+Duh. TJ Null list [here](https://docs.google.com/spreadsheets/u/1/d/1dwSMIAPIam0PuRBkCiDI88pU3yzrqqHkDtBngUHNCw8/htmlview), LainKusanagi list [here](https://docs.google.com/spreadsheets/d/18weuz_Eeynr6sXFQ87Cd5F0slOj9Z6rt/edit?gid=487240997#gid=487240997). A reddit user named [/u/obeyeater](https://www.reddit.com/r/oscp/comments/1gee7m4/from_zero_to_90_points/) compiled them both into a study tracker [here](https://docs.google.com/spreadsheets/d/1nzEN0G6GzneWCfs6qte6Qqv-i8cV_j6po-tFlZAOx1k/edit?gid=488959887#gid=488959887). I wish I'd found it sooner to be honest. Make a copy, update it, check your progress. 
 
 How many do you need to do? This is impossible to know, and as much as you may want a discrete number, anyone who gives you one is pandering. Your background is different from mine; your test will be different from mine. I would say do writeups as you go and take note of when you need to look for hints. If it's on something not covered by the Exam material, fine. If you're needing to search for writeups because you forgot to do something simple or just never got the syntax right, you're probably not ready. 
 
 You need to be able to knock out Proving Grounds Easy machines with no help for sure. If you need help on a Medium box, it better be because you had something to learn outside the course material. 
 
 ### Have a Process For Taking Notes
-Notice that I did not say something generic like "take good notes." You need a process. Maybe this is a no brainer, but I never said this was a post for people with brains. I think sometimes I failed at this because I figured I understood something well enough to not need notes, but a couple mistakes with that is too many. Look at all the random OSCP gitbooks on the internet, those are from people who prioritized taking notes. Look at them, think seriously about the best way for you to emulate them, and then do it. Copy mine if you like, again they're [here](https://github.com/pentestpop/OSCP_Vault). You can download the repo and open it as a vault in Obsidian. Here's a taste: 
+Notice that I did not say something generic like "take good notes." You need a process. Maybe this is a no brainer, but I never said this was a post for people with brains, and it's so, so important. I think sometimes I failed at this because I figured I understood something well enough to not need notes, but a couple mistakes with that is too many. Look at all the different OSCP gitbooks on the internet, those are from people who prioritized taking notes. Look at them, think seriously about the best way for you to emulate them, and then do it. Copy mine if you like, again they're [here](https://github.com/pentestpop/OSCP_Vault). You can download the repo and open it as a vault in Obsidian. Here's a taste: 
 
 ![](/assets/images/OSCP_Tricks/tasty.png){: .responsive-image}
 
@@ -158,6 +160,8 @@ The point is to take the commands you know you need to run every time, put them 
 You can of course take this one step further and automate a bunch of commands with a combination of different tools. I'll just drop [this here](https://github.com/pentestpop/verystupidenum), and then we'll never speak of it again. 
 
 ## More Specific Tips
+That was more genreral advice you almost certainly have heard but may have yet to internalize. Here are more specific items I have picked up along the journey. 
+
 ### adPEAS
 Maybe you're familiar already, but I feel like I don't see [adPEAS](https://github.com/61106960/adPEAS) talked about nearly as much as Linpeas and Winpeas, maybe because it's from a different creator? Per the README.md:
 
@@ -175,7 +179,7 @@ It addition to listing out useful information (like ASREPRoastable and Kerberoas
 *I do want to take a second to note that at times the formatting can be weird. It's possible that you may need to re-run Sharphound/bloodhound-python or Rubeus. Most of the time it's fine, but if you're patient, you may be better off treating this as simply as a tool that checks for low-hanging fruit.*
 
 ### Bloodhound Abuse
-This is touched on in the course material, but it is glossed over pretty heavily. Bloodhound actually includes explicit direction on how to abuse certain permissions and relationships. See this output from HackTheBox's Support lab (no spoilers in this one):
+This is only briefly touched on in the course material, but I think only in the caption of an image. **Bloodhound actually includes explicit direction on how to abuse certain permissions and relationships.** See this output from HackTheBox's Support lab (no spoilers in this one):
 
 ![](/assets/images/OSCP_Tricks/bloodhound1.png){: .responsive-image}
 
@@ -198,15 +202,15 @@ We get the exact command we would need to perform a DC Sync attack. In this exam
 Anyway, I probably wouldn't have known this without doing a bunch of labs and reading writeups, and it can be super helpful. You should be able to find this info anyway, but it's nice to have in one place. 
 
 ### Maintain Your Wordlists
-Wordlists are a thoroughly discussed topic for the OSCP, but I wanted to call out a few things. Yes, `rockyou.txt` is fine for passwords, you shouldn't need anything else, especially with hashcat rules. I like `hashcat -m $mode $hashFile /usr/share/wordlists/rockyou.txt -r /usr/share/hashcat/rules/best64.rule --force`.
+Wordlists are a thoroughly discussed topic for the OSCP, but I wanted to call out a few things. For the most part `rockyou.txt` is fine for passwords, especially with hashcat rules. Definitely in some cases there are opportunities to create custom worldlists with `cewl`, but for most labs I think `rockyou.txt` is fine. For rules I like `hashcat -m $mode $hashFile /usr/share/wordlists/rockyou.txt -r /usr/share/hashcat/rules/best64.rule --force`.
 
-But you should be more careful with directory brute forcing. I needed help on a few labs because I couldn't find the hidden directory. If you do enough of the TJ Null and LainKusanagi lists, you may realize that `.git` is missing on a lot of well-used directory wordlists. For example, it is not on:
+But you might want to be more careful with directory brute forcing. In some labs there are cases where you should try directory wordlists specific to the technology in use, like certain CMS's for example. I also needed help on a few labs because I couldn't find the hidden directory. If you do enough of the TJ Null and LainKusanagi lists, you may realize that `.git` is missing on a lot of well-used directory wordlists. For example, it is not on:
 -  `/usr/share/seclists/Discovery/Web-Content/raft-medium-directories.txt` - the default wordlist for `feroxbuster` is
 - `/usr/share/wordlists/dirb/big.txt`
 - `/usr/share/dirbuster/wordlists/directory-list-lowercase-2.3-small.txt`
 - `/usr/share/dirbuster/wordlists/directory-list-lowercase-2.3-medium.txt`
 
-If you find yourself failing a lab because you didn't have the correct extension for a directory, you need to remember to add that word to you most used wordlists. If you haven't run into this, you may just not have done enough labs yet. 
+If you find yourself failing a lab because you didn't have the correct extension for a directory, try using a specific wordlist, and even consider adding that word to you most used wordlists. If you haven't run into this, you may just not have done enough labs yet. 
 
 ### No Nano, ~~No~~ Fewer Problems
 Use `cat` to create new files (including to copy/paste):
