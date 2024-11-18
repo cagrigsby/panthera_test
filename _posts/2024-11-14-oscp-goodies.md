@@ -306,7 +306,7 @@ Rapid fire:
 - Use `CTRL + Shift + L` instead of `clear` to move the command line to top of the screen so you can see the results better. This is better than clearing the whole screen in case you need to scroll up. 
 
 ### Soup Up Your VM
-Intellectually I know it to be a stupid thing to spend time on. But the thing is, studying for this exam takes a ton of time. It will take 100's of hours, even 1000's of hours. A lot of that time is going to be discouraging. So remember to have some enjoy the ride. Feel like a HACKERMAN (or HACKERWOMAN or HACKERPERSON or HACKERBABY) and don't take yourself too seriously. **If you aren't having fun, You're Not Gonna Make It.** So you might as well have fun. 
+Intellectually I know it to be a silly thing to spend time on. But the thing is, studying for this exam takes a ton of time. It will take 100's of hours, even 1000's of hours. A lot of that time is going to be discouraging. So remember to have some enjoy the ride. Feel like a HACKERMAN (or HACKERWOMAN or HACKERPERSON or HACKERBABY) and don't take yourself too seriously. **If you aren't having fun, You're Not Gonna Make It.** So you might as well have fun. 
 
 ![](/assets/images/OSCP_Tricks/hackerbaby.webp){: .responsive-image}
 
