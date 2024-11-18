@@ -296,7 +296,7 @@ Here I can see a git repo I downloaded, everything I download from an SMB share,
 Rapid fire:
 - Maybe you know already, but [the Ivan Sincek PHP reverse shell](https://github.com/ivan-sincek/php-reverse-shell) is the best PHP reverse shell in my opinion. I never once had it fail when another worked. 
 - I prefer [LSE](https://github.com/diego-treitos/linux-smart-enumeration) to Linpeas. Here is part of the output from the Monitored box on HackTheBox. See how it only gives the output it thinks is notable? If you don't find anything here, run linpeas sure. But I start with `./lse.sh -l1`. 
-- 
+
 ![](/assets/images/OSCP_Tricks/lse.png){: .responsive-image}
 
 - `ldapdomaindump` over `ldapsearch` and `bloodhound-python`. It does both, it outputs to a chosen directory `.grep` files, `.json` files, and `.html` files for easy viewing in browser.  
