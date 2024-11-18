@@ -9,8 +9,8 @@
     vertical-align: middle; /* Aligns with text or other elements */
 }
 
-// Header styles scoped to main content only
-.main-content, .content {  // adjust these selectors based on your theme
+// Header styles scoped to main content area for Panthera theme
+.pan-layout-content {
     h1, h2, h3, h4, h5 {
       color: #101935;
       font-weight: 600;
