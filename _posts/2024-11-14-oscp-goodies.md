@@ -3,7 +3,7 @@ layout: post
 title: OSCP+ Guide, Tips, and Resources
 date: 2024-11-14 13:32:20 +0300
 description: Everything I Wish I'd Known Outside the Course Material
-image: /assets/images/bloodhound4.jpg
+image: /assets/images/bloodhound_header.jpg
 fig-caption: # Add figcaption (optional)
 tags: [personal, professional]
 ---
@@ -313,7 +313,7 @@ Intellectually I know it to be a stupid thing to spend time on. But the thing is
 
 
 <figure>
-    <img src="/assets/Images/OSCP_Tricks/hackerbaby.webp"
+    <img src="/assets/images/OSCP_Tricks/hackerbaby.webp"
          alt="HACKERBABY">
     <figcaption>AI-generated Image</figcaption>
 </figure>
