@@ -297,7 +297,7 @@ Here I can see a git repo I downloaded, everything I download from an SMB share,
 ### This, Not That
 Rapid fire:
 - Maybe you know already, but [the Ivan Sincek PHP reverse shell](https://github.com/ivan-sincek/php-reverse-shell) is the best PHP reverse shell in my opinion. I never once had it fail when another worked. 
-- I prefer [LSE](https://github.com/diego-treitos/linux-smart-enumeration) to Linpeas. Here is part of the output from the Monitored box on HackTheBox. See how it only gives the output it thinks is notable. If you don't find anything here, run linpeas sure. But I start with `./lse.sh -l1`. 
+- I prefer [LSE](https://github.com/diego-treitos/linux-smart-enumeration) to Linpeas. Here is part of the output from the Monitored box on HackTheBox. See how it only gives the output it thinks is notable? If you don't find anything here, run linpeas sure. But I start with `./lse.sh -l1`. 
 - 
 ![](/assets/images/OSCP_Tricks/lse.png){: .responsive-image}
 
@@ -311,14 +311,7 @@ Rapid fire:
 ### Soup Up Your VM
 Intellectually I know it to be a stupid thing to spend time on. But the thing is, studying for this exam takes a ton of time. It will take 100's of hours, even 1000's of hours. A lot of that time is going to be discouraging. So remember to have some enjoy the ride. Feel like a HACKERMAN (or HACKERWOMAN or HACKERPERSON) and don't take yourself too seriously. **If you aren't having fun, You're Not Gonna Make It.** So you might as well have fun. 
 
-
-<figure>
-    <img src="/assets/images/OSCP_Tricks/hackerbaby.webp"
-         alt="HACKERBABY"
-         class="responsive-image">
-    <figcaption>(AI-generated Image)</figcaption>
-</figure>
-
+![](/assets/images/OSCP_Tricks/hackerbaby.webp){: .responsive-image}
 
 I use [Terminator](https://gnome-terminator.org/) terminal emulator which has a ton of themes to choose from. There are some very simple instructions [here](https://github.com/EliverLara/terminator-themes). I prefer using bright colors so I can recognize my own commands quickly when scrolling. You can also set up a default grid for every time you open it. Mine looks like this: 
 
