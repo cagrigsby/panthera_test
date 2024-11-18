@@ -9,6 +9,43 @@
     vertical-align: middle; /* Aligns with text or other elements */
 }
 
+// Header styles scoped to main content area for Panthera theme
+.pan-layout-content {
+    h1, h2, h3, h4, h5 {
+      color: #101935;
+      font-weight: 600;
+      margin-top: 1.5em;
+      margin-bottom: 0.8em;
+    }
+  
+    h1 {
+      font-size: 2.2em;
+      border-bottom: 2px solid #101935;
+      padding-bottom: 0.3em;
+    }
+  
+    h2 {
+      font-size: 1.8em;
+      border-bottom: 1px solid rgba(16, 25, 53, 0.4);
+      padding-bottom: 0.2em;
+    }
+  
+    h3 {
+      font-size: 1.5em;
+      padding-bottom: 0.2em;
+    }
+  
+    h4 {
+      font-size: 1.25em;
+      font-weight: 500;
+    }
+  
+    h5 {
+      font-size: 1.1em;
+      font-weight: 500;
+    }
+  }
+
 /* Custom styles for code blocks */
 code {
     background-color: #DDCBBD !important; /* Champagne pink background */
@@ -49,8 +86,9 @@ pre code {
     display: block !important;
     margin-left: auto !important;
     margin-right: auto !important;
-    width: 100%; /* Adjust this to a fixed percentage or px if you prefer */
-    max-width: 85% !important; /* Adjust as needed */
+    max-width: min(600px, 85%) !important; /* Combines both limits */
+    max-height: 600px !important;
+    width: auto !important;
     height: auto !important;
+    object-fit: contain !important;
   }
-  

@@ -1,52 +1,51 @@
 ---
 layout: post
-title: OSCP+ Guide and Tips
+title: OSCP+ Guide, Tips, and Resources
 date: 2024-11-14 13:32:20 +0300
-description: Everything I Wish I'd Know Outside the Course Material
-image: /assets/images/bloodhound3.jpg
+description: Everything I Wish I'd Known Outside the Course Material
+image: /assets/images/bloodhound_header.jpg
 fig-caption: # Add figcaption (optional)
 tags: [personal, professional]
 ---
 
-# OSCP+ Guide and Tips
 ## Table of Contents
 
-- [OSCP+ Guide and Tips](#oscp-guide-and-tips)
-	- [Table of Contents](#table-of-contents)
-	- [Purpose](#purpose)
-	- [Who Am I](#who-am-i)
-	- [How Did I Prepare](#how-did-i-prepare)
-	- [My Setup](#my-setup)
-	- [General Advice](#general-advice)
-		- [Do The Suggested Labs](#do-the-suggested-labs)
-		- [Have a Process For Taking Notes](#have-a-process-for-taking-notes)
-		- [Use AI](#use-ai)
-		- [Automate By Writing Your Own Scripts](#automate-by-writing-your-own-scripts)
-			- [Checklists](#checklists)
-	- [More Specific Tips](#more-specific-tips)
-		- [adPEAS](#adpeas)
-		- [Bloodhound Abuse](#bloodhound-abuse)
-		- [Maintain Your Wordlists](#maintain-your-wordlists)
-		- [No Nano, ~~No~~ Fewer Problems](#no-nano-no-fewer-problems)
-		- [Other .zshrc Options](#other-zshrc-options)
-		- [Prevent Hanging](#prevent-hanging)
-		- [Speedier, Thorough Enumeration](#speedier-thorough-enumeration)
-		- [SublimeText or Equivalent](#sublimetext-or-equivalent)
-		- [XFreeRDP](#xfreerdp)
-		- [This, Not That](#this-not-that)
-		- [Soup Up Your VM](#soup-up-your-vm)
-	- [FAQ](#faq)
-		- [How many lab machines is enough?](#how-many-lab-machines-is-enough)
-		- [Is the course material enough to pass the exam?](#is-the-course-material-enough-to-pass-the-exam)
-		- [Oh cool, which labs?](#oh-cool-which-labs)
-		- [What other material would you recommend?](#what-other-material-would-you-recommend)
-		- [Is the OSCP Worth It?](#is-the-oscp-worth-it)
-	- [Valuable Resources](#valuable-resources)
-		- [Kali Package Manager](#kali-package-manager)
-		- [GitHub](#github)
-		- [Websites/Gitbooks](#websitesgitbooks)
-		- [YouTube](#youtube)
-	- [Closing Thoughts](#closing-thoughts)
+- [Table of Contents](#table-of-contents)
+- [Purpose](#purpose)
+- [Who Am I](#who-am-i)
+- [How Did I Prepare](#how-did-i-prepare)
+- [My Setup](#my-setup)
+- [General Advice](#general-advice)
+	- [Do The Suggested Labs](#do-the-suggested-labs)
+	- [Have a Process For Taking Notes](#have-a-process-for-taking-notes)
+	- [Use AI](#use-ai)
+	- [Automate As Much As You Can By Writing Your Own Scripts](#automate-as-much-as-you-can-by-writing-your-own-scripts)
+		- [Checklists](#checklists)
+		- [Shameless Script Kiddie Behavior](#shameless-script-kiddie-behavior)
+- [More Specific Tips](#more-specific-tips)
+	- [adPEAS](#adpeas)
+	- [Bloodhound Abuse](#bloodhound-abuse)
+	- [Maintain Your Wordlists](#maintain-your-wordlists)
+	- [No Nano, ~~No~~ Fewer Problems](#no-nano-no-fewer-problems)
+	- [Other .zshrc Options](#other-zshrc-options)
+	- [Prevent Hanging](#prevent-hanging)
+	- [Speedier, Thorough Enumeration](#speedier-thorough-enumeration)
+	- [SublimeText or Equivalent](#sublimetext-or-equivalent)
+	- [XFreeRDP](#xfreerdp)
+	- [This, Not That](#this-not-that)
+	- [Soup Up Your VM](#soup-up-your-vm)
+- [FAQ](#faq)
+	- [How many lab machines is enough?](#how-many-lab-machines-is-enough)
+	- [Is the course material enough to pass the exam?](#is-the-course-material-enough-to-pass-the-exam)
+	- [Oh cool, which labs?](#oh-cool-which-labs)
+	- [What other material would you recommend?](#what-other-material-would-you-recommend)
+	- [Is the OSCP Worth It?](#is-the-oscp-worth-it)
+- [Valuable Resources](#valuable-resources)
+	- [Kali Package Manager](#kali-package-manager)
+	- [GitHub](#github)
+	- [Websites/Gitbooks](#websitesgitbooks)
+	- [YouTube](#youtube)
+- [Closing Thoughts](#closing-thoughts)
 
 ## Purpose
 While preparing to take the OSCP, I frequently browsed the [OSCP subreddit](http://old.reddit.com/r/oscp) checking guides and advice posts, and I saw [this one](https://eins.li/posts/oscp-secret-sauce/) in particular which helped a ton despite the content being mostly just a few helpful commands. I don't want to just copy their stuff, but you should check it out. The busybox shell and Mimikatz one-liner it references were vital for me. I figured I could share a few other suggestions that I found useful outside the PEN-200 material. I want to give (or rather underscore) some general tips on how to prepare, make note of a few specific suggestions I wish I'd known, and then I'll dig into some FAQs. 
@@ -296,8 +295,8 @@ Here I can see a git repo I downloaded, everything I download from an SMB share,
 ### This, Not That
 Rapid fire:
 - Maybe you know already, but [the Ivan Sincek PHP reverse shell](https://github.com/ivan-sincek/php-reverse-shell) is the best PHP reverse shell in my opinion. I never once had it fail when another worked. 
-- I prefer [LSE](https://github.com/diego-treitos/linux-smart-enumeration) to Linpeas. Here is part of the output from the Monitored box on HackTheBox. See how it only gives the output it thinks is notable. If you don't find anything here, run linpeas sure. But I start with `./lse.sh -l1`. 
-- 
+- I prefer [LSE](https://github.com/diego-treitos/linux-smart-enumeration) to Linpeas. Here is part of the output from the Monitored box on HackTheBox. See how it only gives the output it thinks is notable? If you don't find anything here, run linpeas sure. But I start with `./lse.sh -l1`. 
+
 ![](/assets/images/OSCP_Tricks/lse.png){: .responsive-image}
 
 - `ldapdomaindump` over `ldapsearch` and `bloodhound-python`. It does both, it outputs to a chosen directory `.grep` files, `.json` files, and `.html` files for easy viewing in browser.  
@@ -308,38 +307,30 @@ Rapid fire:
 - Use `CTRL + Shift + L` instead of `clear` to move the command line to top of the screen so you can see the results better. This is better than clearing the whole screen in case you need to scroll up. 
 
 ### Soup Up Your VM
-Intellectually I know it to be a stupid thing to spend time on. But the thing is, studying for this exam takes a ton of time. It will take 100's of hours, even 1000's of hours. A lot of that time is going to be discouraging. So remember to have some enjoy the ride. Feel like a HACKERMAN (or HACKERWOMAN or HACKERPERSON) and don't take yourself too seriously. **If you aren't having fun, You're Not Gonna Make It.** So you might as well have fun. 
+Intellectually I know it to be a stupid thing to spend time on. But the thing is, studying for this exam takes a ton of time. It will take 100's of hours, even 1000's of hours. A lot of that time is going to be discouraging. So remember to have some enjoy the ride. Feel like a HACKERMAN (or HACKERWOMAN or HACKERPERSON or HACKERBABY) and don't take yourself too seriously. **If you aren't having fun, You're Not Gonna Make It.** So you might as well have fun. 
 
-![](/assets/images/OSCP_Tricks/hackerbaby.webp)
+![](/assets/images/OSCP_Tricks/hackerbaby.webp){: .responsive-image}
 
-```
-<figure>
-    <img src="/assets/Images/OSCP_Tricks/hackerbaby.webp"
-         alt="HACKERBABY">
-    <figcaption>AI-generated Image</figcaption>
-</figure>
-```
-
-I use [Terminator](https://gnome-terminator.org/)terminal emulator which has a ton of themes to choose from. There are some very simple instructions [here](https://github.com/EliverLara/terminator-themes). I prefer using bright colors so I can recognize my own commands quickly when scrolling. You can also set up a default grid for every time you open it. Mine looks like this: 
+Believe it or not, that ^ is an AI-generated image. I also use [Terminator](https://gnome-terminator.org/) terminal emulator which has a ton of themes to choose from. There are some very simple instructions [here](https://github.com/EliverLara/terminator-themes). I prefer using bright colors so I can recognize my own commands quickly when scrolling. You can also set up a default grid for every time you open it. Mine looks like this: 
 
 ![](/assets/images/OSCP_Tricks/grid.png){: .responsive-image}
 
 I use [coolers.co](https://coolors.co/201e1f-ff4000-faaa8d-feefdd-50b2c0)to generate color schemes and use them when I can. I have a custom background I made with a free Photoshop clone called [Photopea](https://www.photopea.com/). 
 
-Try different Desktop environments. Personally I use XFCE because I couldn't quite get GNOME to do everything I wanted. Customize your keyboard shortcuts. I like a tiling manager on my host machine called [Rectangle](https://rectangleapp.com/), but Kali has a lot of that functionality built-in.  The commands and steps are going to depend on your Desktop Environment. Fortunately, we have Google and our [Robot Friends](###-use-ai) to help.
+Try different Desktop environments. Personally I use XFCE because I couldn't quite get GNOME to do everything I wanted. Customize your keyboard shortcuts. I like a tiling manager on my host machine called [Rectangle](https://rectangleapp.com/), but Kali has a lot of that functionality built-in.  The commands and steps are going to depend on your Desktop Environment. Fortunately, we have Google and our [Robot Friends](#use-ai) to help.
 
 ## FAQ
 ### How many lab machines is enough?
-I don't know. No one knows. As many as you can do, I guess. As I said [above](###-do-the-suggested-labs0**General Advice Link**, one useful metric to use is to do Proving Grounds Practice boxes (since they are created and maintained by Offsec), and do the Easy boxes without help and the Medium boxes without needing help on course material. 
+I don't know. No one knows. As many as you can do, I guess. As I said [above](#do-the-suggested-labs), one useful metric to use is to do Proving Grounds Practice boxes (since they are created and maintained by Offsec), and do the Easy boxes without help and the Medium boxes without needing help on course material. 
 
-I want to reiterate, no one can really answer this because no one knows your background and no one knows what kind of exam you get. Maybe you could even speed through the course once and still pass the exam if you so happen to retain only the exact most useful information for your specific exam like some kind of Slumdog Millionaire situation. 
+I want to reiterate, no one can really answer this because no one knows your background and no one knows what kind of exam you get. Maybe you could even speed through the course once and still pass the exam if you so happen to retain only the exact most useful information for your specific exam like some kind of Slumdog Millionaire situation. Maybe don't plan on that. 
 
 ### Is the course material enough to pass the exam?
 This is a better question to me, and I think the answer is technically yes. The benefit of doing a bunch of outside labs and courses is to get reps in, build your notes, and perhaps most importantly to gain exposure to different kinds of problems. I would say there were specific labs from outside the course material that included the exact same technologies that I encountered on the exam itself. If I didn't have that exposure, maybe the outcome would have been different. 
 
 ### Oh cool, which labs?
 Nice try officer. 
-![](/assets/images/OSCP_Tricks/nope.webp)
+![](/assets/images/OSCP_Tricks/nope.webp){: .responsive-image}
 
 ### What other material would you recommend?
 I guess just see the How Did I Prepare Section. I can tell you with certainty that that was enough to pass my exam. I'll clarify a bit here - there's a ton over overlapping information among those resources and the exam material itself. Part of how I learned, like actually learned, was to see it more than once in different contexts. Maybe you don't need that, maybe you do. So I can't really say whether TCM's Windows Privsec course is a must-do addition or not. I can just say that it helped me to revisit. **I suggest you do a course, then spend a few weeks doing labs, then do another course, then do some labs, then revisit a course, then do some labs, and so on**. It's just a good way to hammer everything home. 
@@ -412,7 +403,8 @@ Other cheatsheets/gitbooks I have bookmarked:
 - [S1ckB0y1337 AD Cheat Sheet](https://github.com/S1ckB0y1337/Active-Directory-Exploitation-Cheat-Sheet)
 - [Siren Linux Privesc](https://sirensecurity.io/blog/linux-privilege-escalation-resources/)
 - [Siren Windows Privesc](https://sirensecurity.io/blog/windows-privilege-escalation-resources/)
-To be honest, when you get started you tend to hoard this kind of stuff, but you need to be making your own. I'm not sure I visited any of these in the last month of my studying. 
+
+To be honest, when you get started you tend to hoard this kind of stuff, but you need to be making your own. I'm not sure I visited any of these in the last month of my studying. That is why I recommend downloading my [notes vault](https://github.com/pentestpop/OSCP_Vault) or someone else's. I used [QuirkyKirkHax](https://github.com/QuirkyKirkHax/OSCP-Resources) CherryTree notes, copied them into an Obsidian Vault, and re-organized them as needed. 
 
 ### YouTube
 [IppSec](https://www.youtube.com/channel/UCa6eh7gCkpPo5XXUDfygQQA)- He does a ton of lab walkthroughs which are super helpful, espcially if you want to knock some labs off of the TJ Null or LainKusanagi list but can't or won't use your machine for some reason. His website, [ippSec.rocks](https://ippsec.rocks/?#) is awesome too because it has a search tool that links to the specific timestamp and video where he uses it. So for example if you want to know more about dfunc-bypasser, you can search it and get a link to the videos where he uses it. 
@@ -421,7 +413,7 @@ To be honest, when you get started you tend to hoard this kind of stuff, but you
 
 [OffSec](https://www.youtube.com/@OffSecTraining) - A lot of good walkthroughs on these. They tend to be slower I guess, but they also tend to focus more on techniques for the course material. 
 
-[Tyler Ramsbey](https://www.youtube.com/@TylerRamsbey)- This guy is alright too. Less walkthroughs, more general content. Ignore the YouTube faces he makes in his thumbnails. 
+[Tyler Ramsbey](https://www.youtube.com/@TylerRamsbey) - This guy is solid too. Less walkthroughs, more general content. He does make some YouTubey faces in his thumbnails, but I like that he clearly reuses them, almost as if he can't bring himself to keep taking those photos.  
 
 There's a ton out there for Cybersecurity in general. The Cyber Mentor, John Hammond, The XSS Rat are good in general, but personally I haven't found their content to be especially helpful when studying for this exam in particular. 
 
