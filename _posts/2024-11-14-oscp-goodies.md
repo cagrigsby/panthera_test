@@ -312,20 +312,21 @@ Rapid fire:
 Intellectually I know it to be a stupid thing to spend time on. But the thing is, studying for this exam takes a ton of time. It will take 100's of hours, even 1000's of hours. A lot of that time is going to be discouraging. So remember to have some enjoy the ride. Feel like a HACKERMAN (or HACKERWOMAN or HACKERPERSON) and don't take yourself too seriously. **If you aren't having fun, You're Not Gonna Make It.** So you might as well have fun. 
 
 
-<figure class="responsive-image">
+<figure>
     <img src="/assets/images/OSCP_Tricks/hackerbaby.webp"
-         alt="HACKERBABY">
+         alt="HACKERBABY"
+         class="responsive-image">
     <figcaption>(AI-generated Image)</figcaption>
 </figure>
 
 
-I use [Terminator](https://gnome-terminator.org/)terminal emulator which has a ton of themes to choose from. There are some very simple instructions [here](https://github.com/EliverLara/terminator-themes). I prefer using bright colors so I can recognize my own commands quickly when scrolling. You can also set up a default grid for every time you open it. Mine looks like this: 
+I use [Terminator](https://gnome-terminator.org/) terminal emulator which has a ton of themes to choose from. There are some very simple instructions [here](https://github.com/EliverLara/terminator-themes). I prefer using bright colors so I can recognize my own commands quickly when scrolling. You can also set up a default grid for every time you open it. Mine looks like this: 
 
 ![](/assets/images/OSCP_Tricks/grid.png){: .responsive-image}
 
 I use [coolers.co](https://coolors.co/201e1f-ff4000-faaa8d-feefdd-50b2c0)to generate color schemes and use them when I can. I have a custom background I made with a free Photoshop clone called [Photopea](https://www.photopea.com/). 
 
-Try different Desktop environments. Personally I use XFCE because I couldn't quite get GNOME to do everything I wanted. Customize your keyboard shortcuts. I like a tiling manager on my host machine called [Rectangle](https://rectangleapp.com/), but Kali has a lot of that functionality built-in.  The commands and steps are going to depend on your Desktop Environment. Fortunately, we have Google and our [Robot Friends](###-use-ai) to help.
+Try different Desktop environments. Personally I use XFCE because I couldn't quite get GNOME to do everything I wanted. Customize your keyboard shortcuts. I like a tiling manager on my host machine called [Rectangle](https://rectangleapp.com/), but Kali has a lot of that functionality built-in.  The commands and steps are going to depend on your Desktop Environment. Fortunately, we have Google and our [Robot Friends](#use-ai) to help.
 
 ## FAQ
 ### How many lab machines is enough?
