@@ -1,9 +1,9 @@
 ---
 layout: post
-title: OSCP+ Guide and Tips
+title: OSCP+ Guide, Tips, and Resources
 date: 2024-11-14 13:32:20 +0300
-description: Everything I Wish I'd Know Outside the Course Material
-image: /assets/images/bloodhound3.jpg
+description: Everything I Wish I'd Known Outside the Course Material
+image: /assets/images/bloodhound4.jpg
 fig-caption: # Add figcaption (optional)
 tags: [personal, professional]
 ---
@@ -21,8 +21,9 @@ tags: [personal, professional]
 		- [Do The Suggested Labs](#do-the-suggested-labs)
 		- [Have a Process For Taking Notes](#have-a-process-for-taking-notes)
 		- [Use AI](#use-ai)
-		- [Automate By Writing Your Own Scripts](#automate-by-writing-your-own-scripts)
+		- [Automate As Much As You Can By Writing Your Own Scripts](#automate-as-much-as-you-can-by-writing-your-own-scripts)
 			- [Checklists](#checklists)
+			- [Shameless Script Kiddie Behavior](#shameless-script-kiddie-behavior)
 	- [More Specific Tips](#more-specific-tips)
 		- [adPEAS](#adpeas)
 		- [Bloodhound Abuse](#bloodhound-abuse)
@@ -310,15 +311,13 @@ Rapid fire:
 ### Soup Up Your VM
 Intellectually I know it to be a stupid thing to spend time on. But the thing is, studying for this exam takes a ton of time. It will take 100's of hours, even 1000's of hours. A lot of that time is going to be discouraging. So remember to have some enjoy the ride. Feel like a HACKERMAN (or HACKERWOMAN or HACKERPERSON) and don't take yourself too seriously. **If you aren't having fun, You're Not Gonna Make It.** So you might as well have fun. 
 
-![](/assets/images/OSCP_Tricks/hackerbaby.webp)
 
-```
 <figure>
     <img src="/assets/Images/OSCP_Tricks/hackerbaby.webp"
          alt="HACKERBABY">
     <figcaption>AI-generated Image</figcaption>
 </figure>
-```
+
 
 I use [Terminator](https://gnome-terminator.org/)terminal emulator which has a ton of themes to choose from. There are some very simple instructions [here](https://github.com/EliverLara/terminator-themes). I prefer using bright colors so I can recognize my own commands quickly when scrolling. You can also set up a default grid for every time you open it. Mine looks like this: 
 
@@ -339,7 +338,7 @@ This is a better question to me, and I think the answer is technically yes. The 
 
 ### Oh cool, which labs?
 Nice try officer. 
-![](/assets/images/OSCP_Tricks/nope.webp)
+![](/assets/images/OSCP_Tricks/nope.webp){: .responsive-image}
 
 ### What other material would you recommend?
 I guess just see the How Did I Prepare Section. I can tell you with certainty that that was enough to pass my exam. I'll clarify a bit here - there's a ton over overlapping information among those resources and the exam material itself. Part of how I learned, like actually learned, was to see it more than once in different contexts. Maybe you don't need that, maybe you do. So I can't really say whether TCM's Windows Privsec course is a must-do addition or not. I can just say that it helped me to revisit. **I suggest you do a course, then spend a few weeks doing labs, then do another course, then do some labs, then revisit a course, then do some labs, and so on**. It's just a good way to hammer everything home. 
