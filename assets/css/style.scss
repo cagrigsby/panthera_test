@@ -49,8 +49,9 @@ pre code {
     display: block !important;
     margin-left: auto !important;
     margin-right: auto !important;
-    width: 600px; /* Adjust this to a fixed percentage or px if you prefer */
+    width: 600px !important; /* Adjust this to a fixed percentage or px if you prefer */
     max-width: 85% !important; /* Adjust as needed */
     height: auto !important;
+    max-height: 600px !important;
   }
   
