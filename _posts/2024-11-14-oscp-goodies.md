@@ -323,9 +323,9 @@ Try different Desktop environments. Personally I use XFCE because I couldn't qui
 
 ## FAQ
 ### How many lab machines is enough?
-I don't know. No one knows. As many as you can do, I guess. As I said [above](###-do-the-suggested-labs0**General Advice Link**, one useful metric to use is to do Proving Grounds Practice boxes (since they are created and maintained by Offsec), and do the Easy boxes without help and the Medium boxes without needing help on course material. 
+I don't know. No one knows. As many as you can do, I guess. As I said [above](#do-the-suggested-labs), one useful metric to use is to do Proving Grounds Practice boxes (since they are created and maintained by Offsec), and do the Easy boxes without help and the Medium boxes without needing help on course material. 
 
-I want to reiterate, no one can really answer this because no one knows your background and no one knows what kind of exam you get. Maybe you could even speed through the course once and still pass the exam if you so happen to retain only the exact most useful information for your specific exam like some kind of Slumdog Millionaire situation. 
+I want to reiterate, no one can really answer this because no one knows your background and no one knows what kind of exam you get. Maybe you could even speed through the course once and still pass the exam if you so happen to retain only the exact most useful information for your specific exam like some kind of Slumdog Millionaire situation. Maybe don't plan on that. 
 
 ### Is the course material enough to pass the exam?
 This is a better question to me, and I think the answer is technically yes. The benefit of doing a bunch of outside labs and courses is to get reps in, build your notes, and perhaps most importantly to gain exposure to different kinds of problems. I would say there were specific labs from outside the course material that included the exact same technologies that I encountered on the exam itself. If I didn't have that exposure, maybe the outcome would have been different. 
@@ -405,7 +405,8 @@ Other cheatsheets/gitbooks I have bookmarked:
 - [S1ckB0y1337 AD Cheat Sheet](https://github.com/S1ckB0y1337/Active-Directory-Exploitation-Cheat-Sheet)
 - [Siren Linux Privesc](https://sirensecurity.io/blog/linux-privilege-escalation-resources/)
 - [Siren Windows Privesc](https://sirensecurity.io/blog/windows-privilege-escalation-resources/)
-To be honest, when you get started you tend to hoard this kind of stuff, but you need to be making your own. I'm not sure I visited any of these in the last month of my studying. 
+
+To be honest, when you get started you tend to hoard this kind of stuff, but you need to be making your own. I'm not sure I visited any of these in the last month of my studying. That is why I recommend downloading my [notes vault](https://github.com/pentestpop/OSCP_Vault) or someone else's. I used [QuirkyKirkHax](https://github.com/QuirkyKirkHax/OSCP-Resources) CherryTree notes, copied them into an Obsidian Vault, and re-organized them as needed. 
 
 ### YouTube
 [IppSec](https://www.youtube.com/channel/UCa6eh7gCkpPo5XXUDfygQQA)- He does a ton of lab walkthroughs which are super helpful, espcially if you want to knock some labs off of the TJ Null or LainKusanagi list but can't or won't use your machine for some reason. His website, [ippSec.rocks](https://ippsec.rocks/?#) is awesome too because it has a search tool that links to the specific timestamp and video where he uses it. So for example if you want to know more about dfunc-bypasser, you can search it and get a link to the videos where he uses it. 
@@ -414,7 +415,7 @@ To be honest, when you get started you tend to hoard this kind of stuff, but you
 
 [OffSec](https://www.youtube.com/@OffSecTraining) - A lot of good walkthroughs on these. They tend to be slower I guess, but they also tend to focus more on techniques for the course material. 
 
-[Tyler Ramsbey](https://www.youtube.com/@TylerRamsbey)- This guy is alright too. Less walkthroughs, more general content. Ignore the YouTube faces he makes in his thumbnails. 
+[Tyler Ramsbey](https://www.youtube.com/@TylerRamsbey) - This guy is solid too. Less walkthroughs, more general content. He does make some YouTubey faces in his thumbnails, but I like that he clearly reuses them, almost as if he can't bring himself to keep taking those photos.  
 
 There's a ton out there for Cybersecurity in general. The Cyber Mentor, John Hammond, The XSS Rat are good in general, but personally I haven't found their content to be especially helpful when studying for this exam in particular. 
 
