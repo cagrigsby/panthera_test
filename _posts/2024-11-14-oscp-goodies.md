@@ -312,10 +312,10 @@ Rapid fire:
 Intellectually I know it to be a stupid thing to spend time on. But the thing is, studying for this exam takes a ton of time. It will take 100's of hours, even 1000's of hours. A lot of that time is going to be discouraging. So remember to have some enjoy the ride. Feel like a HACKERMAN (or HACKERWOMAN or HACKERPERSON) and don't take yourself too seriously. **If you aren't having fun, You're Not Gonna Make It.** So you might as well have fun. 
 
 
-<figure>
+<figure class="responsive-image">
     <img src="/assets/images/OSCP_Tricks/hackerbaby.webp"
          alt="HACKERBABY">
-    <figcaption>AI-generated Image</figcaption>
+    <figcaption>(AI-generated Image)</figcaption>
 </figure>
 
 
