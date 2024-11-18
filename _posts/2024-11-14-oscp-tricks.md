@@ -122,12 +122,12 @@ I know you can't do it on the exam, but you can learn a lot from asking ChatGPT 
 
 Btw, as of November 2024, [Claude](https://claude.ai/) is better for code, but the free tier is more limited by message, so sadly you might want to skip the "Perfect, that works, thank you" messages. I tend to be polite to chat bots, but hey I'm from the South. 
 
-### Automate By Writing Your Own Scripts
+### Automate As Much As You Can By Writing Your Own Scripts
 Automate by forcing your robot friends to write your own scripts!  Yeah, you'll learn more trying to write every line yourself, but you'll learn nothing if you give up because it's too confusing. I have a few custom scripts on my [GitHub](https://github.com/pentestpop/PopScripts), so you can get more details from the README there, but basically if I know some task is going to require multiple commands, or long commands I might mistype, I (or [someone](https://miro.medium.com/v2/resize:fit:4800/format:webp/1*GmDjVtGv2I7A8-X5vC4tAQ.jpeg)) create a script which runs the commands and echos anything I might need to paste into another window. Examples:
 - `liggy` starts Ligolo, asks for what subnet to pivot into, and then prints commands to run into the shell on the target.
 - `ivan` prompts the user for a IP and Port before generating a new copy of Ivan Sincek's [PHP-Reverse-Shell](https://github.com/ivan-sincek/php-reverse-shell/blob/master/src/reverse/php_reverse_shell.php) in the working directory.
 - `served` prints certutil, iwr, and wget commands to be run on a remote target to download files from your machine using the `tun0` IP. So `served -f file.txt` returns `iwr -uri http://tun0/file.txt -o file.txt` and so on. 
-Feel free to copy these or fork them or whatever. But probably you can find some other examples. Losing focus is death by a thousand cuts, make everything as easy on yourself as possible. 
+Feel free to copy these or fork them or whatever. But probably you can find some other examples. Losing focus is death by a thousand cuts, make everything as easy on yourself as possible.
 
 #### Checklists
 For the OSCP specifically, there's kind of a limited number of pathways you can take to exploit a machine. And it's good advice to **Enumerate Deeply, Exploit Simply**. Check the practice tests they give you, the exploits simply are not that complicated. If you're struggling, you probably missed something relatively simple. One way to make sure you catch all the low hanging fruit is to run scripts which give you all the output. Once again, I have some of this on my [GitHub](https://github.com/pentestpop/verybasicenum). I noticed that I forgot to run a UDP scan a few times, so I made a script for nmap called `vbnmap` (very basic nmap). It doesn't have all the bells and whistles of [AutoRecon](https://github.com/Tib3rius/AutoRecon) for example, but it's fast, it automatically creates an output file, and you won't miss anything. It runs: 
@@ -154,6 +154,9 @@ Get-Content "$HOME\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\Conso
 ```
 
 The point is to take the commands you know you need to run every time, put them in one script, and run it every time so you know you won't forget to do something simple like check the history file. 
+
+#### Shameless Script Kiddie Behavior
+You can of course take this one step further and automate a bunch of commands with a combination of different tools. I'll just drop [this here](https://github.com/pentestpop/verystupidenum), and then we'll never speak of it again. 
 
 ## More Specific Tips
 ### adPEAS
