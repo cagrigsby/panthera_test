@@ -3,7 +3,7 @@ layout: post
 title: My Cybersecurity PATH
 date: 2024-11-10 13:32:20 +0300
 description: Get It? PATH?
-image: /assets/images/hacker.jpg
+image: /assets/images/matrix.jpg
 fig-caption: # Add figcaption (optional)
 tags: [personal, professional]
 ---
