@@ -10,7 +10,7 @@ paginate: 10
 paginate_path: "/blog/page:num/"
 
 title: Chris Grigsby
-subtitle: No hookups. 
+subtitle: The Ferrero Rocher of Cybersecurity Professionals. 
 
 # left_side:
 #   background_image: "./assets/images/left-background.jpg"
