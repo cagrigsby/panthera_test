@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Look! Free Content!
+title: Content!
 ---
 
 # About Me
