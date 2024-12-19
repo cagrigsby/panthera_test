@@ -26,22 +26,22 @@ menu:
   - text: About Me
     link: /
     icon: ""
-
+    
+  - text: Blog
+    link: /blog
+    icon: ""
     #text: My Resume
     #link: /resume
     #icon: ""
+    
+  - text: OSCP Notes
+    link: /oscp_notes
+    icon: ""
 
   - text: Pentest Lab Writeups
     link: /writeups
     icon: ""
 
-  - text: OSCP Notes
-    link: /oscp_notes
-    icon: ""
-
-  - text: Blog
-    link: /blog
-    icon: ""
 
 # Socialmedia Icons
 social_icons:
