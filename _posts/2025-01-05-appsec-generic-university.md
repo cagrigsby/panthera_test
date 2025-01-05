@@ -3,13 +3,14 @@ layout: post
 title: "Exploring Application Security: Hands-On with 6 SCA, SAST, and DAST Tools"
 date: 2025-01-05 13:32:20 +0300
 description: Analyzing the vulernable Generic-University application with a combination of FOSS and commercial AppSec tools.
-image: /assets/images/foss_sast/microscope_baby.webp
+image: /assets/images/bunsen_beaker.png
 fig-caption: 
 tags:
   - professional
   - FOSS
   - AppSec
   - DevOps
+  - SecDevOps
 ---
 After completing my Offensive Security Certified Professional (OSCP) certification in November, I decided it would be fun and educational to study more of the defensive side of cybersecurity. I completed both [Security Engineer](https://tryhackme.com/r/path/outline/security-engineer-training) and [DevSecOps](https://tryhackme.com/r/path/outline/devsecops) paths on TryHackMe and then decided it was time to get my hands dirty with some Free Open-Source Software (FOSS) tools and test them myself. 
 
