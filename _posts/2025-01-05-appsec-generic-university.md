@@ -44,7 +44,7 @@ For the purposes of this post, I will be using [OWASP Dependency-Check](https://
 ### OWASP Dependency-Check Setup
 Per their website:
 
-	Dependency-Check is a Software Composition Analysis (SCA) tool that attempts to detect publicly disclosed vulnerabilities contained within a project’s dependencies. It does this by determining if there is a Common Platform Enumeration (CPE) identifier for a given dependency. If found, it will generate a report linking to the associated CVE entries.
+`Dependency-Check is a Software Composition Analysis (SCA) tool that attempts to detect publicly disclosed vulnerabilities contained within a project’s dependencies. It does this by determining if there is a Common Platform Enumeration (CPE) identifier for a given dependency. If found, it will generate a report linking to the associated CVE entries.`
 
  As I said, it only checks for known vulnerabilities against a database, such as NIST's [National Vulnerability Database](https://nvd.nist.gov/) (NVD), so it can't alert the user to zero-days or anything like that. 
 
