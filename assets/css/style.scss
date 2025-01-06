@@ -91,10 +91,14 @@ pre code {
 }
 
 .post-view__image {
-    max-height: 200px;
+    max-width: 100%;           /* Match content width */
+    max-height: 400px;          /* Adjust this value as needed */
+    width: 100%;               /* Take full width of container */
+    height: auto;              /* Maintain aspect ratio */
+    object-fit: contain;       /* Ensure entire image is visible */
     margin-left: auto;
     margin-right: auto;
-    padding: auto;
+    display: block;            /* Ensures proper centering */
 }
 
 // responsive images
