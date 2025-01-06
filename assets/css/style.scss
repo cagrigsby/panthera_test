@@ -99,9 +99,9 @@ pre code {
 /* Header image styles */
 .post-view__image {
     width: auto !important;              /* Allow natural width scaling */
-    //max-width: none;         /* Maximum width constraint */
+    max-width: 800px;         /* Maximum width constraint */
     height: auto !important;  /* Override any existing height constraints */
-    max-height: 500px;         /* Remove any max-height restrictions */
+    max-height: none;         /* Remove any max-height restrictions */
     object-fit: contain !important;      /* Ensure the entire image is visible */
     margin: 0 auto;          /* Center the image */
     display: block;
