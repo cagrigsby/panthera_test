@@ -9,8 +9,12 @@
     vertical-align: middle; /* Aligns with text or other elements */
 }
 
+// Padding
 // Header styles scoped to main content area for Panthera theme
 .pan-layout-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
     h1, h2, h3, h4, h5 {
       color: #101935;
       font-weight: 600;
@@ -71,16 +75,7 @@ pre code {
     padding: 0; /* Remove padding for code blocks within pre */
 }
 
-// padding
-.container,
-.content-wrapper,
-.page-content {  /* Common class names in Jekyll themes */
-    max-width: 500px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-//highlight color change
+// highlight color change
 ::selection {
     background: #F686BD;  /* The highlight color you want */
     color: #101935;      /* Text color when highlighted */
@@ -91,7 +86,7 @@ pre code {
     color: #101935;
 }
 
-/* responsive images */
+// responsive images
 .responsive-image {
     display: block !important;
     margin-left: auto !important;
