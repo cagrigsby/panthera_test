@@ -90,16 +90,24 @@ pre code {
     padding: 0 20px;
 }
 
+/* Header image styles */
 .post-view__image {
-    max-width: 100%;           /* Match content width */
-    max-height: 400px;          /* Adjust this value as needed */
     width: 100%;               /* Take full width of container */
-    height: auto;              /* Maintain aspect ratio */
-    object-fit: contain;       /* Ensure entire image is visible */
+    height: 100%;             /* Take full height */
+    max-width: 500px;         /* Match content width */
+    object-fit: cover;        /* Cover the container while maintaining aspect ratio */
+    object-position: center;  /* Center the image */
     margin-left: auto;
     margin-right: auto;
-    display: block;            /* Ensures proper centering */
+    display: block;
 }
+
+/* Add this to target the container of the image if needed */
+.post-view__image-container {
+    max-width: 500px;
+    margin: 0 auto;
+    aspect-ratio: 16/9;      /* Set a specific aspect ratio */
+    overflow: hidden;        /* Ensure content stays within bounds */
 
 // responsive images
 .responsive-image {
