@@ -3,7 +3,7 @@ layout: post
 title: "Exploring Application Security: Hands-On with 6 SCA, SAST, and DAST Tools"
 date: 2025-01-05 13:32:20 +0300
 description: Analyzing the vulernable Generic-University application with a combination of FOSS and commercial AppSec tools.
-image: /assets/images/bunsen_beaker.png
+image: /assets/images/scientistbaby_dissection.webp
 fig-caption: 
 tags:
   - professional
