@@ -46,7 +46,7 @@
     }
   }
 
-/* Custom styles for code blocks */
+// Custom styles for code blocks 
 code {
     background-color: #DDCBBD !important; /* Champagne pink background */
     border: 1px solid #DDCBBD; /* Amaranth pink border = #FC9BC2 */
@@ -71,6 +71,14 @@ pre code {
     padding: 0; /* Remove padding for code blocks within pre */
 }
 
+// padding
+.post-content {
+    max-width: 700px;  /* Adjust this value to your preference */
+    margin: 0 auto;    /* Centers the content */
+    padding: 0 20px;   /* Adds padding on the left and right */
+}
+
+//highlight color change
 ::selection {
     background: #F686BD;  /* The highlight color you want */
     color: #101935;      /* Text color when highlighted */
