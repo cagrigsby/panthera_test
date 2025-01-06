@@ -94,7 +94,7 @@ pre code {
 .post-view__image {
     width: 100%;               /* Take full width of container */
     height: 100%;             /* Take full height */
-    max-width: 500px;         /* Match content width */
+    max-height: 500px;         /* Match content width */
     object-fit: cover;        /* Cover the container while maintaining aspect ratio */
     object-position: center;  /* Center the image */
     margin-left: auto;
