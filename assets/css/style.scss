@@ -102,13 +102,6 @@ pre code {
     display: block;
 }
 
-/* Add this to target the container of the image if needed */
-.post-view__image-container {
-    max-width: 500px;
-    margin: 0 auto;
-    aspect-ratio: 16/9;      /* Set a specific aspect ratio */
-    overflow: hidden;        /* Ensure content stays within bounds */
-
 // responsive images
 .responsive-image {
     display: block !important;
