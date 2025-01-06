@@ -90,6 +90,13 @@ pre code {
     padding: 0 20px;
 }
 
+.post-view__image {
+    max-height: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: auto;
+}
+
 // responsive images
 .responsive-image {
     display: block !important;
