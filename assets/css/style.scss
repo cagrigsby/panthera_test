@@ -98,7 +98,7 @@ pre code {
 
 /* Header image styles */
 .post-view__image {
-    width: auto;              /* Allow natural width scaling */
+    width: auto !important;              /* Allow natural width scaling */
     //max-width: none;         /* Maximum width constraint */
     height: auto !important;  /* Override any existing height constraints */
     max-height: 500px;         /* Remove any max-height restrictions */
