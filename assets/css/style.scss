@@ -83,9 +83,10 @@ pre code {
 }
 
 //padding 
-.pan-post-content {
+.post-view__body {
     max-width: 500px;
-    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
     padding: 0 20px;
 }
 
